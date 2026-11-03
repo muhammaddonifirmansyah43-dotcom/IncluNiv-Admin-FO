@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from "next/link";
@@ -32,20 +31,17 @@ type SidebarProps = {
   onToggle: () => void;
 };
 
-export default function Sidebar({
-  collapsed,
-  onToggle,
-}: SidebarProps) {
+export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
   const pathname = usePathname();
 
   return (
     <aside
-      className={`flex min-h-screen shrink-0 flex-col bg-[#0F2D5B] py-5 text-white transition-[width] duration-300 ${
+      className={`flex h-full shrink-0 flex-col overflow-y-auto bg-[#0F2D5B] py-5 text-white transition-[width] duration-300 ${
         collapsed ? "w-[72px] px-2" : "w-72 px-3"
       }`}
     >
       {/* Logo, nama aplikasi, dan tombol collapse */}
-      <div className="mb-8 flex h-[64px] items-center gap-2">
+      <div className="mb-8 flex h-[64px] shrink-0 items-center gap-2">
         <div
           className={`flex shrink-0 items-center ${
             collapsed ? "w-full justify-center" : "justify-start"
@@ -90,8 +86,7 @@ export default function Sidebar({
           const Icon = item.icon;
 
           const active =
-            pathname === item.href ||
-            pathname.startsWith(`${item.href}/`);
+            pathname === item.href || pathname.startsWith(`${item.href}/`);
 
           return (
             <Link
@@ -103,9 +98,7 @@ export default function Sidebar({
                 if (collapsed) onToggle();
               }}
               className={`flex items-center rounded-lg py-3 text-sm transition-colors ${
-                collapsed
-                  ? "justify-center px-0"
-                  : "gap-3 px-3"
+                collapsed ? "justify-center px-0" : "gap-3 px-3"
               } ${
                 active
                   ? "bg-[#3B82F6] font-semibold text-white"
@@ -123,7 +116,7 @@ export default function Sidebar({
       <button
         type="button"
         title={collapsed ? "Keluar" : undefined}
-        className={`mt-6 flex items-center rounded-lg py-3 text-sm text-orange-300 transition-colors hover:bg-white/10 ${
+        className={`mt-6 flex shrink-0 items-center rounded-lg py-3 text-sm text-orange-300 transition-colors hover:bg-white/10 ${
           collapsed ? "justify-center px-0" : "gap-3 px-3"
         }`}
       >
