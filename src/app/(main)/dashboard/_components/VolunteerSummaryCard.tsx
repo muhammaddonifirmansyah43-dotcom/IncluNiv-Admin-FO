@@ -36,7 +36,9 @@ export default function VolunteerSummaryCard() {
         ))}
       </div>
 
-      <PanelFooter actionLabel="Lihat Data Pendamping" note="20 personel" />
+      <PanelFooter actionLabel="Lihat Data Pendamping" 
+       href="/pendamping"
+      note="20 personel" />
     </DashboardPanel>
   );
 }

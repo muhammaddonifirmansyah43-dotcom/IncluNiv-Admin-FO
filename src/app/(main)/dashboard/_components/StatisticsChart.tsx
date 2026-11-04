@@ -50,6 +50,7 @@ export default function StatisticsChart() {
 
       <PanelFooter
         actionLabel="Lihat Detail Statistik"
+        href="/rekap"
         note={`Akumulasi ${period}`}
       />
     </DashboardPanel>
