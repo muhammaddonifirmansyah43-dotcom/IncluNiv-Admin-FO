@@ -52,17 +52,27 @@ export default function DetailInfoCard({ item }: { item: Pengajuan }) {
           </dt>
           <dd>
             <span
-              className={inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border px-2.5 py-0.5 text-[11px] font-semibold ${status.pill}}
+              className={
+                "inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border px-2.5 py-0.5 text-[11px] font-semibold " +
+                status.pill
+              }
             >
-              <span className={h-1.5 w-1.5 rounded-full ${status.dot}} aria-hidden="true" />
+              <span
+                className={"h-1.5 w-1.5 rounded-full " + status.dot}
+                aria-hidden="true"
+              />
               {status.pillLabel}
             </span>
           </dd>
         </div>
       </dl>
 
-      <div className={mt-3 rounded-lg border p-3 ${alert.box}}>
-        <p className={flex items-center gap-2 text-[11px] font-bold ${alert.titleColor}}>
+      <div className={"mt-3 rounded-lg border p-3 " + alert.box}>
+        <p
+          className={
+            "flex items-center gap-2 text-[11px] font-bold " + alert.titleColor
+          }
+        >
           <Info size={14} aria-hidden="true" />
           {alert.title}
         </p>
