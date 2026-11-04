@@ -1,5 +1,6 @@
 import Logo from "@/components/layout/Logo";
 
+
 export default function LoginPage() {
   return (
     <main className="flex min-h-screen items-center justify-center bg-[#E6F0FF] p-4">

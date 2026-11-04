@@ -1,6 +1,8 @@
+
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   Search,
   ChevronDown,
@@ -12,6 +14,8 @@ import {
 import PageHeader from "@/components/ui/PageHeader";
 
 export default function MahasiswaPage() {
+  const router = useRouter();
+
   const [search, setSearch] = useState("");
   const [disability, setDisability] = useState("Semua");
   const [showDisability, setShowDisability] = useState(false);
@@ -20,6 +24,7 @@ export default function MahasiswaPage() {
   const mahasiswa = [
     {
       no: 1,
+      id: "253140707000065",
       nama: "Ahmad Macheda",
       nim: "253140707000065",
       fakultas: "Fakultas Vokasi",
@@ -73,9 +78,7 @@ export default function MahasiswaPage() {
               onClick={() => setShowDisability(!showDisability)}
               className="flex h-[36px] min-w-[182px] items-center justify-between gap-3 rounded-lg border border-[#dbe4ef] bg-white px-3 text-xs font-medium text-[#344866]"
             >
-              <span>
-                Jenis disabilitas: {disability}
-              </span>
+              <span>Jenis disabilitas: {disability}</span>
 
               <ChevronDown
                 size={15}
@@ -188,27 +191,22 @@ export default function MahasiswaPage() {
                   key={item.nim}
                   className="border-b border-[#e8edf4]"
                 >
-                  {/* NO */}
                   <td className="px-5 py-4 text-center text-xs text-[#657892]">
                     {item.no}
                   </td>
 
-                  {/* NAMA */}
                   <td className="px-5 py-4 text-xs font-semibold text-[#17365f]">
                     {item.nama}
                   </td>
 
-                  {/* NIM */}
                   <td className="px-5 py-4 text-xs text-[#526681]">
                     {item.nim}
                   </td>
 
-                  {/* FAKULTAS */}
                   <td className="px-5 py-4 text-xs text-[#526681]">
                     {item.fakultas}
                   </td>
 
-                  {/* JENIS DISABILITAS */}
                   <td className="px-5 py-4">
                     <span className="inline-flex items-center gap-1.5 rounded-full bg-[#e8f1ff] px-3 py-1.5 text-[10px] font-semibold text-[#4385f5]">
                       <span className="h-1.5 w-1.5 rounded-full bg-[#4385f5]" />
@@ -219,13 +217,19 @@ export default function MahasiswaPage() {
                   {/* AKSI */}
                   <td className="px-5 py-4">
                     <div className="flex items-center justify-center gap-2">
+                      {/* BUTTON MATA */}
                       <button
                         type="button"
+                        onClick={() =>
+                          router.push(`/mahasiswa/${item.id}`)
+                        }
+                        title="Lihat Detail"
                         className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#e8f1ff] text-[#4385f5] transition hover:bg-[#dbe9ff]"
                       >
                         <Eye size={16} />
                       </button>
 
+                      {/* BUTTON HAPUS */}
                       <button
                         type="button"
                         className="flex h-8 w-8 items-center justify-center rounded-lg text-[#8495ac] transition hover:bg-[#fff0f0] hover:text-[#e05252]"
@@ -247,17 +251,14 @@ export default function MahasiswaPage() {
               </tr>
             )}
 
-            {/* BARIS KOSONG AGAR TABEL TINGGI */}
+            {/* BARIS KOSONG */}
             {filteredMahasiswa.length > 0 &&
               Array.from({ length: 8 }).map((_, index) => (
                 <tr
                   key={`empty-${index}`}
                   className="border-b border-[#e8edf4]"
                 >
-                  <td
-                    colSpan={6}
-                    className="h-[53px]"
-                  />
+                  <td colSpan={6} className="h-[53px]" />
                 </tr>
               ))}
           </tbody>
@@ -267,9 +268,7 @@ export default function MahasiswaPage() {
         <div className="border-t border-[#e0e7ef] bg-[#f8fafc] px-5 py-3.5">
           <p className="text-xs text-[#71829b]">
             Menampilkan{" "}
-            <span className="font-semibold text-[#17365f]">
-              20
-            </span>{" "}
+            <span className="font-semibold text-[#17365f]">20</span>{" "}
             dari{" "}
             <span className="font-semibold text-[#17365f]">
               64 data mahasiswa
