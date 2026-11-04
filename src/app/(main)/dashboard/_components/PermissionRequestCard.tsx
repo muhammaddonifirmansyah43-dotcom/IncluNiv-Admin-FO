@@ -59,6 +59,7 @@ export default function PermissionRequestCard() {
 
       <PanelFooter
         actionLabel="Lihat semua pengajuan"
+        href="/pengajuan"
         note={`${filtered.length} pengajuan`}
       />
     </DashboardPanel>

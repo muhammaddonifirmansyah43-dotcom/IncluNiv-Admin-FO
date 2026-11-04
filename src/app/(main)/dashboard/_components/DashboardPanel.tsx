@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 export function DashboardPanel({
@@ -27,20 +28,21 @@ export function PanelHeading({ children }: { children: ReactNode }) {
 
 type FooterProps = {
   actionLabel: string;
+  href: string;
   note?: string;
 };
 
-export function PanelFooter({ actionLabel, note }: FooterProps) {
+export function PanelFooter({ actionLabel, href, note }: FooterProps) {
   return (
     <div className="mt-auto pt-4">
       <div className="flex items-center justify-between gap-2 border-t border-slate-100 pt-3">
-        <button
-          type="button"
-          className="inline-flex items-center gap-1 text-xs font-bold hover:text-[#3B82F6]"
+        <Link
+          href={href}
+          className="inline-flex items-center gap-1 text-xs font-bold transition hover:text-[#3B82F6] hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-200"
         >
           {actionLabel}
           <ArrowRight size={14} aria-hidden="true" />
-        </button>
+        </Link>
         {note && <span className="text-xs text-slate-400">{note}</span>}
       </div>
     </div>
