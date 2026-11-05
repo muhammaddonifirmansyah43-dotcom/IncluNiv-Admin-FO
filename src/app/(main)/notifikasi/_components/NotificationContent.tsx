@@ -1,20 +1,21 @@
 "use client";
 
 import { useState } from "react";
-import { notifications } from "@/lib/notification-data";
+import { notificationStore, useNotifications } from "@/lib/notification-store";
 import type { NotificationFilter } from "@/types/notification";
 import NotificationToolbar from "./NotificationToolbar";
 import NotificationSection from "./NotificationSection";
 
 export default function NotificationContent() {
-  const [items, setItems] = useState(notifications);
+  const items = useNotifications();
   const [filter, setFilter] = useState<NotificationFilter>("all");
   const [search, setSearch] = useState("");
 
   const query = search.trim().toLowerCase();
 
   const matched = items.filter((item) =>
-    `${item.title} ${item.description} ${item.category} ${item.extra}`
+    [item.title, item.description, item.category, item.extra]
+      .join(" ")
       .toLowerCase()
       .includes(query)
   );
@@ -24,12 +25,6 @@ export default function NotificationContent() {
 
   const totalCount = items.length;
   const unreadCount = items.filter((item) => !item.read).length;
-
-  function toggleRead(id: string) {
-    setItems((prev) =>
-      prev.map((item) => (item.id === id ? { ...item, read: !item.read } : item))
-    );
-  }
 
   return (
     <div className="space-y-6">
@@ -46,10 +41,10 @@ export default function NotificationContent() {
         <NotificationSection
           id="section-unread"
           title="Belum dibaca"
-          countLabel={`${unreadItems.length} Baru`}
+          countLabel={unreadItems.length + " Baru"}
           dotClass="bg-orange-500"
           items={unreadItems}
-          onToggleRead={toggleRead}
+          onToggleRead={notificationStore.toggleRead}
         />
       )}
 
@@ -57,10 +52,10 @@ export default function NotificationContent() {
         <NotificationSection
           id="section-read"
           title="Sudah dibaca"
-          countLabel={`${readItems.length} Notifikasi`}
+          countLabel={readItems.length + " Notifikasi"}
           dotClass="bg-slate-400"
           items={readItems}
-          onToggleRead={toggleRead}
+          onToggleRead={notificationStore.toggleRead}
         />
       )}
 
