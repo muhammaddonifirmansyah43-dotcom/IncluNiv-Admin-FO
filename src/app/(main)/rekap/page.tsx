@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useMemo, useState } from "react";
@@ -32,23 +31,18 @@ export default function RekapVolunteerPage() {
           item.nim.toLowerCase().includes(keyword);
 
         const sesuaiPendamping =
-          pendamping === "Semua" ||
-          item.nama === pendamping;
+          pendamping === "Semua" || item.nama === pendamping;
 
         // Semua data contoh berada pada semester ganjil 2026/2027.
         const sesuaiSemester = semester === "ganjil";
 
-        return (
-          sesuaiPencarian &&
-          sesuaiPendamping &&
-          sesuaiSemester
-        );
+        return sesuaiPencarian && sesuaiPendamping && sesuaiSemester;
       })
       .sort((a, b) => b.jumlah - a.jumlah);
   }, [search, pendamping, semester, periode]);
 
   return (
-    <div className="min-h-screen space-y-5">
+    <div className="w-full space-y-6 p-4 text-[#17345F] sm:p-6 lg:px-8">
       <PageHeader
         title="Rekap Pendampingan"
         description="Pantau rekapitulasi data pendampingan, peringkat aktivitas relawan, dan akumulasi sesi secara terstruktur dalam satu konsol."
@@ -63,9 +57,7 @@ export default function RekapVolunteerPage() {
         setPeriode={setPeriode}
         semester={semester}
         setSemester={setSemester}
-        namaPendamping={volunteerData.map(
-          (item) => item.nama
-        )}
+        namaPendamping={volunteerData.map((item) => item.nama)}
       />
 
       <RekapTable data={filteredData} />

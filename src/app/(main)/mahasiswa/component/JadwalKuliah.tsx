@@ -1,169 +1,120 @@
+"use client";
 
-import { CalendarDays, Clock, MapPin } from "lucide-react";
+import { useState } from "react";
+import { CalendarDays, ChevronDown, Clock, MapPin } from "lucide-react";
 
-const jadwal = [
-  {
-    hari: "SENIN",
-    matkul: [
-      {
-        sks: "3 SKS",
-        jam: "08:00 - 10:30",
-        nama: "Algoritma & Struktur Data",
-        lokasi: "Lab Komputer A307",
-        gedung: "Gedung Vokasi Lt. 3",
-      },
-      {
-        sks: "3 SKS",
-        jam: "13:00 - 15:30",
-        nama: "Arsitektur & Organisasi Komputer",
-        lokasi: "Ruang Teori B201",
-        gedung: "Gedung Vokasi Lt. 2",
-      },
-    ],
-  },
-  {
-    hari: "SELASA",
-    matkul: [
-      {
-        sks: "3 SKS",
-        jam: "07:30 - 10:00",
-        nama: "Pemrograman Berorientasi Objek",
-        lokasi: "Lab Komputer A305",
-        gedung: "Gedung Vokasi Lt. 3",
-      },
-      {
-        sks: "2 SKS",
-        jam: "10:30 - 12:10",
-        nama: "Statistika & Probabilitas",
-        lokasi: "Ruang Teori A307",
-        gedung: "Gedung Vokasi Lt. 3",
-      },
-    ],
-  },
-  {
-    hari: "RABU",
-    matkul: [
-      {
-        sks: "3 SKS",
-        jam: "08:00 - 10:30",
-        nama: "Pemrograman Web Framework",
-        lokasi: "Lab Komputer A310",
-        gedung: "Gedung Vokasi Lt. 3",
-      },
-      {
-        sks: "2 SKS",
-        jam: "13:00 - 14:40",
-        nama: "Basis Data Terdistribusi",
-        lokasi: "Ruang Teori A204",
-        gedung: "Gedung Vokasi Lt. 2",
-      },
-    ],
-  },
-  {
-    hari: "KAMIS",
-    matkul: [
-      {
-        sks: "2 SKS",
-        jam: "08:00 - 10:00",
-        nama: "Interaksi Manusia dan Komputer",
-        lokasi: "Gedung Vokasi A309",
-        gedung: "Gedung Vokasi Lt. 3",
-      },
-      {
-        sks: "2 SKS",
-        jam: "10:30 - 12:10",
-        nama: "Bahasa Inggris Komunikasi Profesi",
-        lokasi: "Ruang Diskusi B102",
-        gedung: "Gedung Bersama Lt. 1",
-      },
-    ],
-  },
-  {
-    hari: "JUMAT",
-    matkul: [
-      {
-        sks: "2 SKS",
-        jam: "08:00 - 10:00",
-        nama: "Kewirausahaan Teknologi",
-        lokasi: "Ruang Diskusi B201",
-        gedung: "Gedung Bersama Lt. 1",
-      },
-    ],
-  },
-];
+import {
+  DEFAULT_SEMESTER,
+  jadwalPerSemester,
+  semesterOptions,
+} from "./types";
+import type { JadwalHari, Matkul } from "./types";
+
+function MatkulCard({ item }: { item: Matkul }) {
+  return (
+    <div className="rounded-lg border border-gray-100 bg-[#FAFBFD] p-4">
+      <div className="mb-3 flex items-center justify-between gap-2">
+        <span className="rounded bg-blue-50 px-2 py-1 text-xs font-semibold text-blue-700">
+          {item.sks}
+        </span>
+
+        <span className="flex items-center gap-1.5 text-sm font-medium text-blue-600">
+          <Clock size={14} />
+          {item.jam}
+        </span>
+      </div>
+
+      <h4 className="mb-3 text-sm font-bold text-[#0F2D5B]">{item.nama}</h4>
+
+      <div className="flex flex-wrap items-center gap-x-1.5 gap-y-1 text-xs text-gray-600">
+        <MapPin size={13} className="shrink-0" />
+        {item.lokasi}
+        <span className="text-gray-300">•</span>
+        {item.gedung}
+      </div>
+    </div>
+  );
+}
+
+function ScheduleDay({ jadwal }: { jadwal: JadwalHari }) {
+  return (
+    <section>
+      <div className="mb-3 flex items-center gap-2">
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1 text-xs font-bold uppercase tracking-wide text-blue-700">
+          <span className="h-1.5 w-1.5 rounded-full bg-blue-600" />
+          {jadwal.hari}
+        </span>
+
+        <span className="text-xs text-gray-500">
+          {jadwal.matkul.length} mata kuliah
+        </span>
+      </div>
+
+      <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+        {jadwal.matkul.map((item) => (
+          <MatkulCard key={`${item.jam}-${item.nama}`} item={item} />
+        ))}
+      </div>
+    </section>
+  );
+}
 
 export default function JadwalKuliah() {
-  return (
-    <div className="rounded-xl bg-white p-5 shadow-sm">
+  const [semester, setSemester] = useState(DEFAULT_SEMESTER);
 
-      <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
+  const jadwal = jadwalPerSemester[semester] ?? [];
+  const label = semesterOptions.find((o) => o.value === semester)?.label ?? "";
+
+  return (
+    <div className="rounded-xl border border-[#DCE6F2] bg-white p-5 shadow-sm">
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-3">
           <div className="rounded-lg bg-blue-50 p-2 text-blue-500">
-            <CalendarDays size={18} />
+            <CalendarDays size={20} />
           </div>
 
           <div>
-            <h3 className="text-sm font-bold text-[#0F2D5B]">
-              Jadwal Perkuliahan Semester Ini
+            <h3 className="text-base font-bold text-[#0F2D5B]">
+              Jadwal Perkuliahan
             </h3>
-            <p className="text-[10px] text-gray-400">
-              Jadwal perkuliahan semester ganjil yang diampu oleh mahasiswa
+            <p className="text-xs text-gray-500">
+              Mata kuliah yang diampu mahasiswa pada {label}
             </p>
           </div>
         </div>
 
-        <select className="rounded-lg border border-gray-200 px-3 py-2 text-xs outline-none">
-          <option>Semester Ganjil 2026/2027</option>
-          <option>Semester Genap 2025/2026</option>
-        </select>
+        <div className="relative w-full sm:w-72">
+          <select
+            value={semester}
+            onChange={(e) => setSemester(e.target.value)}
+            aria-label="Pilih semester"
+            className="w-full appearance-none rounded-lg border border-[#DCE6F2] bg-white px-4 py-3 pr-10 text-sm text-[#263B55] outline-none transition hover:border-[#93B4E5] focus:border-[#3B82F6] focus:ring-2 focus:ring-blue-100"
+          >
+            {semesterOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+
+          <ChevronDown
+            size={18}
+            className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[#526985]"
+          />
+        </div>
       </div>
 
-      <div className="space-y-4">
-        {jadwal.map((hari) => (
-          <div key={hari.hari}>
-            <div className="mb-2 flex items-center gap-2">
-              <span className="rounded-full bg-blue-50 px-3 py-1 text-[10px] font-bold text-blue-600">
-                ● {hari.hari}
-              </span>
-
-              <span className="text-[10px] text-gray-400">
-                {hari.matkul.length} Mata Kuliah
-              </span>
-            </div>
-
-            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-              {hari.matkul.map((item) => (
-                <div
-                  key={item.nama}
-                  className="rounded-lg border border-gray-100 bg-[#FAFBFD] p-3"
-                >
-                  <div className="mb-2 flex items-center justify-between gap-2">
-                    <span className="rounded bg-blue-50 px-2 py-1 text-[9px] font-semibold text-blue-600">
-                      {item.sks}
-                    </span>
-
-                    <span className="flex items-center gap-1 text-[10px] text-blue-500">
-                      <Clock size={11} />
-                      {item.jam}
-                    </span>
-                  </div>
-
-                  <h4 className="mb-3 text-xs font-bold text-[#0F2D5B]">
-                    {item.nama}
-                  </h4>
-
-                  <div className="flex flex-wrap items-center gap-1 text-[10px] text-gray-500">
-                    <MapPin size={11} />
-                    {item.lokasi}
-                    <span className="text-gray-300">•</span>
-                    {item.gedung}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
+      {jadwal.length === 0 ? (
+        <div className="rounded-lg border border-dashed border-[#DCE6F2] bg-[#FAFBFD] px-4 py-12 text-center text-sm text-gray-500">
+          Belum ada jadwal perkuliahan untuk {label}.
+        </div>
+      ) : (
+        <div className="space-y-6">
+          {jadwal.map((hari) => (
+            <ScheduleDay key={hari.hari} jadwal={hari} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

@@ -1,4 +1,3 @@
-
 "use client";
 
 import { Search, ChevronDown } from "lucide-react";
@@ -27,12 +26,12 @@ export default function RekapFilter({
   namaPendamping,
 }: RekapFilterProps) {
   const selectClass =
-    "w-full appearance-none rounded-lg border border-[#DFE8F5] bg-[#F8FAFF] px-3 py-2.5 pr-8 text-xs font-medium text-[#29466D] outline-none focus:border-blue-400";
+    "w-full appearance-none rounded-xl border border-[#DFE8F5] bg-white px-3 py-3 pr-8 text-sm font-medium text-[#29466D] outline-none focus:border-blue-400";
 
   return (
-    <div className="grid grid-cols-1 gap-3 rounded-xl border border-[#E5ECF6] bg-white p-3 shadow-sm md:grid-cols-2 xl:grid-cols-4">
+    <div className="grid grid-cols-1 gap-3 rounded-2xl border border-[#E5ECF6] bg-white p-4 shadow-sm md:grid-cols-2 xl:grid-cols-4">
       {/* Search */}
-      <div className="flex items-center gap-2 rounded-lg border border-[#DFE8F5] bg-[#F8FAFF] px-3">
+      <div className="flex items-center gap-2 rounded-xl border border-[#DFE8F5] bg-white px-3">
         <Search size={16} className="shrink-0 text-[#91A2BA]" />
 
         <input
@@ -40,7 +39,7 @@ export default function RekapFilter({
           placeholder="Cari nama volunteer atau NIM..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full bg-transparent py-2.5 text-xs text-[#29466D] outline-none placeholder:text-[#9AAAC0]"
+          className="w-full bg-transparent py-3 text-sm text-[#29466D] outline-none placeholder:text-[#9AAAC0]"
         />
       </div>
 
@@ -52,14 +51,12 @@ export default function RekapFilter({
           className={selectClass}
         >
           <option value="Semua">Semua Pendamping</option>
-
           {namaPendamping.map((nama) => (
             <option key={nama} value={nama}>
               {nama}
             </option>
           ))}
         </select>
-
         <ChevronDown
           size={14}
           className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[#7185A2]"
@@ -78,7 +75,6 @@ export default function RekapFilter({
           <option value="6 bulan terakhir">6 bulan terakhir</option>
           <option value="Semua periode">Semua periode</option>
         </select>
-
         <ChevronDown
           size={14}
           className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[#7185A2]"
@@ -95,7 +91,6 @@ export default function RekapFilter({
           <option value="ganjil">Semester Ganjil 2026/2027</option>
           <option value="genap">Semester Genap 2026/2027</option>
         </select>
-
         <ChevronDown
           size={14}
           className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[#7185A2]"

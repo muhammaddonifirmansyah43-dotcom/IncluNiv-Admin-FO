@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useMemo, useState } from "react";
@@ -7,7 +6,7 @@ import JadwalFilter from "./components/JadwalFilter";
 import JadwalTable from "./components/JadwalTable";
 import JadwalEmpty from "./components/JadwalEmpty";
 
-import type { Jadwal } from "./components/types";
+import type { Jadwal } from "./types";
 
 const dataJadwal: Jadwal[] = [
   {
@@ -91,69 +90,114 @@ const dataJadwal: Jadwal[] = [
   },
 ];
 
+// Rentang tanggal tiap semester (format YYYY-MM-DD)
+const SEMESTER_RANGE: Record<string, { start: string; end: string }> = {
+  ganjil: { start: "2026-08-01", end: "2027-01-31" },
+  genap: { start: "2027-02-01", end: "2027-07-31" },
+};
+
+const DEFAULT_SEMESTER = "ganjil";
+
+function getTodayString() {
+  const today = new Date();
+  return [
+    today.getFullYear(),
+    String(today.getMonth() + 1).padStart(2, "0"),
+    String(today.getDate()).padStart(2, "0"),
+  ].join("-");
+}
+
+function dalamSemester(tanggal: string, semester: string) {
+  const range = SEMESTER_RANGE[semester];
+  if (!range) return true;
+  return tanggal >= range.start && tanggal <= range.end;
+}
+
 export default function JadwalPage() {
   const [search, setSearch] = useState("");
-  const [semester, setSemester] = useState("ganjil");
+  const [semester, setSemester] = useState(DEFAULT_SEMESTER);
   const [status, setStatus] = useState("Semua");
-  const [tanggal, setTanggal] = useState("2026-09-30");
+  // Default: hari ini. Ganti ke "2026-09-30" kalau mau demo dengan data dummy.
+  const [tanggal, setTanggal] = useState(getTodayString);
 
   const handleToday = () => {
-    const today = new Date();
+    setTanggal(getTodayString());
+  };
 
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, "0");
-    const day = String(today.getDate()).padStart(2, "0");
+  // Ganti semester: kosongkan tanggal supaya semua sesi semester itu tampil
+  const handleSemesterChange = (value: string) => {
+    setSemester(value);
+    if (tanggal && !dalamSemester(tanggal, value)) {
+      setTanggal("");
+    }
+  };
 
-    setTanggal(`${year}-${month}-${day}`);
+  // Dipakai tombol di empty state: ke hari ini bila ada jadwal,
+  // kalau tidak ke tanggal terakhir yang punya jadwal.
+  const handleBack = () => {
+    const today = getTodayString();
+    const adaHariIni = dataJadwal.some((item) => item.tanggal === today);
+
+    if (adaHariIni) {
+      setTanggal(today);
+      return;
+    }
+
+    const tanggalTersedia = dataJadwal
+      .map((item) => item.tanggal)
+      .filter((value) => dalamSemester(value, semester))
+      .sort();
+
+    setTanggal(tanggalTersedia[tanggalTersedia.length - 1] ?? "");
   };
 
   const filteredJadwal = useMemo(() => {
-    return dataJadwal.filter((item) => {
-      const sesuaiTanggal = item.tanggal === tanggal;
+    const keyword = search.toLowerCase().trim();
 
-      const sesuaiSemester =
-        semester === "ganjil"
-          ? item.tanggal >= "2026-08-01" &&
-            item.tanggal <= "2027-01-31"
-          : item.tanggal >= "2027-02-01" &&
-            item.tanggal <= "2027-07-31";
+    return dataJadwal
+      .filter((item) => {
+        const sesuaiTanggal = !tanggal || item.tanggal === tanggal;
+        const sesuaiSemester = dalamSemester(item.tanggal, semester);
+        const sesuaiStatus = status === "Semua" || item.status === status;
 
-      const sesuaiStatus =
-        status === "Semua" || item.status === status;
+        const sesuaiPencarian =
+          !keyword ||
+          [
+            item.mahasiswa,
+            item.nimMahasiswa,
+            item.pendamping,
+            item.nimPendamping,
+            item.mataKuliah,
+            item.lokasi,
+            item.kelas,
+          ].some((value) => value.toLowerCase().includes(keyword));
 
-      const keyword = search.toLowerCase().trim();
-
-      const sesuaiPencarian = [
-        item.mahasiswa,
-        item.nimMahasiswa,
-        item.pendamping,
-        item.nimPendamping,
-        item.mataKuliah,
-        item.lokasi,
-        item.kelas,
-      ].some((value) =>
-        value.toLowerCase().includes(keyword)
+        return (
+          sesuaiTanggal && sesuaiSemester && sesuaiStatus && sesuaiPencarian
+        );
+      })
+      .sort(
+        (a, b) =>
+          a.tanggal.localeCompare(b.tanggal) || a.waktu.localeCompare(b.waktu)
       );
-
-      return (
-        sesuaiTanggal &&
-        sesuaiSemester &&
-        sesuaiStatus &&
-        sesuaiPencarian
-      );
-    });
   }, [search, semester, status, tanggal]);
 
+  // Pesan "belum ada sesi pada semester ini" hanya bila tanggal terpilih
+  // berada di luar rentang semester, atau semester itu memang tanpa data.
+  const semesterKosong =
+    (tanggal !== "" && !dalamSemester(tanggal, semester)) ||
+    !dataJadwal.some((item) => dalamSemester(item.tanggal, semester));
+
   return (
-    <div className="min-h-screen space-y-4">
-      <div className="mb-4">
+    <div className="space-y-6 px-8 pb-8 pt-6">
+      <div>
         <h1 className="text-2xl font-bold text-[#153D70]">
           Penjadwalan Pendampingan
         </h1>
 
         <p className="mt-1 text-sm text-[#647A9B]">
-          Pantau dan kelola sinkronisasi jadwal pendampingan
-          antara mahasiswa difabel dan volunteer secara berkala.
+          Pantau dan kelola sinkronisasi jadwal pendampingan antara mahasiswa
+          difabel dan volunteer secara berkala.
         </p>
       </div>
 
@@ -161,7 +205,7 @@ export default function JadwalPage() {
         search={search}
         setSearch={setSearch}
         semester={semester}
-        setSemester={setSemester}
+        setSemester={handleSemesterChange}
         status={status}
         setStatus={setStatus}
         tanggal={tanggal}
@@ -172,10 +216,7 @@ export default function JadwalPage() {
       {filteredJadwal.length > 0 ? (
         <JadwalTable data={filteredJadwal} />
       ) : (
-        <JadwalEmpty
-          onBack={handleToday}
-          semester={semester === "genap"}
-        />
+        <JadwalEmpty onBack={handleBack} semester={semesterKosong} />
       )}
     </div>
   );
