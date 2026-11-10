@@ -73,9 +73,11 @@ export default function ScheduleCalendar() {
         </div>
       </div>
 
-      <PanelFooter actionLabel="Lihat Kalender Penjadwalan"
-      href="/jadwal"
-       note="14 sesi" />
+      <PanelFooter
+        actionLabel="Lihat Kalender Penjadwalan"
+        href="/jadwal"
+        note="14 sesi"
+      />
     </DashboardPanel>
   );
 }

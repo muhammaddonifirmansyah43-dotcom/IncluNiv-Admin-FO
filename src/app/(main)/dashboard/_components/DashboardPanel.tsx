@@ -1,5 +1,8 @@
 import type { ReactNode } from "react";
+<<<<<<< HEAD
 import Link from "next/link";
+=======
+>>>>>>> main
 import { ArrowRight } from "lucide-react";
 
 export function DashboardPanel({
@@ -28,6 +31,7 @@ export function PanelHeading({ children }: { children: ReactNode }) {
 
 type FooterProps = {
   actionLabel: string;
+<<<<<<< HEAD
   href: string;
   note?: string;
 };
@@ -43,6 +47,22 @@ export function PanelFooter({ actionLabel, href, note }: FooterProps) {
           {actionLabel}
           <ArrowRight size={14} aria-hidden="true" />
         </Link>
+=======
+  note?: string;
+};
+
+export function PanelFooter({ actionLabel, note }: FooterProps) {
+  return (
+    <div className="mt-auto pt-4">
+      <div className="flex items-center justify-between gap-2 border-t border-slate-100 pt-3">
+        <button
+          type="button"
+          className="inline-flex items-center gap-1 text-xs font-bold hover:text-[#3B82F6]"
+        >
+          {actionLabel}
+          <ArrowRight size={14} aria-hidden="true" />
+        </button>
+>>>>>>> main
         {note && <span className="text-xs text-slate-400">{note}</span>}
       </div>
     </div>
