@@ -22,6 +22,7 @@ export type NotificationItem = {
   category: string;
   extra: string;
   read: boolean;
+  preview?: { title: string; name: string; text: string; time: string };
   action: {
     label: string;
     href: string;

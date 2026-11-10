@@ -6,7 +6,7 @@ import JadwalFilter from "./components/JadwalFilter";
 import JadwalTable from "./components/JadwalTable";
 import JadwalEmpty from "./components/JadwalEmpty";
 
-import type { Jadwal } from "./types";
+import type { Jadwal } from "./components/types";
 
 const dataJadwal: Jadwal[] = [
   {

@@ -14,6 +14,12 @@ export const notifications: NotificationItem[] = [
     category: "Perizinan Relawan",
     extra: "ID Tiket: #IZIN-2026-0881",
     read: false,
+    preview: {
+      title: "Pengajuan Izin Relawan",
+      name: "Anjani Tri Paundra",
+      text: " mengajukan izin sakit untuk sesi pendampingan Pemrograman Web (Rabu, 08.00 - 10.00).",
+      time: "15 mnt lalu",
+    },
     action: {
       label: "Detail Pengajuan",
       href: "/pengajuan",
@@ -33,6 +39,12 @@ export const notifications: NotificationItem[] = [
     category: "Penjadwalan AI",
     extra: "Skor Kesesuaian: 98.4%",
     read: false,
+    preview: {
+      title: "Relawan Pengganti Ditemukan",
+      name: "Lukito Adi Nugroho",
+      text: " dikonfirmasi menggantikan sesi pendampingan Ahmad Macheda di Lab Komputer A310.",
+      time: "42 mnt lalu",
+    },
     action: {
       label: "Cek Jadwal",
       href: "/jadwal",
@@ -42,6 +54,31 @@ export const notifications: NotificationItem[] = [
   },
   {
     id: "n3",
+    title: "Pengajuan Izin Baru: Gita Naura Kusuma (Relawan)",
+    description:
+      "Mengajukan izin sakit untuk sesi pendampingan Pemrograman Web (Kamis, 07.20 - 10.00). Sistem mencarikan relawan pengganti otomatis.",
+    icon: "volunteer",
+    tone: "orange",
+    badge: { label: "Menunggu Validasi", tone: "orange" },
+    time: "15 menit yang lalu",
+    category: "Perizinan Relawan",
+    extra: "ID Tiket: #IZIN-2026-0882",
+    read: false,
+    preview: {
+      title: "Pengajuan Izin Relawan",
+      name: "Gita Naura Kusuma",
+      text: " mengajukan izin sakit untuk sesi pendampingan Pemrograman Web (Kamis, 07.20 - 10.00).",
+      time: "15 mnt lalu",
+    },
+    action: {
+      label: "Detail Pengajuan",
+      href: "/pengajuan",
+      variant: "primary",
+      icon: "arrowRight",
+    },
+  },
+  {
+    id: "n-ramp",
     title: "Laporan Kendala Aksesibilitas: Ramp Gedung F",
     description:
       "Lift barat Gedung F sedang dalam perbaikan berkala. 2 rute pendampingan mahasiswa tuna daksa dialihkan ke Ramp Timur.",

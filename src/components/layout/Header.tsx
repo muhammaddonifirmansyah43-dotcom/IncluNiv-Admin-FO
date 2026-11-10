@@ -1,11 +1,11 @@
-
 "use client";
 
-import { Bell, Search } from "lucide-react";
+import { Search } from "lucide-react";
+import NotificationBell from "@/components/layout/NotificationBell";
 
 export default function Header() {
   return (
-    <header className="flex h-[64px] items-center justify-between gap-4 bg-[#0F2D5B] px-5 text-white md:px-7">
+    <header className="relative z-30 flex h-[64px] items-center justify-between gap-4 bg-[#0F2D5B] px-5 text-white md:px-7">
       <div className="flex min-w-0 flex-1 items-center">
         <label className="flex min-w-0 max-w-lg flex-1 items-center gap-3 rounded-lg bg-white/10 px-4 py-2.5">
           <Search
@@ -23,14 +23,7 @@ export default function Header() {
         </label>
       </div>
 
-      <button
-        type="button"
-        aria-label="Notifikasi"
-        title="Notifikasi"
-        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition hover:bg-white/10"
-      >
-        <Bell size={25} strokeWidth={2.5} />
-      </button>
+      <NotificationBell />
     </header>
   );
 }
