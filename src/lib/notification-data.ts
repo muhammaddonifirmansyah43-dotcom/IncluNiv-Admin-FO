@@ -77,6 +77,25 @@ export const notifications: NotificationItem[] = [
       icon: "arrowRight",
     },
   },
+  {
+    id: "n-ramp",
+    title: "Laporan Kendala Aksesibilitas: Ramp Gedung F",
+    description:
+      "Lift barat Gedung F sedang dalam perbaikan berkala. 2 rute pendampingan mahasiswa tuna daksa dialihkan ke Ramp Timur.",
+    icon: "accessibility",
+    tone: "orange",
+    badge: { label: "Perhatian Khusus", tone: "red" },
+    time: "2 jam yang lalu",
+    category: "Fasilitas Kampus",
+    extra: "Sarana & Prasarana PLD",
+    read: false,
+    action: {
+      label: "Tinjau Alur Ramp",
+      href: "/jadwal",
+      variant: "outline",
+      icon: "route",
+    },
+  },
 
   // ===== SUDAH DIBACA =====
   {

@@ -39,7 +39,6 @@ export default function PengajuanTable({ items, onDelete }: Props) {
                   <Link
                     href={"/pengajuan/" + item.id}
                     aria-label={"Lihat detail pengajuan " + item.nama}
-                    aria-label={"Hapus pengajuan " + item.nama}
                     className="flex h-8 w-8 items-center justify-center rounded-md text-[#3B82F6] transition hover:bg-blue-50"
                   >
                     <Eye size={17} aria-hidden="true" />
