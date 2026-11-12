@@ -22,11 +22,15 @@ const filtered = items.filter(
 
   const visible = filtered.slice(0, pageSize);
 
-  function handleDelete(id: string) {
-    const target = items.find((item) => item.id === id);
-    if (!window.confirm("Hapus pengajuan " + target.nama + "?")) return;
-    setItems((prev) => prev.filter((item) => item.id !== id));
-  }
+function handleDelete(id: string) {
+  const target = items.find((item) => item.id === id);
+
+  if (!target) return;
+
+  if (!window.confirm("Hapus pengajuan " + target.nama + "?")) return;
+
+  setItems((prev) => prev.filter((item) => item.id !== id));
+}
 
   return (
     <div className="space-y-4">
