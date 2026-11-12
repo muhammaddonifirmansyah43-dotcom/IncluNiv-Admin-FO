@@ -1,115 +1,153 @@
-
 import { MapPin } from "lucide-react";
+
+import { formatTanggal } from "./types";
 import type { Jadwal, StatusJadwal } from "./types";
 
 interface JadwalTableProps {
   data: Jadwal[];
+  tanggal: string;
 }
 
-function StatusBadge({ status }: { status: StatusJadwal }) {
-  const styles: Record<StatusJadwal, string> = {
-    Selesai: "bg-green-100 text-green-700",
-    Berlangsung: "bg-blue-100 text-blue-700",
-    "Akan datang": "bg-orange-100 text-orange-700",
-  };
+const th =
+  "px-5 py-3.5 text-left text-xs font-bold uppercase tracking-wide text-[#17365f]";
 
+const statusStyle: Record<StatusJadwal, string> = {
+  Selesai: "border-emerald-200 bg-emerald-50 text-emerald-600",
+  Berlangsung: "border-blue-200 bg-blue-50 text-blue-600",
+  "Akan datang": "border-orange-200 bg-orange-50 text-orange-600",
+};
+
+function StatusBadge({ status }: { status: StatusJadwal }) {
   return (
     <span
-      className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${styles[status]}`}
+      className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold ${statusStyle[status]}`}
     >
+      {status === "Berlangsung" && (
+        <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
+      )}
       {status}
     </span>
   );
 }
 
-export default function JadwalTable({ data }: JadwalTableProps) {
+export default function JadwalTable({ data, tanggal }: JadwalTableProps) {
   return (
-    <div className="w-full overflow-hidden rounded-xl border border-[#DCE6F2] bg-white shadow-sm">
+    <div className="overflow-hidden rounded-2xl border border-[#e0e7f0] bg-white shadow-sm">
       <div className="overflow-x-auto">
-        <table className="w-full min-w-[1100px] border-collapse text-left">
+        <table className="w-full min-w-[900px] border-collapse">
+          <caption className="sr-only">Daftar jadwal pendampingan</caption>
+
           <thead>
-            <tr className="bg-[#F1F6FC] text-xs font-bold uppercase tracking-wide text-[#526985]">
-              <th className="px-5 py-4">Waktu</th>
-              <th className="px-5 py-4">Mahasiswa</th>
-              <th className="px-5 py-4">Pendamping</th>
-              <th className="px-5 py-4">Mata Kuliah</th>
-              <th className="px-5 py-4">Lokasi</th>
-              <th className="px-5 py-4">Status</th>
+            <tr className="border-b border-[#dfe6ef] bg-[#f8faff]">
+              <th scope="col" className={`${th} w-[14%]`}>
+                Waktu
+              </th>
+              <th scope="col" className={`${th} w-[22%]`}>
+                Mahasiswa Difabel
+              </th>
+              <th scope="col" className={`${th} w-[24%]`}>
+                Pendamping / Volunteer
+              </th>
+              <th scope="col" className={`${th} w-[28%]`}>
+                Lokasi / Ruang
+              </th>
+              <th scope="col" className={`${th} w-[12%] !text-center`}>
+                Status
+              </th>
             </tr>
           </thead>
 
-          <tbody className="divide-y divide-[#E8EEF5]">
-            {data.map((item) => (
-              <tr
-                key={item.id}
-                className="transition hover:bg-[#F8FAFD]"
-              >
-                <td className="whitespace-nowrap px-5 py-5">
-                  <p className="text-sm font-semibold text-[#153D70]">
+          <tbody>
+            {data.map((item) => {
+              const live = item.status === "Berlangsung";
+
+              return (
+                <tr
+                  key={item.id}
+                  className={`border-b border-[#e8edf4] align-top ${
+                    live ? "bg-[#F5F9FF]" : "hover:bg-[#F8FAFD]"
+                  }`}
+                >
+                  <td
+                    className={`whitespace-nowrap px-5 py-3 text-sm font-bold ${
+                      live ? "text-[#2563C9]" : "text-[#17365f]"
+                    }`}
+                  >
                     {item.waktu}
-                  </p>
-                  <p className="mt-1 text-xs text-[#8191A8]">
-                    {item.tanggal}
-                  </p>
-                </td>
+                  </td>
 
-                <td className="px-5 py-5">
-                  <p className="text-sm font-semibold text-[#263B55]">
-                    {item.mahasiswa}
-                  </p>
-                  <p className="mt-1 text-xs text-[#8191A8]">
-                    {item.nimMahasiswa}
-                  </p>
-                </td>
+                  <td className="px-5 py-3">
+                    <p className="text-sm font-semibold text-[#17365f]">
+                      {item.mahasiswa}
+                    </p>
+                    <p className="mt-0.5 text-xs text-[#71829b]">
+                      NIM {item.nimMahasiswa}
+                    </p>
+                  </td>
 
-                <td className="px-5 py-5">
-                  <p className="text-sm font-semibold text-[#263B55]">
-                    {item.pendamping}
-                  </p>
-                  <p className="mt-1 text-xs text-[#8191A8]">
-                    {item.nimPendamping}
-                  </p>
+                  <td className="px-5 py-3">
+                    <p className="text-sm font-semibold text-[#17365f]">
+                      {item.pendamping}
+                    </p>
 
-                  {item.labelPendamping && (
-                    <span className="mt-2 inline-block rounded-md bg-orange-100 px-2 py-1 text-[10px] font-bold text-orange-700">
-                      {item.labelPendamping}
-                    </span>
-                  )}
-                </td>
+                    {item.aiMatch && (
+                      <span className="mt-1 inline-block rounded border border-orange-200 bg-orange-50 px-1.5 py-0.5 text-xs font-bold text-orange-600">
+                        AI MATCH
+                      </span>
+                    )}
 
-                <td className="px-5 py-5">
-                  <p className="text-sm font-medium text-[#263B55]">
-                    {item.mataKuliah}
-                  </p>
-                  <p className="mt-1 text-xs text-[#8191A8]">
-                    {item.kelas}
-                  </p>
-                </td>
+                    <p className="mt-0.5 text-xs text-[#71829b]">
+                      NIM {item.nimPendamping}
+                    </p>
 
-                <td className="px-5 py-5">
-                  <div className="flex items-start gap-2">
-                    <MapPin
-                      size={16}
-                      className="mt-0.5 shrink-0 text-[#3B82F6]"
-                    />
-                    <span className="text-sm text-[#526985]">
+                    {item.pendampingAsli && (
+                      <p className="mt-0.5 text-xs text-gray-400 line-through">
+                        {item.pendampingAsli}
+                      </p>
+                    )}
+                  </td>
+
+                  <td className="px-5 py-3">
+                    <p className="text-sm font-semibold text-[#17365f]">
+                      {item.mataKuliah}
+                    </p>
+                    <p
+                      className={`mt-0.5 flex items-start gap-1.5 text-xs text-[#526681] ${
+                        live ? "font-semibold" : ""
+                      }`}
+                    >
+                      <MapPin
+                        size={13}
+                        className="mt-0.5 shrink-0 text-[#3B82F6]"
+                      />
                       {item.lokasi}
-                    </span>
-                  </div>
-                </td>
+                    </p>
+                    <p className="mt-0.5 text-xs text-[#71829b]">
+                      Kelas {item.kelas}
+                    </p>
+                  </td>
 
-                <td className="px-5 py-5">
-                  <StatusBadge status={item.status} />
-                </td>
-              </tr>
-            ))}
+                  <td className="px-5 py-3 text-center">
+                    <StatusBadge status={item.status} />
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
 
-      <div className="border-t border-[#E8EEF5] px-5 py-4">
-        <p className="text-xs text-[#8191A8]">
-          Menampilkan {data.length} jadwal pendampingan
+      <div className="flex items-center gap-2 border-t border-[#e0e7ef] bg-[#f8fafc] px-5 py-4 text-sm text-[#71829b]">
+        <span className="h-2 w-2 shrink-0 rounded-full bg-[#3B82F6]" />
+        <p>
+          Menampilkan{" "}
+          <span className="font-semibold text-[#17365f]">
+            {data.length} sesi
+          </span>{" "}
+          terdaftar untuk tanggal{" "}
+          <span className="font-semibold text-[#17365f]">
+            {formatTanggal(tanggal, false)}
+          </span>
         </p>
       </div>
     </div>
