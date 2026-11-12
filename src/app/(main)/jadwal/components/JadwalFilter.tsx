@@ -60,13 +60,13 @@ function FilterMenu({
   const solid = active || (solidWhenOpen && open);
 
   return (
-    <div className="relative">
+    <div className="relative shrink-0">
       <button
         type="button"
         aria-haspopup="listbox"
         aria-expanded={open}
         onClick={() => setOpen(!open)}
-        className={`flex h-[38px] items-center gap-2 rounded-lg px-3 text-sm font-medium transition ${
+        className={`flex h-[38px] shrink-0 items-center gap-2 whitespace-nowrap rounded-lg px-3 text-sm font-medium transition ${
           solid
             ? "bg-[#3B82F6] text-white"
             : "bg-[#EAF2FF] text-[#2563C9] hover:bg-[#DCE9FF]"
@@ -139,9 +139,9 @@ export default function JadwalFilter({
     semesterOptions.find((option) => option.value === semester)?.label ?? "";
 
   return (
-    <div className="rounded-2xl border border-[#e0e8f3] bg-white p-3 shadow-sm">
-      <div className="flex flex-wrap items-center gap-3">
-        <div className="relative min-w-[240px] flex-1">
+    <div className="min-w-0 rounded-2xl border border-[#e0e8f3] bg-white p-3 shadow-sm">
+      <div className="flex flex-nowrap items-center gap-3">
+        <div className="relative min-w-0 flex-1">
           <Search
             size={18}
             className="absolute left-4 top-1/2 -translate-y-1/2 text-[#91a3bb]"

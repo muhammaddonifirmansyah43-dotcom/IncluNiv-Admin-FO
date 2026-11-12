@@ -48,7 +48,7 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
   return (
     <>
       <aside
-        className={`flex h-full shrink-0 flex-col overflow-y-auto bg-[#0F2D5B] py-5 text-white transition-[width] duration-300 ${
+        className={`flex h-full shrink-0 flex-col overflow-y-auto bg-[#0F2D5B] pt-0 pb-5 text-white transition-[width] duration-300 ${
           collapsed ? "w-[72px] px-2" : "w-72 px-3"
         }`}
       >
@@ -71,10 +71,10 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
           {!collapsed && (
             <>
               <div className="min-w-0 flex-1">
-                <h1 className="whitespace-nowrap text-[25px] font-extrabold leading-tight tracking-wide">
+                <h1 className="whitespace-nowrap text-[22px] font-extrabold leading-tight tracking-wide">
                   INCLUNIV
                 </h1>
-                <p className="whitespace-nowrap text-[15px] font-semibold uppercase tracking-wide text-blue-200">
+                <p className="whitespace-nowrap text-[12px] font-semibold uppercase tracking-wide text-blue-200">
                   LAYANAN DISABILITAS
                 </p>
               </div>
