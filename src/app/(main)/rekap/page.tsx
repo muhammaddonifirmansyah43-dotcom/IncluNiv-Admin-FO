@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useMemo, useState } from "react";
@@ -33,6 +32,7 @@ export default function RekapVolunteerPage() {
         const sesuaiPendamping =
           pendamping === "Semua" || item.nama === pendamping;
 
+        // Semua data contoh berada pada semester ganjil 2026/2027.
         const sesuaiSemester = semester === "ganjil";
 
         return sesuaiPencarian && sesuaiPendamping && sesuaiSemester;

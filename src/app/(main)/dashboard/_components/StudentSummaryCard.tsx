@@ -35,9 +35,11 @@ export default function StudentSummaryCard() {
         ))}
       </div>
 
-      <PanelFooter actionLabel="Lihat Data Mahasiswa" 
-      href="/mahasiswa"
-      note="Semester Ganjil" />
+      <PanelFooter
+        actionLabel="Lihat Data Mahasiswa"
+        href="/mahasiswa"
+        note="Semester Ganjil"
+      />
     </DashboardPanel>
   );
 }

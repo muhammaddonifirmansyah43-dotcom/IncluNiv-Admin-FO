@@ -140,7 +140,7 @@ export default function JadwalFilter({
 
   return (
     <div className="min-w-0 rounded-2xl border border-[#e0e8f3] bg-white p-3 shadow-sm">
-  <div className="flex flex-nowrap items-center gap-3">
+      <div className="flex flex-nowrap items-center gap-3">
         <div className="relative min-w-0 flex-1">
           <Search
             size={18}
