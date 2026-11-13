@@ -1,5 +1,14 @@
+
 import Link from "next/link";
-import { ArrowRight, CalendarCheck, Check, RefreshCw, X, Zap, Sparkles } from "lucide-react";
+import {
+  ArrowRight,
+  CalendarCheck,
+  Check,
+  RefreshCw,
+  X,
+  Zap,
+  Sparkles,
+} from "lucide-react";
 import type { Pengajuan } from "@/types/pengajuan";
 import DetailCard from "./DetailCard";
 
@@ -11,14 +20,17 @@ function Diproses() {
           <Zap size={12} aria-hidden="true" />
           Sedang Diproses AI
         </span>
-        <span className="text-[11px] font-bold text-amber-700">Mencari Kecocokan...</span>
+        <span className="text-[11px] font-bold text-amber-700">
+          Mencari Kecocokan...
+        </span>
       </div>
 
       <p className="mt-3 text-xs leading-relaxed text-slate-600">
         Sistem AI sedang mencocokkan kualifikasi pendampingan{" "}
-        <strong className="text-[#17345F]">Sensorik Netra</strong> dan jadwal kuliah dengan
-        database <strong className="text-[#17345F]">20 relawan aktif</strong> yang berstatus
-        luang.
+        <strong className="text-[#17345F]">Sensorik Netra</strong> dan jadwal
+        kuliah dengan database{" "}
+        <strong className="text-[#17345F]">20 relawan aktif</strong> yang
+        berstatus luang.
       </p>
 
       <ul className="mt-3 space-y-3 rounded-lg border border-amber-100 bg-white p-3 text-xs">
@@ -72,8 +84,8 @@ function Disetujui() {
       </div>
 
       <p className="mt-3 text-xs leading-relaxed text-slate-600">
-        AI berhasil memproses pengajuan izin dan telah menemukan volunteer pengganti yang sesuai
-        kualifikasi.
+        AI berhasil memproses pengajuan izin dan telah menemukan volunteer
+        pengganti yang sesuai kualifikasi.
       </p>
 
       <Link
@@ -97,13 +109,15 @@ function TidakDipenuhi({ item }: { item: Pengajuan }) {
         <span className="flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-white">
           <X size={12} aria-hidden="true" />
         </span>
-        Tidak dapat dipenuhi
+        Tidak dipenuhi
       </p>
       <p className="mt-1.5 border-b border-red-200 pb-3 text-xs text-slate-600">
         AI tidak dapat menemukan pendamping yang tersedia
       </p>
 
-      <p className="mt-3 text-[11px] font-bold text-red-600">PENYEBAB / ALASAN:</p>
+      <p className="mt-3 text-[11px] font-bold text-red-600">
+        PENYEBAB / ALASAN:
+      </p>
       <ul className="mt-2 list-disc space-y-1.5 pl-4 text-xs leading-relaxed text-slate-600">
         <li>
           Tidak ada pendamping yang tersedia pada waktu yang dibutuhkan (
@@ -123,12 +137,14 @@ function TidakDipenuhi({ item }: { item: Pengajuan }) {
 
 export default function DetailAiCard({ item }: { item: Pengajuan }) {
   const subtitle =
-    item.status === "diproses" ? "Pencocokan relawan pengganti otomatis" : "";
+    item.status === "dalam_proses"
+      ? "Pencocokan relawan pengganti otomatis"
+      : "";
 
   return (
     <DetailCard icon={Sparkles} title="Hasil Pemrosesan AI" subtitle={subtitle}>
-      {item.status === "diproses" && <Diproses />}
-      {item.status === "disetujui" && <Disetujui />}
+      {item.status === "dalam_proses" && <Diproses />}
+      {item.status === "telah_disetujui" && <Disetujui />}
       {item.status === "tidak_dipenuhi" && <TidakDipenuhi item={item} />}
     </DetailCard>
   );

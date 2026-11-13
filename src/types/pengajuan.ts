@@ -1,4 +1,7 @@
-export type PengajuanStatus = "diproses" | "disetujui" | "tidak_dipenuhi";
+export type PengajuanStatus =
+  | "dalam_proses"
+  | "telah_disetujui"
+  | "tidak_dipenuhi";
 
 export type Pengajuan = {
   id: string;

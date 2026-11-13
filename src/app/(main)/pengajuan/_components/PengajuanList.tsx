@@ -1,54 +1,132 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { pengajuanList } from "@/lib/pengajuan-data";
-import type { PengajuanStatus } from "@/types/pengajuan";
+
 import PengajuanToolbar from "./PengajuanToolbar";
 import PengajuanTable from "./PengajuanTable";
+import type { DateFilterValue } from "./DateFilter";
+import type { PengajuanStatus } from "@/types/pengajuan";
+
+type StatusFilterValue = "semua" | PengajuanStatus;
+
+function parseDisplayDate(value: string): Date | null {
+  const parts = value.match(/\d+/g);
+
+  if (!parts || parts.length < 3) return null;
+
+  const [day, month, year] = parts.map(Number);
+  const date = new Date(year, month - 1, day);
+
+  if (
+    date.getFullYear() !== year ||
+    date.getMonth() !== month - 1 ||
+    date.getDate() !== day
+  ) {
+    return null;
+  }
+
+  return date;
+}
+
+function isSameDay(first: Date, second: Date) {
+  return (
+    first.getFullYear() === second.getFullYear() &&
+    first.getMonth() === second.getMonth() &&
+    first.getDate() === second.getDate()
+  );
+}
 
 export default function PengajuanList() {
-  const [items, setItems] = useState(pengajuanList);
   const [search, setSearch] = useState("");
-  const [status, setStatus] = useState<"semua" | PengajuanStatus>("semua");
-  const [pageSize, setPageSize] = useState(8);
+  const [dateFilter, setDateFilter] =
+    useState<DateFilterValue>("bulan_ini");
+  const [statusFilter, setStatusFilter] =
+    useState<StatusFilterValue>("semua");
 
-  const query = search.trim().toLowerCase();
+  const filtered = useMemo(() => {
+    const query = search.trim().toLowerCase();
 
-const filtered = items.filter(
-  (item) =>
-    (status === "semua" || item.status === status) &&
-    (item.nama + " " + item.nim).toLowerCase().includes(query)
-);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
-  const visible = filtered.slice(0, pageSize);
+    const sevenDaysAgo = new Date(today);
+    sevenDaysAgo.setDate(today.getDate() - 6);
 
-  function handleDelete(id: string) {
-    const target = items.find((item) => item.id === id);
+    const result = pengajuanList.filter((item) => {
+      const matchSearch =
+        !query ||
+        `${item.nama} ${item.nim}`.toLowerCase().includes(query);
 
-    if (!target) return;
+      const matchStatus =
+        statusFilter === "semua" || item.status === statusFilter;
 
-    if (!window.confirm("Hapus pengajuan " + target.nama + "?")) return;
+      const itemDate = parseDisplayDate(item.tanggalSingkat);
+      let matchDate = true;
 
-    setItems((prev) => prev.filter((item) => item.id !== id));
-  }
+      if (dateFilter !== "semua") {
+        if (!itemDate) {
+          matchDate = false;
+        } else {
+          itemDate.setHours(0, 0, 0, 0);
+
+          switch (dateFilter) {
+            case "hari_ini":
+              matchDate = isSameDay(itemDate, today);
+              break;
+
+            case "7_hari":
+              matchDate =
+                itemDate >= sevenDaysAgo && itemDate <= today;
+              break;
+
+            case "bulan_ini":
+              matchDate =
+                itemDate.getMonth() === today.getMonth() &&
+                itemDate.getFullYear() === today.getFullYear();
+              break;
+          }
+        }
+      }
+
+      return matchSearch && matchDate && matchStatus;
+    });
+
+    return [...result].sort((a, b) => {
+      if (a.status !== b.status) {
+        if (a.status === "dalam_proses") return -1;
+        if (b.status === "dalam_proses") return 1;
+      }
+
+      const dateA =
+        parseDisplayDate(a.tanggalSingkat)?.getTime() ?? 0;
+      const dateB =
+        parseDisplayDate(b.tanggalSingkat)?.getTime() ?? 0;
+
+      return dateB - dateA;
+    });
+  }, [search, dateFilter, statusFilter]);
 
   return (
     <div className="space-y-4">
       <PengajuanToolbar
         search={search}
         onSearchChange={setSearch}
-        status={status}
-        onStatusChange={setStatus}
-        pageSize={pageSize}
-        onPageSizeChange={setPageSize}
+        dateFilter={dateFilter}
+        onDateFilterChange={setDateFilter}
+        statusFilter={statusFilter}
+        onStatusFilterChange={setStatusFilter}
       />
 
       <div className="overflow-hidden rounded-xl border border-[#E2EBF8] bg-white shadow-[0_4px_14px_rgba(31,71,130,0.07)]">
-        <PengajuanTable items={visible} onDelete={handleDelete} />
+        <PengajuanTable items={filtered} />
 
         <p className="border-t border-[#EEF3FB] px-4 py-3 text-xs text-slate-500">
-          Menampilkan <span className="font-bold text-[#3B82F6]">{visible.length}</span> dari{" "}
-          <span className="font-bold text-[#3B82F6]">{filtered.length}</span> data pengajuan
+          Menampilkan{" "}
+          <span className="font-bold text-[#3B82F6]">
+            {filtered.length}
+          </span>{" "}
+          pengajuan
         </p>
       </div>
     </div>
