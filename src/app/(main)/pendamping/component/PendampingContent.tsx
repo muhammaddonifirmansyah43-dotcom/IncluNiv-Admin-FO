@@ -1,6 +1,7 @@
+
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { pendampingList } from "@/lib/pendamping-data";
 import type { Pendamping } from "@/types/pendamping";
 import ConfirmDialog from "@/components/ui/ConfirmDialog";
@@ -11,21 +12,38 @@ import TableFooter from "./TableFooter";
 export default function PendampingContent() {
   const [items, setItems] = useState(pendampingList);
   const [search, setSearch] = useState("");
+  const [faculty, setFaculty] = useState("Semua Fakultas");
   const [pageSize, setPageSize] = useState(20);
   const [target, setTarget] = useState<Pendamping | null>(null);
 
-  const query = search.trim().toLowerCase();
-
-  const filtered = items.filter(
-    (item) =>
-      item.nama.toLowerCase().includes(query) ||
-      item.nim.toLowerCase().includes(query)
+  const facultyOptions = useMemo(
+    () => [
+      "Semua Fakultas",
+      ...Array.from(new Set(items.map((item) => item.fakultas))).sort(),
+    ],
+    [items]
   );
+
+  const filtered = useMemo(() => {
+    const query = search.trim().toLowerCase();
+
+    return items.filter((item) => {
+      const matchSearch =
+        item.nama.toLowerCase().includes(query) ||
+        item.nim.toLowerCase().includes(query);
+
+      const matchFaculty =
+        faculty === "Semua Fakultas" || item.fakultas === faculty;
+
+      return matchSearch && matchFaculty;
+    });
+  }, [items, search, faculty]);
 
   const visible = filtered.slice(0, pageSize);
 
   function handleConfirmDelete() {
     if (!target) return;
+
     setItems((prev) => prev.filter((item) => item.id !== target.id));
     setTarget(null);
   }
@@ -35,6 +53,9 @@ export default function PendampingContent() {
       <PendampingToolbar
         search={search}
         onSearchChange={setSearch}
+        faculty={faculty}
+        facultyOptions={facultyOptions}
+        onFacultyChange={setFaculty}
         pageSize={pageSize}
         onPageSizeChange={setPageSize}
       />

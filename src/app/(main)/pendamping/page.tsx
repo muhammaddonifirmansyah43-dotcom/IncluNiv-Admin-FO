@@ -1,5 +1,6 @@
+
 import PageHeader from "@/components/ui/PageHeader";
-import PendampingContent from "./_components/PendampingContent";
+import PendampingContent from "./component/PendampingContent";
 
 export default function PendampingPage() {
   return (

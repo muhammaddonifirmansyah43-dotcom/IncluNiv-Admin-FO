@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
+
 import { pengajuanList } from "@/lib/pengajuan-data";
 import DetailProfilCard from "../_components/DetailProfilCard";
 import DetailInfoCard from "../_components/DetailInfoCard";

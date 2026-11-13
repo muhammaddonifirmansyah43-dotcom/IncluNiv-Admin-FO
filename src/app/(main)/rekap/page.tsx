@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useMemo, useState } from "react";
@@ -9,7 +10,6 @@ import { volunteerData } from "./components/RekapData";
 
 export default function RekapVolunteerPage() {
   const [search, setSearch] = useState("");
-  const [pendamping, setPendamping] = useState("Semua");
   const [periode, setPeriode] = useState("1 bulan terakhir");
   const [semester, setSemester] = useState("ganjil");
 
@@ -29,16 +29,13 @@ export default function RekapVolunteerPage() {
           item.nama.toLowerCase().includes(keyword) ||
           item.nim.toLowerCase().includes(keyword);
 
-        const sesuaiPendamping =
-          pendamping === "Semua" || item.nama === pendamping;
-
         // Semua data contoh berada pada semester ganjil 2026/2027.
         const sesuaiSemester = semester === "ganjil";
 
-        return sesuaiPencarian && sesuaiPendamping && sesuaiSemester;
+        return sesuaiPencarian && sesuaiSemester;
       })
       .sort((a, b) => b.jumlah - a.jumlah);
-  }, [search, pendamping, semester]);
+  }, [search, semester]);
 
   return (
     <div className="w-full space-y-6 p-4 text-[#17345F] sm:p-5">
@@ -50,13 +47,10 @@ export default function RekapVolunteerPage() {
       <RekapFilter
         search={search}
         setSearch={setSearch}
-        pendamping={pendamping}
-        setPendamping={setPendamping}
         periode={periode}
         setPeriode={setPeriode}
         semester={semester}
         setSemester={setSemester}
-        namaPendamping={volunteerData.map((item) => item.nama)}
       />
 
       <RekapTable data={filteredData} />

@@ -1,3 +1,4 @@
+
 import { CalendarDays, FileText, Info, RefreshCw } from "lucide-react";
 import type { Pengajuan, PengajuanStatus } from "@/types/pengajuan";
 import { statusConfig } from "@/lib/pengajuan-status";
@@ -7,21 +8,21 @@ const alertContent: Record<
   PengajuanStatus,
   { title: string; text: string; box: string; titleColor: string }
 > = {
-  diproses: {
+  dalam_proses: {
     title: "JADWAL YANG TERDAMPAK",
     text: "Pengajuan izin sedang dianalisis oleh sistem pencocokan AI untuk mengidentifikasi relawan pengganti yang sesuai jadwal dan kualifikasi akademik pendampingan.",
     box: "border-amber-200 bg-amber-50 text-amber-800",
     titleColor: "text-amber-700",
   },
-  disetujui: {
+  telah_disetujui: {
     title: "JADWAL YANG TERDAMPAK",
-    text: "Pengajuan izin otomatis terintegrasi dengan jadwal akademik & modul alokasi cadangan volunteer tanpa memerlukan verifikasi manual tambahan.",
+    text: "Pengajuan izin telah disetujui dan dapat dilanjutkan ke proses penyesuaian jadwal pendampingan.",
     box: "border-blue-200 bg-blue-50 text-slate-600",
     titleColor: "text-[#17345F]",
   },
   tidak_dipenuhi: {
     title: "PENGAJUAN TIDAK DAPAT DIPENUHI",
-    text: "Pengajuan izin tidak dapat dipenuhi secara otomatis karena sistem AI tidak menemukan relawan pengganti yang tersedia dan sesuai kualifikasi pada jadwal tersebut.",
+    text: "Pengajuan izin tidak dapat dipenuhi karena tidak ditemukan relawan pengganti yang tersedia dan sesuai kualifikasi pada jadwal tersebut.",
     box: "border-red-200 bg-red-50 text-red-700",
     titleColor: "text-red-600",
   },
@@ -43,8 +44,11 @@ export default function DetailInfoCard({ item }: { item: Pengajuan }) {
             <CalendarDays size={14} aria-hidden="true" />
             Tanggal Pengajuan:
           </dt>
-          <dd className="text-right font-bold text-[#17345F]">{item.tanggalLengkap}</dd>
+          <dd className="text-right font-bold text-[#17345F]">
+            {item.tanggalLengkap}
+          </dd>
         </div>
+
         <div className="flex items-center justify-between gap-3">
           <dt className="flex items-center gap-2 text-slate-500">
             <RefreshCw size={14} aria-hidden="true" />
@@ -70,7 +74,8 @@ export default function DetailInfoCard({ item }: { item: Pengajuan }) {
       <div className={"mt-3 rounded-lg border p-3 " + alert.box}>
         <p
           className={
-            "flex items-center gap-2 text-[11px] font-bold " + alert.titleColor
+            "flex items-center gap-2 text-[11px] font-bold " +
+            alert.titleColor
           }
         >
           <Info size={14} aria-hidden="true" />

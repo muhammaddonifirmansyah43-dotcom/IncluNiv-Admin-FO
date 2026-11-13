@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useMemo, useState } from "react";
@@ -28,16 +29,25 @@ export default function MahasiswaContent() {
   const [data, setData] = useState<Mahasiswa[]>(initialData);
   const [search, setSearch] = useState("");
   const [disability, setDisability] = useState("Semua");
+  const [faculty, setFaculty] = useState("Semua Fakultas");
   const [limit, setLimit] = useState(20);
   const [sort, setSort] = useState<SortDirection>(null);
   const [deleteTarget, setDeleteTarget] = useState<Mahasiswa | null>(null);
+
+  const facultyOptions = useMemo(
+    () => [
+      "Semua Fakultas",
+      ...Array.from(new Set(data.map((item) => item.fakultas))).sort(),
+    ],
+    [data]
+  );
 
   const toggleSort = () =>
     setSort(sort === null ? "asc" : sort === "asc" ? "desc" : null);
 
   const confirmDelete = () => {
     if (!deleteTarget) return;
-    // Nanti: panggil API hapus di sini sebelum memperbarui state.
+
     setData((prev) => prev.filter((row) => row.id !== deleteTarget.id));
     setDeleteTarget(null);
   };
@@ -54,7 +64,10 @@ export default function MahasiswaContent() {
       const matchDisability =
         disability === "Semua" || item.disability === disability;
 
-      return matchSearch && matchDisability;
+      const matchFaculty =
+        faculty === "Semua Fakultas" || item.fakultas === faculty;
+
+      return matchSearch && matchDisability && matchFaculty;
     });
 
     if (sort) {
@@ -66,7 +79,7 @@ export default function MahasiswaContent() {
     }
 
     return result;
-  }, [data, search, disability, sort]);
+  }, [data, search, disability, faculty, sort]);
 
   const visible = filtered.slice(0, limit);
 
@@ -78,6 +91,9 @@ export default function MahasiswaContent() {
         disability={disability}
         disabilityOptions={disabilityOptions}
         onDisabilityChange={setDisability}
+        faculty={faculty}
+        facultyOptions={facultyOptions}
+        onFacultyChange={setFaculty}
         limit={limit}
         limitOptions={limitOptions}
         onLimitChange={setLimit}
