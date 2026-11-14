@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import MahasiswaToolbar from "./MahasiswaToolbar";
@@ -33,6 +33,15 @@ export default function MahasiswaContent() {
   const [limit, setLimit] = useState(20);
   const [sort, setSort] = useState<SortDirection>(null);
   const [deleteTarget, setDeleteTarget] = useState<Mahasiswa | null>(null);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const keyword = params.get("q");
+
+    if (keyword) {
+      setSearch(keyword);
+    }
+  }, []);
 
   const facultyOptions = useMemo(
     () => [

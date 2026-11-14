@@ -1,29 +1,55 @@
-import type { volunteerData } from "./RekapData";
+
+import type { Volunteer } from "./types";
 import DetailStatusBadge from "./DetailStatusBadge";
 
-type Riwayat = (typeof volunteerData)[number]["riwayat"][number];
+type Riwayat = Volunteer["riwayat"][number];
 
-const td = "px-4 py-3.5";
+type Props = {
+  no: number;
+  item: Riwayat;
+};
 
-export default function DetailRiwayatRow({ no, item }: { no: number; item: Riwayat }) {
+const td =
+  "px-4 py-4 align-middle text-sm text-[#263B55]";
+
+export default function DetailRiwayatRow({ no, item }: Props) {
   return (
-    <tr className="transition hover:bg-[#F8FAFD]">
-      <td className={`${td} text-xs text-[#718198]`}>{String(no).padStart(2, "0")}</td>
-      <td className={td}>
-        <p className="whitespace-nowrap text-xs font-semibold text-[#263B55]">{item.tanggal}</p>
-        <p className="mt-0.5 text-[10px] text-[#94A3B8]">{item.waktu}</p>
+    <tr className="transition-colors duration-150 hover:bg-[#F5F8FD]">
+      <td className={`${td} whitespace-nowrap font-medium text-[#8191A8]`}>
+        {String(no).padStart(2, "0")}
       </td>
-      <td className={`${td} text-xs font-medium text-[#263B55]`}>{item.mahasiswa}</td>
+
       <td className={td}>
-        <p className="text-xs font-semibold text-[#263B55]">{item.kegiatan}</p>
-        <p className="mt-0.5 text-[10px] text-[#94A3B8]">Pendampingan perkuliahan</p>
+        <p className="whitespace-nowrap font-semibold text-[#17345F]">
+          {item.tanggal}
+        </p>
+        <p className="mt-1 whitespace-nowrap text-xs text-[#8191A8]">
+          {item.waktu}
+        </p>
       </td>
+
+      <td className={`${td} font-medium leading-relaxed`}>
+        {item.mahasiswa}
+      </td>
+
+      <td className={`${td} leading-relaxed`}>
+        {item.kegiatan}
+      </td>
+
       <td className={td}>
-        <p className="text-xs font-medium text-[#263B55]">{item.lokasi}</p>
-        <p className="mt-0.5 text-[10px] text-[#94A3B8]">{item.ruang}</p>
+        <p className="font-medium">{item.lokasi}</p>
+        <p className="mt-1 text-xs text-[#8191A8]">
+          {item.ruang}
+        </p>
       </td>
-      <td className={`${td} whitespace-nowrap text-xs text-[#263B55]`}>{item.durasi}</td>
-      <td className={td}><DetailStatusBadge status={item.status} /></td>
+
+      <td className={`${td} whitespace-nowrap font-medium`}>
+        {item.durasi}
+      </td>
+
+      <td className={td}>
+        <DetailStatusBadge status={item.status} />
+      </td>
     </tr>
   );
 }

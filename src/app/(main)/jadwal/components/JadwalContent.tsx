@@ -1,6 +1,7 @@
+
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import JadwalFilter from "./JadwalFilter";
 import JadwalTable from "./JadwalTable";
@@ -21,14 +22,25 @@ export default function JadwalContent() {
   const [semester, setSemester] = useState("ganjil");
   const [status, setStatus] = useState<FilterStatus>("Semua");
   const [tanggal, setTanggal] = useState(DEFAULT_TANGGAL);
+  const [globalSearch, setGlobalSearch] = useState(false);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const keyword = params.get("q");
+
+    if (keyword) {
+      setSearch(keyword);
+      setGlobalSearch(true);
+    }
+  }, []);
 
   const filtered = useMemo(() => {
     const keyword = search.toLowerCase().trim();
 
     return dataJadwal
       .filter((item) => {
-        const sesuaiTanggal = item.tanggal === tanggal;
-        const sesuaiSemester = dalamSemester(item.tanggal, semester);
+        const sesuaiTanggal = globalSearch || item.tanggal === tanggal;
+        const sesuaiSemester = globalSearch || dalamSemester(item.tanggal, semester);
         const sesuaiStatus = status === "Semua" || item.status === status;
 
         const sesuaiPencarian =
@@ -41,14 +53,24 @@ export default function JadwalContent() {
             item.mataKuliah,
             item.lokasi,
             item.kelas,
+            item.status,
           ].some((value) => value.toLowerCase().includes(keyword));
 
         return (
-          sesuaiTanggal && sesuaiSemester && sesuaiStatus && sesuaiPencarian
+          sesuaiTanggal &&
+          sesuaiSemester &&
+          sesuaiStatus &&
+          sesuaiPencarian
         );
       })
-      .sort((a, b) => a.waktu.localeCompare(b.waktu));
-  }, [search, semester, status, tanggal]);
+      .sort((a, b) => {
+        const tanggalCompare = a.tanggal.localeCompare(b.tanggal);
+
+        return tanggalCompare !== 0
+          ? tanggalCompare
+          : a.waktu.localeCompare(b.waktu);
+      });
+  }, [search, semester, status, tanggal, globalSearch]);
 
   return (
     <div className="space-y-6">
@@ -69,7 +91,7 @@ export default function JadwalContent() {
       ) : (
         <JadwalEmpty
           onBack={() => setTanggal(getTodayString())}
-          outOfSemester={!dalamSemester(tanggal, semester)}
+          outOfSemester={!globalSearch && !dalamSemester(tanggal, semester)}
         />
       )}
     </div>
