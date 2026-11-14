@@ -1,7 +1,8 @@
+
 "use client";
 
 import { useParams } from "next/navigation";
-import PageHeader from "@/components/ui/PageHeader";
+
 import { volunteerData } from "../../components/RekapData";
 import DetailBackLink from "../../components/DetailBackLink";
 import DetailNotFound from "../../components/DetailNotFound";
@@ -12,16 +13,16 @@ export default function DetailRekapPage() {
   const { id } = useParams();
   const volunteer = volunteerData.find((v) => v.id === Number(id));
 
-  if (!volunteer) return <DetailNotFound />;
+  if (!volunteer) {
+    return <DetailNotFound />;
+  }
 
   return (
-    <div className="space-y-5 p-8">
+    <div className="w-full space-y-4 p-4 text-[#0F2D5B] sm:p-5 lg:p-6">
       <DetailBackLink />
-      <PageHeader
-        title="Detail Pendamping"
-        description="Profil dan riwayat kontribusi pendamping pada semester berjalan."
-      />
+
       <DetailProfileCard volunteer={volunteer} />
+
       <DetailRiwayatTable volunteer={volunteer} />
     </div>
   );

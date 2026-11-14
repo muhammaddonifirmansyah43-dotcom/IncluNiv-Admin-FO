@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { pendampingList } from "@/lib/pendamping-data";
 import type { Pendamping } from "@/types/pendamping";
 import ConfirmDialog from "@/components/ui/ConfirmDialog";
@@ -16,6 +16,15 @@ export default function PendampingContent() {
   const [pageSize, setPageSize] = useState(20);
   const [target, setTarget] = useState<Pendamping | null>(null);
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const keyword = params.get("q");
+
+    if (keyword) {
+      setSearch(keyword);
+    }
+  }, []);
+
   const facultyOptions = useMemo(
     () => [
       "Semua Fakultas",
@@ -29,8 +38,10 @@ export default function PendampingContent() {
 
     return items.filter((item) => {
       const matchSearch =
+        !query ||
         item.nama.toLowerCase().includes(query) ||
-        item.nim.toLowerCase().includes(query);
+        item.nim.toLowerCase().includes(query) ||
+        item.fakultas.toLowerCase().includes(query);
 
       const matchFaculty =
         faculty === "Semua Fakultas" || item.fakultas === faculty;

@@ -21,10 +21,10 @@ import LogoutModal from "@/components/ui/LogoutModal"; // BARU
 const menuItems = [
   { label: "Beranda", href: "/dashboard", icon: House },
   { label: "Data Mahasiswa", href: "/mahasiswa", icon: Users },
-  { label: "Data Volunteer", href: "/pendamping", icon: UserRoundCheck },
+  { label: "Data pendamping", href: "/pendamping", icon: UserRoundCheck },
   { label: "Pengajuan", href: "/pengajuan", icon: ClipboardList },
   { label: "Penjadwalan", href: "/jadwal", icon: CalendarDays },
-  { label: "Rekap Volunteer", href: "/rekap", icon: FileBarChart },
+  { label: "Rekap Pendamping", href: "/rekap", icon: FileBarChart },
   { label: "Notifikasi", href: "/notifikasi", icon: Bell },
 ];
 

@@ -1,37 +1,60 @@
-import { CheckCircle2 } from "lucide-react";
-import type { volunteerData } from "./RekapData";
+
+import type { Volunteer } from "./types";
+
 import DetailRiwayatRow from "./DetailRiwayatRow";
 import DetailRiwayatEmpty from "./DetailRiwayatEmpty";
 
-type Volunteer = (typeof volunteerData)[number];
+type Props = {
+  volunteer: Volunteer;
+};
 
-const th = "px-4 py-3";
-const kolom = ["No.", "Tanggal / Waktu", "Mahasiswa Didampingi", "Kegiatan / Mata Kuliah", "Lokasi", "Durasi", "Status"];
+const kolom = [
+  "No.",
+  "Tanggal / Waktu",
+  "Mahasiswa Didampingi",
+  "Mata Kuliah",
+  "Lokasi",
+  "Durasi",
+  "Status",
+];
 
-export default function DetailRiwayatTable({ volunteer }: { volunteer: Volunteer }) {
-  const selesai = volunteer.riwayat.filter((r) => r.status === "Selesai").length;
-
+export default function DetailRiwayatTable({ volunteer }: Props) {
   return (
-    <div className="overflow-hidden rounded-xl border border-[#E1EAF6] bg-white shadow-sm">
-      <div className="flex flex-wrap items-center gap-2 border-b border-[#E1EAF6] px-5 py-3.5">
-        <CheckCircle2 size={16} className="text-emerald-500" />
-        <span className="text-sm font-bold text-[#263B55]">{selesai} sesi selesai</span>
-        <span className="text-xs text-[#8191A8]">• Riwayat pendampingan</span>
-      </div>
+    <section className="w-full overflow-hidden rounded-xl border border-[#DCE6F2] bg-white shadow-sm">
+      <div className="w-full overflow-x-auto">
+        <table className="w-full min-w-[720px] table-fixed text-left">
+          <colgroup>
+            <col className="w-[6%]" />
+            <col className="w-[14%]" />
+            <col className="w-[17%]" />
+            <col className="w-[21%]" />
+            <col className="w-[17%]" />
+            <col className="w-[11%]" />
+            <col className="w-[14%]" />
+          </colgroup>
 
-      <div className="overflow-x-auto">
-        <table className="w-full min-w-[900px] text-left">
-          <thead className="bg-[#EDF3FF]">
-            <tr className="text-[10px] font-bold uppercase text-[#526985]">
-              {kolom.map((k) => (
-                <th key={k} className={th}>{k}</th>
+          <thead className="bg-[#E6F0FF]">
+            <tr className="text-[9px] font-bold uppercase tracking-wide text-[#526985]">
+              {kolom.map((item) => (
+                <th
+                  key={item}
+                  scope="col"
+                  className="whitespace-nowrap px-2 py-3"
+                >
+                  {item}
+                </th>
               ))}
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#EDF1F7]">
+
+          <tbody className="divide-y divide-[#E8EEF6]">
             {volunteer.riwayat.length > 0 ? (
-              volunteer.riwayat.map((item, i) => (
-                <DetailRiwayatRow key={item.id} no={i + 1} item={item} />
+              volunteer.riwayat.map((item, index) => (
+                <DetailRiwayatRow
+                  key={item.id}
+                  no={index + 1}
+                  item={item}
+                />
               ))
             ) : (
               <DetailRiwayatEmpty />
@@ -40,10 +63,13 @@ export default function DetailRiwayatTable({ volunteer }: { volunteer: Volunteer
         </table>
       </div>
 
-      <div className="flex flex-wrap items-center justify-between gap-2 border-t border-[#EDF1F7] px-5 py-3.5">
-        <p className="text-xs font-medium text-[#526985]">{volunteer.riwayat.length} riwayat ditampilkan</p>
-        <p className="text-xs text-[#94A3B8]">Total {volunteer.totalSesi} sesi pendampingan</p>
+      <div className="border-t border-[#E8EEF6] px-3 py-2">
+        <p className="text-[9px] text-[#8191A8]">
+          {volunteer.riwayat.length > 0
+            ? "Seluruh riwayat pendampingan ditampilkan"
+            : "Belum ada riwayat pendampingan yang ditampilkan"}
+        </p>
       </div>
-    </div>
+    </section>
   );
 }

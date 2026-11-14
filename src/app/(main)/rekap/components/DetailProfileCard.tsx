@@ -1,49 +1,70 @@
+
 import { GraduationCap, Building2 } from "lucide-react";
-import type { volunteerData } from "./RekapData";
+import type { Volunteer } from "./types";
 
-type Volunteer = (typeof volunteerData)[number];
+type Props = {
+  volunteer: Volunteer;
+};
 
-const chip = "flex items-center gap-1 rounded-md px-2 py-1 text-[10px]";
+const chip =
+  "inline-flex items-center gap-1.5 rounded-lg bg-[#F1F5FB] px-3 py-2 text-xs font-medium text-[#526985]";
 
-export default function DetailProfileCard({ volunteer }: { volunteer: Volunteer }) {
+function getInitials(name: string) {
+  return name
+    .trim()
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((word) => word[0])
+    .join("")
+    .toUpperCase();
+}
+
+export default function DetailProfileCard({ volunteer }: Props) {
   return (
-    <div className="flex flex-col justify-between gap-4 rounded-xl border border-[#E1EAF6] bg-white p-4 shadow-sm sm:flex-row sm:items-center">
+    <section className="flex w-full flex-col gap-4 rounded-2xl border border-[#DCE6F2] bg-white p-5 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:p-6">
       <div className="flex min-w-0 items-center gap-4">
-        <div className="relative flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-full border-2 border-blue-300 bg-blue-50">
-          <span className="absolute text-lg font-bold text-blue-600">
-            {volunteer.nama.charAt(0)}
-          </span>
-          <img
-            src={volunteer.foto}
-            alt={volunteer.nama}
-            className="relative h-full w-full object-cover"
-            onError={(e) => (e.currentTarget.style.display = "none")}
-          />
+        <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border-2 border-[#BFDBFE] bg-[#E6F0FF] text-xl font-bold text-[#17345F] sm:h-[76px] sm:w-[76px] sm:text-2xl">
+          {getInitials(volunteer.nama)}
         </div>
 
         <div className="min-w-0">
-          <h2 className="text-base font-bold text-[#153D70]">{volunteer.nama}</h2>
-          <div className="mt-1.5 flex flex-wrap gap-2">
-            <span className={`${chip} bg-[#EAF2FF] text-[#2858A6]`}>
-              <GraduationCap size={12} /> {volunteer.nim}
+          <h2 className="break-words text-lg font-bold text-[#17345F] sm:text-xl">
+            {volunteer.nama}
+          </h2>
+
+          <div className="mt-3 flex flex-wrap gap-2">
+            <span className={chip}>
+              <GraduationCap size={14} />
+              {volunteer.nim}
             </span>
-            <span className={`${chip} bg-[#F1F5F9] text-[#526985]`}>
-              <GraduationCap size={12} /> {volunteer.prodi}
+
+            <span className={chip}>
+              <GraduationCap size={14} />
+              {volunteer.prodi}
             </span>
-            <span className={`${chip} bg-[#F1F5F9] text-[#526985]`}>
-              <Building2 size={12} /> {volunteer.fakultas}
+
+            <span className={chip}>
+              <Building2 size={14} />
+              {volunteer.fakultas}
             </span>
           </div>
         </div>
       </div>
 
-      <div className="w-full rounded-xl bg-[#EEF3FF] px-4 py-3 sm:w-44">
+      <div className="flex shrink-0 flex-col justify-center rounded-xl bg-[#E6F0FF] px-5 py-3 sm:min-w-[190px]">
         <div className="flex items-baseline gap-2">
-          <span className="text-3xl font-bold text-[#153D70]">{volunteer.totalSesi}</span>
-          <span className="text-sm font-semibold text-[#526985]">Sesi</span>
+          <span className="text-3xl font-bold leading-none text-[#17345F]">
+            {volunteer.totalSesi}
+          </span>
+          <span className="text-sm font-semibold text-[#526985]">
+            Sesi
+          </span>
         </div>
-        <p className="mt-1 text-[11px] text-[#8191A8]">Total pendampingan semester ini</p>
+
+        <p className="mt-2 text-xs leading-relaxed text-[#71829B]">
+          Pendampingan terbanyak semester ini
+        </p>
       </div>
-    </div>
+    </section>
   );
 }
