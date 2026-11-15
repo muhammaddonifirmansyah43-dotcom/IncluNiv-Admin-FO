@@ -1,4 +1,4 @@
-﻿import { Clock, MapPin, BookOpen } from "lucide-react";
+import { Clock, MapPin, BookOpen } from "lucide-react";
 import type { ScheduleDay as ScheduleDayType } from "@/types/pendamping";
 
 export default function ScheduleDay({ hari, courses }: ScheduleDayType) {
@@ -10,7 +10,7 @@ export default function ScheduleDay({ hari, courses }: ScheduleDayType) {
           <h3 className="text-sm font-bold text-[#17345F]">{hari}</h3>
         </div>
 
-        <span className="rounded-full bg-[#F1F5FB] px-2.5 py-1 text-[10px] font-medium text-slate-500">
+        <span className="rounded-full bg-[#F1F5FB] px-2.5 py-1 text-xs font-medium text-slate-500">
           {courses.length} Mata Kuliah
         </span>
       </div>
@@ -37,7 +37,7 @@ export default function ScheduleDay({ hari, courses }: ScheduleDayType) {
               className="group rounded-xl border border-[#E2EAF5] bg-[#FAFCFF] p-4 transition hover:border-[#B8D1F5] hover:bg-white hover:shadow-sm"
             >
               <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-                <span className="inline-flex items-center gap-1.5 rounded-lg bg-[#E6F0FF] px-2.5 py-1.5 text-[11px] font-bold text-[#2563EB]">
+                <span className="inline-flex items-center gap-1.5 rounded-lg bg-[#E6F0FF] px-2.5 py-1.5 text-xs font-bold text-[#2563EB]">
                   <BookOpen size={13} aria-hidden="true" />
                   {course.sks} SKS
                 </span>
@@ -62,7 +62,7 @@ export default function ScheduleDay({ hari, courses }: ScheduleDayType) {
                   <span>{course.ruang}</span>
                 </div>
 
-                <p className="pl-[22px] text-[11px] text-slate-400">
+                <p className="pl-[22px] text-xs text-slate-400">
                   Dosen: {course.dosen}
                 </p>
               </div>

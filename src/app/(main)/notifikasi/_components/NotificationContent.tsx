@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -21,10 +22,17 @@ export default function NotificationContent() {
   );
 
   const unreadItems = matched.filter((item) => !item.read);
-  const readItems = filter === "all" ? matched.filter((item) => item.read) : [];
+  const readItems = matched.filter((item) => item.read);
 
   const totalCount = items.length;
   const unreadCount = items.filter((item) => !item.read).length;
+  const readCount = items.filter((item) => item.read).length;
+
+  const visibleUnreadItems =
+    filter === "all" || filter === "unread" ? unreadItems : [];
+
+  const visibleReadItems =
+    filter === "all" || filter === "read" ? readItems : [];
 
   return (
     <div className="space-y-6">
@@ -35,31 +43,32 @@ export default function NotificationContent() {
         onFilterChange={setFilter}
         totalCount={totalCount}
         unreadCount={unreadCount}
+        readCount={readCount}
       />
 
-      {unreadItems.length > 0 && (
+      {visibleUnreadItems.length > 0 && (
         <NotificationSection
           id="section-unread"
           title="Belum dibaca"
-          countLabel={unreadItems.length + " Baru"}
+          countLabel={visibleUnreadItems.length + " Baru"}
           dotClass="bg-orange-500"
-          items={unreadItems}
+          items={visibleUnreadItems}
           onToggleRead={notificationStore.toggleRead}
         />
       )}
 
-      {readItems.length > 0 && (
+      {visibleReadItems.length > 0 && (
         <NotificationSection
           id="section-read"
           title="Sudah dibaca"
-          countLabel={readItems.length + " Notifikasi"}
+          countLabel={visibleReadItems.length + " Notifikasi"}
           dotClass="bg-slate-400"
-          items={readItems}
+          items={visibleReadItems}
           onToggleRead={notificationStore.toggleRead}
         />
       )}
 
-      {unreadItems.length === 0 && readItems.length === 0 && (
+      {visibleUnreadItems.length === 0 && visibleReadItems.length === 0 && (
         <p
           role="status"
           className="rounded-xl border border-[#E2EBF8] bg-white py-10 text-center text-sm text-slate-400"

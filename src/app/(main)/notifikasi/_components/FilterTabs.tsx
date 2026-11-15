@@ -1,10 +1,11 @@
-import type { NotificationFilter } from "@/types/notification";
+﻿import type { NotificationFilter } from "@/types/notification";
 
 type Props = {
   value: NotificationFilter;
   onChange: (filter: NotificationFilter) => void;
   totalCount: number;
   unreadCount: number;
+  readCount: number;
 };
 
 export default function FilterTabs({
@@ -12,10 +13,12 @@ export default function FilterTabs({
   onChange,
   totalCount,
   unreadCount,
+  readCount,
 }: Props) {
   const tabs: { key: NotificationFilter; label: string; count: number }[] = [
     { key: "all", label: "Semua", count: totalCount },
     { key: "unread", label: "Belum Dibaca", count: unreadCount },
+    { key: "read", label: "Sudah Dibaca", count: readCount },
   ];
 
   return (
@@ -38,7 +41,7 @@ export default function FilterTabs({
           >
             {tab.label}
             <span
-              className={`rounded-full px-1.5 py-0.5 text-[11px] leading-none ${
+              className={`rounded-full px-1.5 py-0.5 text-xs leading-none ${
                 active
                   ? "bg-white/25 text-white"
                   : isUnreadTab

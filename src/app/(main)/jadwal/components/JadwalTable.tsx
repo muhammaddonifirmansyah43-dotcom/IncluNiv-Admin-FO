@@ -1,3 +1,4 @@
+
 import { MapPin } from "lucide-react";
 
 import { formatTanggal } from "./types";
@@ -9,7 +10,7 @@ interface JadwalTableProps {
 }
 
 const th =
-  "px-5 py-3.5 text-left text-xs font-bold uppercase tracking-wide text-[#17365f]";
+  "px-5 py-4 text-sm font-semibold text-[#17365f]";
 
 const statusStyle: Record<StatusJadwal, string> = {
   Selesai: "border-emerald-200 bg-emerald-50 text-emerald-600",
@@ -39,19 +40,19 @@ export default function JadwalTable({ data, tanggal }: JadwalTableProps) {
 
           <thead>
             <tr className="border-b border-[#dfe6ef] bg-[#f8faff]">
-              <th scope="col" className={`${th} w-[14%]`}>
+              <th scope="col" className={`${th} w-[14%] text-left`}>
                 Waktu
               </th>
-              <th scope="col" className={`${th} w-[22%]`}>
+              <th scope="col" className={`${th} w-[22%] text-left`}>
                 Mahasiswa Difabel
               </th>
-              <th scope="col" className={`${th} w-[24%]`}>
-                Pendamping / Volunteer
+              <th scope="col" className={`${th} w-[24%] text-left`}>
+                Pendamping
               </th>
-              <th scope="col" className={`${th} w-[28%]`}>
+              <th scope="col" className={`${th} w-[28%] text-left`}>
                 Lokasi / Ruang
               </th>
-              <th scope="col" className={`${th} w-[12%] !text-center`}>
+              <th scope="col" className={`${th} w-[12%] text-center`}>
                 Status
               </th>
             </tr>
@@ -64,28 +65,30 @@ export default function JadwalTable({ data, tanggal }: JadwalTableProps) {
               return (
                 <tr
                   key={item.id}
-                  className={`border-b border-[#e8edf4] align-top ${
-                    live ? "bg-[#F5F9FF]" : "hover:bg-[#F8FAFD]"
+                  className={`border-b border-[#e8edf4] transition ${
+                    live
+                      ? "bg-[#F5F9FF]"
+                      : "hover:bg-[#F8FAFD]"
                   }`}
                 >
                   <td
-                    className={`whitespace-nowrap px-5 py-3 text-sm font-bold ${
+                    className={`whitespace-nowrap px-5 py-4 text-sm font-bold ${
                       live ? "text-[#2563C9]" : "text-[#17365f]"
                     }`}
                   >
                     {item.waktu}
                   </td>
 
-                  <td className="px-5 py-3">
+                  <td className="px-5 py-4">
                     <p className="text-sm font-semibold text-[#17365f]">
                       {item.mahasiswa}
                     </p>
-                    <p className="mt-0.5 text-xs text-[#71829b]">
+                    <p className="mt-0.5 text-xs text-[#657892]">
                       NIM {item.nimMahasiswa}
                     </p>
                   </td>
 
-                  <td className="px-5 py-3">
+                  <td className="px-5 py-4">
                     <p className="text-sm font-semibold text-[#17365f]">
                       {item.pendamping}
                     </p>
@@ -96,7 +99,7 @@ export default function JadwalTable({ data, tanggal }: JadwalTableProps) {
                       </span>
                     )}
 
-                    <p className="mt-0.5 text-xs text-[#71829b]">
+                    <p className="mt-0.5 text-xs text-[#657892]">
                       NIM {item.nimPendamping}
                     </p>
 
@@ -107,7 +110,7 @@ export default function JadwalTable({ data, tanggal }: JadwalTableProps) {
                     )}
                   </td>
 
-                  <td className="px-5 py-3">
+                  <td className="px-5 py-4">
                     <p className="text-sm font-semibold text-[#17365f]">
                       {item.mataKuliah}
                     </p>
@@ -122,12 +125,12 @@ export default function JadwalTable({ data, tanggal }: JadwalTableProps) {
                       />
                       {item.lokasi}
                     </p>
-                    <p className="mt-0.5 text-xs text-[#71829b]">
+                    <p className="mt-0.5 text-xs text-[#657892]">
                       Kelas {item.kelas}
                     </p>
                   </td>
 
-                  <td className="px-5 py-3 text-center">
+                  <td className="px-5 py-4 text-center">
                     <StatusBadge status={item.status} />
                   </td>
                 </tr>

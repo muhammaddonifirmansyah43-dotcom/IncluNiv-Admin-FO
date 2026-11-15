@@ -1,3 +1,4 @@
+
 import { Search } from "lucide-react";
 import type { NotificationFilter } from "@/types/notification";
 import FilterTabs from "./FilterTabs";
@@ -9,6 +10,7 @@ type Props = {
   onFilterChange: (filter: NotificationFilter) => void;
   totalCount: number;
   unreadCount: number;
+  readCount: number;
 };
 
 export default function NotificationToolbar({
@@ -18,14 +20,21 @@ export default function NotificationToolbar({
   onFilterChange,
   totalCount,
   unreadCount,
+  readCount,
 }: Props) {
   return (
     <div className="space-y-3 rounded-xl border border-[#E2EBF8] bg-white p-4 shadow-[0_4px_14px_rgba(31,71,130,0.07)]">
       <label htmlFor="notification-search" className="sr-only">
         Cari notifikasi
       </label>
+
       <div className="flex h-11 items-center gap-3 rounded-lg border border-[#E2EBF8] bg-[#F1F5FB] px-3 focus-within:border-[#3B82F6] focus-within:ring-2 focus-within:ring-blue-100">
-        <Search size={18} className="shrink-0 text-slate-400" aria-hidden="true" />
+        <Search
+          size={18}
+          className="shrink-0 text-slate-400"
+          aria-hidden="true"
+        />
+
         <input
           id="notification-search"
           type="search"
@@ -41,6 +50,7 @@ export default function NotificationToolbar({
         onChange={onFilterChange}
         totalCount={totalCount}
         unreadCount={unreadCount}
+        readCount={readCount}
       />
     </div>
   );

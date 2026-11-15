@@ -19,7 +19,7 @@ export default function PermissionRequestCard() {
       <PanelHeading>Pengajuan Perizinan</PanelHeading>
 
       <div className="mt-4 flex items-center justify-between rounded-lg border border-[#E2EBF8] bg-[#F8FAFF] px-3 py-2.5">
-        <span className="text-xs text-slate-500">Kapasitas Relawan</span>
+        <span className="text-sm text-slate-500">Kapasitas Relawan</span>
         <div className="flex items-center gap-2">
           <div className="flex gap-1">
             {[1, 2, 3, 4, 5].map((item) => (
@@ -43,7 +43,7 @@ export default function PermissionRequestCard() {
         value={search}
         onChange={(event) => setSearch(event.target.value)}
         placeholder="Cari pengajuan..."
-        className="mt-3 h-9 w-full rounded-lg border border-[#D9E6F8] px-3 text-xs outline-none placeholder:text-slate-400 focus:border-[#3B82F6]"
+        className="mt-3 h-9 w-full rounded-lg border border-[#D9E6F8] px-3 text-sm outline-none placeholder:text-slate-400 focus:border-[#3B82F6]"
       />
 
       <div className="mt-3 space-y-2">

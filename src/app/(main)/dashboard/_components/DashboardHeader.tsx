@@ -1,9 +1,10 @@
+
 export default function DashboardHeader() {
   return (
     <section className="flex flex-wrap items-center justify-between gap-3">
       <div>
         <div className="flex flex-wrap items-center gap-3">
-          <h1 className="text-xl font-bold tracking-tight sm:text-2xl">
+          <h1 className="text-2xl font-bold tracking-tight">
             Selamat datang kembali, Admin!
           </h1>
           <span className="rounded-full bg-white px-3 py-1.5 text-xs font-semibold text-[#3B82F6]">

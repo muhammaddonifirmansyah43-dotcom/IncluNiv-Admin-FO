@@ -26,7 +26,7 @@ export default function NotificationSection({
       >
         <span className={`h-2.5 w-2.5 rounded-full ${dotClass}`} aria-hidden="true" />
         {title}
-        <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-500">
+        <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-500">
           {countLabel}
         </span>
       </h2>

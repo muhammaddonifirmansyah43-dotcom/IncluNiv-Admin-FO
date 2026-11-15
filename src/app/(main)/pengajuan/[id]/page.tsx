@@ -25,7 +25,7 @@ export default async function PengajuanDetailPage({
         className="inline-flex items-center gap-2 text-sm font-medium text-[#3B82F6] hover:underline"
       >
         <ArrowLeft size={16} aria-hidden="true" />
-        Kembali ke Data Mahasiswa
+        Kembali ke Halaman Pengajuan
       </Link>
 
       <div className="grid gap-4 lg:grid-cols-2">

@@ -141,7 +141,7 @@ export default function JadwalCalendar({
             <div className="mb-3 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <CalendarDays size={16} className="text-[#3B82F6]" />
-                <h3 className="text-sm font-bold capitalize text-[#17365f]">
+                <h3 className="text-base font-bold capitalize text-[#17365f]">
                   {monthLabel}
                 </h3>
                 <span className="rounded border border-[#3B82F6] px-1.5 py-0.5 text-xs font-semibold text-[#2563C9]">

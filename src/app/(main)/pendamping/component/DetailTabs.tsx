@@ -30,7 +30,7 @@ export default function DetailTabs({ value, onChange }: Props) {
             aria-selected={active}
             aria-controls={`panel-${key}`}
             onClick={() => onChange(key)}
-            className={`flex h-10 items-center justify-center gap-2 rounded-xl text-xs font-semibold transition sm:text-sm ${
+            className={`flex h-10 items-center justify-center gap-2 rounded-xl text-sm font-semibold transition ${
               active
                 ? "bg-[#3B82F6] text-white shadow-sm"
                 : "text-slate-600 hover:bg-blue-50"
