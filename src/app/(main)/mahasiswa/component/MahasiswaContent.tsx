@@ -108,7 +108,7 @@ export default function MahasiswaContent() {
         onLimitChange={setLimit}
       />
 
-      <div className="overflow-hidden rounded-2xl border border-[#e0e7f0] bg-white shadow-sm">
+      <div className="overflow-hidden rounded-2xl border border-[#DCE6F2] bg-white shadow-sm">
         <MahasiswaTable
           data={visible}
           sort={sort}

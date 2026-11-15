@@ -15,7 +15,7 @@ export default function SearchInput({
 }: SearchInputProps) {
   return (
     <label className="flex w-full max-w-sm items-center gap-2 rounded-lg border border-slate-300 bg-white px-3 py-2.5 focus-within:border-[#3B82F6]">
-      <Search size={17} className="shrink-0 text-slate-400" />
+      <Search size={18} strokeWidth={2} className="shrink-0 text-slate-400" />
 
       <input
         type="search"

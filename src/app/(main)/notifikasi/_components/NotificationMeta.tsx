@@ -16,7 +16,7 @@ export default function NotificationMeta({ time, tone, read }: Props) {
         (read ? "text-slate-500" : toneText[tone])
       }
     >
-      <Clock size={13} aria-hidden="true" />
+      <Clock size={14} strokeWidth={2} aria-hidden="true" />
       {time}
     </p>
   );

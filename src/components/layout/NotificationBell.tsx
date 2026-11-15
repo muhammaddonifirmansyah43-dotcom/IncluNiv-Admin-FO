@@ -82,7 +82,7 @@ export default function NotificationBell() {
               disabled={unread.length === 0}
               className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#3B82F6] hover:underline disabled:cursor-not-allowed disabled:text-slate-400 disabled:no-underline"
             >
-              <CheckCheck size={13} aria-hidden="true" />
+              <CheckCheck size={14} strokeWidth={2} aria-hidden="true" />
               Tandai semua dibaca
             </button>
           </div>
@@ -131,7 +131,7 @@ export default function NotificationBell() {
                         )}
                       </p>
                       <p className="mt-1 inline-flex items-center gap-1 text-[10px] text-slate-400">
-                        <Clock size={11} aria-hidden="true" />
+                        <Clock size={12} strokeWidth={2} aria-hidden="true" />
                         {preview ? preview.time : item.time}
                       </p>
                     </div>

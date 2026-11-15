@@ -38,7 +38,7 @@ export default function ScheduleDay({ hari, courses }: ScheduleDayType) {
             >
               <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
                 <span className="inline-flex items-center gap-1.5 rounded-lg bg-[#E6F0FF] px-2.5 py-1.5 text-xs font-bold text-[#2563EB]">
-                  <BookOpen size={13} aria-hidden="true" />
+                  <BookOpen size={14} aria-hidden="true" />
                   {course.sks} SKS
                 </span>
 

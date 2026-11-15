@@ -7,7 +7,7 @@ export default function MatkulCard({ item }: { item: Matkul }) {
     <article className="group rounded-xl border border-[#E2EAF5] bg-[#FAFCFF] p-4 transition hover:border-[#B8D1F5] hover:bg-white hover:shadow-sm">
       <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
         <span className="inline-flex items-center gap-1.5 rounded-lg bg-[#E6F0FF] px-2.5 py-1.5 text-xs font-bold text-[#2563EB]">
-          <BookOpen size={13} />
+          <BookOpen size={14} />
           {item.sks}
         </span>
 

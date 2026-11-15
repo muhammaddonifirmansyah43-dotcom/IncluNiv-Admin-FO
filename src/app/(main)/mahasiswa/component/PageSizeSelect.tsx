@@ -23,7 +23,7 @@ export default function PageSizeSelect({
         aria-haspopup="listbox"
         aria-expanded={open}
         onClick={() => setOpen(!open)}
-        className="flex h-11 min-w-[190px] items-center justify-between gap-3 rounded-lg border border-[#dbe4ef] bg-white px-4 text-sm font-medium text-[#344866] transition hover:border-[#93B4E5]"
+        className="flex h-11 min-w-[190px] items-center justify-between gap-3 rounded-lg border border-[#dbe4ef] bg-white px-4 text-sm font-medium text-[#344866] transition hover:border-[#93B4E5] outline-none focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2"
       >
         <span>{value} data mahasiswa</span>
         <ChevronDown
@@ -49,9 +49,9 @@ export default function PageSizeSelect({
                   onChange(item);
                   setOpen(false);
                 }}
-                className={`w-full rounded-lg px-3 py-2.5 text-left text-sm text-[#344866] hover:bg-[#f0f5ff] ${
-                  item === value ? "bg-[#EAF2FF] font-semibold" : ""
-                }`}
+className={`w-full rounded-lg px-3 py-2.5 text-left text-sm text-[#344866] outline-none transition hover:bg-[#f0f5ff] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-300 ${
+  item === value ? "bg-[#EAF2FF] font-semibold" : ""
+}`}
               >
                 {item} data mahasiswa
               </button>

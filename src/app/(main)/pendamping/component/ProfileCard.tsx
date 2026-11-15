@@ -1,4 +1,4 @@
-﻿import { GraduationCap, Hash, Building2 } from "lucide-react";
+import { GraduationCap, Hash, Building2 } from "lucide-react";
 import type { PendampingDetail } from "@/types/pendamping";
 
 function initials(name: string) {
@@ -31,7 +31,7 @@ export default function ProfileCard({ data }: { data: PendampingDetail }) {
 
         <div className="mt-3 flex flex-wrap gap-2">
           <span className={`${chip} font-bold text-[#17345F]`}>
-            <Hash size={13} aria-hidden="true" />
+            <Hash size={14} aria-hidden="true" />
             {data.nim}
           </span>
 

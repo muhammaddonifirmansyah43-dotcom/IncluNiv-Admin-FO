@@ -36,7 +36,7 @@ function FacultyFilter({
         aria-haspopup="listbox"
         aria-expanded={open}
         onClick={() => setOpen(!open)}
-        className="flex h-[38px] w-[240px] shrink-0 items-center justify-between gap-3 rounded-xl border border-[#dce5f2] bg-white px-4 text-sm font-medium text-[#344866] transition hover:border-[#93B4E5]"
+        className="flex h-[38px] w-[240px] shrink-0 items-center justify-between gap-3 rounded-xl border border-[#dce5f2] bg-white px-4 text-sm font-medium text-[#344866] transition hover:border-[#93B4E5] outline-none focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2"
       >
         <span
           className="min-w-0 flex-1 truncate text-left"
@@ -70,7 +70,7 @@ function FacultyFilter({
                   onChange(item);
                   setOpen(false);
                 }}
-                className={`w-full truncate rounded-lg px-3 py-2.5 text-left text-sm text-[#344866] hover:bg-[#f0f5ff] ${
+                className={`w-full truncate rounded-lg px-3 py-2.5 text-left text-sm text-[#344866] outline-none transition hover:bg-[#f0f5ff] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-300 ${
                   item === value ? "bg-[#EAF2FF] font-semibold" : ""
                 }`}
               >
@@ -113,7 +113,7 @@ export default function PendampingToolbar({
             placeholder="Cari nama volunteer atau NIM..."
             value={search}
             onChange={(event) => onSearchChange(event.target.value)}
-            className="h-[38px] w-full rounded-xl border border-[#dce5f2] bg-[#f9fbff] pl-11 pr-4 text-sm text-[#193b6d] outline-none transition placeholder:text-[#9aabc3] focus:border-[#5b96ff]"
+            className="h-[38px] w-full rounded-xl border border-[#dce5f2] bg-[#f9fbff] pl-11 pr-4 text-sm text-[#193b6d] outline-none transition placeholder:text-[#9aabc3] focus-visible:border-[#5b96ff] focus-visible:ring-2 focus-visible:ring-blue-200"
           />
         </div>
 

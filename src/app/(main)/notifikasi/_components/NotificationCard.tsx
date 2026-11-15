@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import {
   ArrowRight,
   CalendarDays,
@@ -31,9 +31,9 @@ const actionIcons: Record<ActionIconKey, LucideIcon> = {
 };
 
 const buttonVariant: Record<ActionVariant, string> = {
-  primary: "bg-[#3B82F6] text-white hover:bg-[#2F73E8]",
-  soft: "bg-[#EAF2FF] text-[#17345F] hover:bg-[#DCEAFF]",
-  outline: "border border-[#D9E6F8] bg-white text-[#17345F] hover:bg-slate-50",
+  primary: "bg-[#3B82F6] text-white hover:bg-[#2F73E8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2",
+  soft: "bg-[#EAF2FF] text-[#17345F] hover:bg-[#DCEAFF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2",
+  outline: "border border-[#D9E6F8] bg-white text-[#17345F] hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2",
 };
 
 const cardBase =
@@ -105,7 +105,7 @@ export default function NotificationCard({ item, onToggleRead }: Props) {
             onClick={() => onToggleRead(item.id)}
             aria-label="Tandai sudah dibaca"
             title="Tandai sudah dibaca"
-            className="flex h-9 w-9 items-center justify-center rounded-lg text-slate-400 transition hover:bg-blue-50 hover:text-[#3B82F6]"
+            className="flex h-9 w-9 items-center justify-center rounded-lg text-slate-400 transition hover:bg-blue-50 hover:text-[#3B82F6] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2"
           >
             <Mail size={18} aria-hidden="true" />
           </button>

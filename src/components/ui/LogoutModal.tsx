@@ -65,14 +65,14 @@ export default function LogoutModal({ open, onClose, onConfirm }: Props) {
             ref={cancelRef}
             type="button"
             onClick={onClose}
-            className="h-11 rounded-xl border border-[#E2EBF8] bg-white text-sm font-semibold text-[#17345F] transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-200"
+            className="h-11 rounded-xl border border-[#E2EBF8] bg-white text-sm font-semibold text-[#17345F] transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2"
           >
             Kembali
           </button>
           <button
             type="button"
             onClick={onConfirm}
-            className="h-11 rounded-xl bg-orange-500 text-sm font-semibold text-white transition hover:bg-orange-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-300"
+            className="h-11 rounded-xl bg-orange-500 text-sm font-semibold text-white transition hover:bg-orange-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-300 focus-visible:ring-offset-2"
           >
             Ya, Keluar
           </button>

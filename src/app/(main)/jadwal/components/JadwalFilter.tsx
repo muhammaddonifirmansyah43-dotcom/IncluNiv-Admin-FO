@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState, type ReactNode } from "react";
 import {
@@ -75,7 +75,7 @@ function FilterMenu({
         {icon}
         <span className="whitespace-nowrap">{label}</span>
         <ChevronDown
-          size={15}
+          size={16}
           className={`transition-transform ${open ? "rotate-180" : ""}`}
         />
       </button>
@@ -113,7 +113,7 @@ function FilterMenu({
                   }`}
                 >
                   {option.label}
-                  {selected && <Check size={15} className="text-[#F97316]" />}
+                  {selected && <Check size={16} className="text-[#F97316]" />}
                 </button>
               );
             })}
@@ -151,7 +151,7 @@ export default function JadwalFilter({
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Cari mahasiswa, volunteer, mata kuliah, atau ruang..."
-            className="h-[38px] w-full rounded-lg bg-[#F1F5FA] pl-11 pr-4 text-sm text-[#183963] outline-none placeholder:text-[#9aabc0] focus:ring-2 focus:ring-blue-100"
+            className="h-[38px] w-full rounded-lg bg-[#F1F5FA] pl-11 pr-4 text-sm text-[#183963] outline-none placeholder:text-[#9aabc0] transition focus-visible:ring-2 focus-visible:ring-blue-200"
           />
         </div>
 

@@ -36,7 +36,7 @@ export default function MahasiswaHeader({
       <button
         type="button"
         onClick={onBack}
-        className="inline-flex items-center gap-2 text-sm font-medium text-[#3B82F6] transition hover:text-[#17345F]"
+        className="inline-flex items-center gap-2 rounded-md text-sm font-medium text-[#3B82F6] transition hover:text-[#17345F] outline-none focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2"
       >
         <ArrowLeft size={16} />
         Kembali ke Data Mahasiswa
@@ -55,7 +55,7 @@ export default function MahasiswaHeader({
 
           <div className="mt-3 flex flex-wrap gap-2">
             <span className="inline-flex items-center gap-1.5 rounded-lg bg-[#F1F5FB] px-3 py-1.5 text-xs font-medium text-slate-600">
-              <Hash size={13} />
+              <Hash size={14} />
               {NIM}
             </span>
 
@@ -84,7 +84,7 @@ export default function MahasiswaHeader({
               type="button"
               onClick={() => onTabChange(tab.id)}
               aria-current={active ? "page" : undefined}
-              className={`flex min-h-11 items-center justify-center gap-2 rounded-xl px-3 py-3 text-sm font-semibold transition ${
+              className={`flex min-h-11 items-center justify-center gap-2 rounded-xl px-3 py-3 text-sm font-semibold transition outline-none focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2 ${
                 active
                   ? "bg-[#3B82F6] text-white shadow-sm"
                   : "text-slate-600 hover:bg-[#F1F5FB] hover:text-[#17345F]"

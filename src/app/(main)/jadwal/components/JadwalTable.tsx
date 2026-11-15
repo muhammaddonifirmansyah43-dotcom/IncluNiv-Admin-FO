@@ -33,7 +33,7 @@ function StatusBadge({ status }: { status: StatusJadwal }) {
 
 export default function JadwalTable({ data, tanggal }: JadwalTableProps) {
   return (
-    <div className="overflow-hidden rounded-2xl border border-[#e0e7f0] bg-white shadow-sm">
+    <div className="overflow-hidden rounded-2xl border border-[#DCE6F2] bg-white shadow-sm">
       <div className="overflow-x-auto">
         <table className="w-full min-w-[900px] border-collapse">
           <caption className="sr-only">Daftar jadwal pendampingan</caption>
@@ -120,7 +120,7 @@ export default function JadwalTable({ data, tanggal }: JadwalTableProps) {
                       }`}
                     >
                       <MapPin
-                        size={13}
+                        size={14}
                         className="mt-0.5 shrink-0 text-[#3B82F6]"
                       />
                       {item.lokasi}

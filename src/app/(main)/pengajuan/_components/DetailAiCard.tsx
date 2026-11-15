@@ -90,7 +90,7 @@ function Disetujui() {
 
       <Link
         href="/jadwal"
-        className="mt-3 flex items-center justify-between gap-2 rounded-lg border border-emerald-200 bg-white px-3 py-2.5 text-xs font-semibold text-[#17345F] transition hover:bg-emerald-50"
+        className="mt-3 flex items-center justify-between gap-2 rounded-lg border border-emerald-200 bg-white px-3 py-2.5 text-xs font-semibold text-[#17345F] transition hover:bg-emerald-50 outline-none focus-visible:ring-2 focus-visible:ring-emerald-300 focus-visible:ring-offset-2"
       >
         <span className="flex items-center gap-2">
           <CalendarCheck size={15} className="text-[#3B82F6]" aria-hidden="true" />

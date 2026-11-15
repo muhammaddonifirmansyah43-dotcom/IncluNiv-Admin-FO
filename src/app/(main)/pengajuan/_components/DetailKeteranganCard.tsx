@@ -27,7 +27,7 @@ export default function DetailKeteranganCard({ item }: { item: Pengajuan }) {
       <div className="mt-2 rounded-lg border border-[#E2EBF8] bg-[#F8FAFD] p-3">
         <div className="flex items-center justify-between gap-3">
           <p className="flex items-center gap-2 text-xs font-bold text-[#17345F]">
-            <CalendarDays size={15} className="text-[#3B82F6]" aria-hidden="true" />
+            <CalendarDays size={16} strokeWidth={2} className="text-[#3B82F6]" aria-hidden="true" />
             {item.jadwal.hari}
           </p>
           <span className="whitespace-nowrap rounded-md border border-[#E2EBF8] bg-white px-2 py-1 text-xs font-bold text-[#17345F]">

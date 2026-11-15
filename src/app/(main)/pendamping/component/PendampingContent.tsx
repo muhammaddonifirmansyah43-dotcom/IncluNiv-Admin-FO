@@ -71,7 +71,7 @@ export default function PendampingContent() {
         onPageSizeChange={setPageSize}
       />
 
-      <div className="overflow-hidden rounded-2xl border border-[#e0e7f1] bg-white shadow-sm">
+      <div className="overflow-hidden rounded-2xl border border-[#DCE6F2] bg-white shadow-sm">
         <PendampingTable data={visible} onRequestDelete={setTarget} />
         <TableFooter shown={visible.length} total={filtered.length} />
       </div>

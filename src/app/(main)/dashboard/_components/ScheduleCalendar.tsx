@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -30,7 +31,7 @@ export default function ScheduleCalendar() {
           type="button"
           aria-label="Bulan sebelumnya"
           onClick={() => changeMonth(-1)}
-          className="rounded-lg p-1.5 text-slate-400 hover:bg-blue-50"
+          className="rounded-lg p-1.5 text-slate-400 transition hover:bg-blue-50 outline-none focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2"
         >
           <ChevronLeft size={18} />
         </button>
@@ -39,7 +40,7 @@ export default function ScheduleCalendar() {
           type="button"
           aria-label="Bulan berikutnya"
           onClick={() => changeMonth(1)}
-          className="rounded-lg p-1.5 text-slate-400 hover:bg-blue-50"
+          className="rounded-lg p-1.5 text-slate-400 transition hover:bg-blue-50 outline-none focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2"
         >
           <ChevronRight size={18} />
         </button>

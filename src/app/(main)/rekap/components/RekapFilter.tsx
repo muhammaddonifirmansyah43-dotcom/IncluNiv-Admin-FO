@@ -21,13 +21,13 @@ export default function RekapFilter({
   setSemester,
 }: RekapFilterProps) {
   const selectClass =
-    "w-full appearance-none rounded-xl border border-[#DFE8F5] bg-white px-3 py-3 pr-8 text-sm font-medium text-[#29466D] outline-none focus:border-blue-400";
+    "w-full appearance-none rounded-xl border border-[#DFE8F5] bg-white px-3 py-3 pr-8 text-sm font-medium text-[#29466D] outline-none transition hover:border-[#93B4E5] focus-visible:border-[#3B82F6] focus-visible:ring-2 focus-visible:ring-blue-200";
 
   return (
     <div className="grid grid-cols-1 gap-3 rounded-2xl border border-[#E5ECF6] bg-white p-4 shadow-sm md:grid-cols-2 xl:grid-cols-3">
       {/* Search */}
       <div className="flex items-center gap-2 rounded-xl border border-[#DFE8F5] bg-white px-3">
-        <Search size={16} className="shrink-0 text-[#91A2BA]" />
+        <Search size={18} className="shrink-0 text-[#91A2BA]" />
 
         <input
           type="search"
@@ -52,7 +52,7 @@ export default function RekapFilter({
         </select>
 
         <ChevronDown
-          size={14}
+          size={16}
           className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[#7185A2]"
         />
       </div>
@@ -69,7 +69,7 @@ export default function RekapFilter({
         </select>
 
         <ChevronDown
-          size={14}
+          size={16}
           className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[#7185A2]"
         />
       </div>

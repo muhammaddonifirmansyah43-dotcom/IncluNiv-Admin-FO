@@ -43,7 +43,7 @@ export default function PermissionRequestCard() {
         value={search}
         onChange={(event) => setSearch(event.target.value)}
         placeholder="Cari pengajuan..."
-        className="mt-3 h-9 w-full rounded-lg border border-[#D9E6F8] px-3 text-sm outline-none placeholder:text-slate-400 focus:border-[#3B82F6]"
+        className="mt-3 h-9 w-full rounded-lg border border-[#D9E6F8] px-3 text-sm outline-none placeholder:text-slate-400 transition focus-visible:border-[#3B82F6] focus-visible:ring-2 focus-visible:ring-blue-200"
       />
 
       <div className="mt-3 space-y-2">

@@ -58,7 +58,7 @@ export default function PengajuanTable({ items }: Props) {
                     href={"/pengajuan/" + item.id}
                     aria-label={"Lihat detail pengajuan " + item.nama}
                     title="Lihat detail"
-                    className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#e8f1ff] text-[#4385f5] transition hover:bg-[#dbe9ff]"
+                    className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#e8f1ff] text-[#4385f5] transition hover:bg-[#dbe9ff] outline-none focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2"
                   >
                     <Eye size={16} strokeWidth={2} aria-hidden="true" />
                   </Link>
