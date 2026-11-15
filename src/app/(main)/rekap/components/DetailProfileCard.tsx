@@ -1,5 +1,5 @@
 
-import { GraduationCap, Building2 } from "lucide-react";
+import { GraduationCap, Building2, Hash } from "lucide-react";
 import type { Volunteer } from "./types";
 
 type Props = {
@@ -34,7 +34,7 @@ export default function DetailProfileCard({ volunteer }: Props) {
 
           <div className="mt-3 flex flex-wrap gap-2">
             <span className={chip}>
-              <GraduationCap size={14} />
+              <Hash size={14} />
               {volunteer.nim}
             </span>
 

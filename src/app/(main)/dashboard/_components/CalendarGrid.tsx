@@ -1,3 +1,4 @@
+
 const weekdays = ["S", "S", "R", "K", "J", "S", "M"];
 
 type Props = {
@@ -30,7 +31,8 @@ export default function CalendarGrid({ year, month, selectedDay, onSelect }: Pro
           type="button"
           disabled={day === null}
           onClick={() => day && onSelect(day)}
-          className={`mx-auto flex h-7 w-7 items-center justify-center rounded-md text-xs transition ${
+          aria-pressed={day === selectedDay}
+          className={`mx-auto flex h-7 w-7 items-center justify-center rounded-md text-xs transition outline-none focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2 ${
             day === selectedDay
               ? "bg-[#3B82F6] font-bold text-white"
               : "text-slate-600 hover:bg-blue-50"

@@ -43,7 +43,7 @@ function FilterDropdown({
         aria-haspopup="listbox"
         aria-expanded={open}
         onClick={() => setOpen(!open)}
-        className="flex h-11 w-[240px] shrink-0 items-center justify-between gap-3 rounded-lg border border-[#dbe4ef] bg-white px-4 text-sm font-medium text-[#344866] transition hover:border-[#93B4E5]"
+        className="flex h-11 w-[240px] shrink-0 items-center justify-between gap-3 rounded-lg border border-[#dbe4ef] bg-white px-4 text-sm font-medium text-[#344866] transition hover:border-[#93B4E5] outline-none focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2"
       >
         <span
           className="min-w-0 flex-1 truncate text-left"
@@ -77,9 +77,9 @@ function FilterDropdown({
                   onChange(item);
                   setOpen(false);
                 }}
-                className={`w-full truncate rounded-lg px-3 py-2.5 text-left text-sm text-[#344866] hover:bg-[#f0f5ff] ${
-                  item === value ? "bg-[#EAF2FF] font-semibold" : ""
-                }`}
+className={`w-full truncate rounded-lg px-3 py-2.5 text-left text-sm text-[#344866] outline-none transition hover:bg-[#f0f5ff] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-300 ${
+  item === value ? "bg-[#EAF2FF] font-semibold" : ""
+}`}
               >
                 {item}
               </button>
@@ -118,7 +118,7 @@ export default function MahasiswaToolbar({
             value={search}
             onChange={(e) => onSearchChange(e.target.value)}
             placeholder="Cari nama mahasiswa atau NIM..."
-            className="h-11 w-full rounded-lg border border-[#dbe4ef] bg-[#fafcff] pl-11 pr-4 text-sm text-[#183963] outline-none placeholder:text-[#9aabc0] focus:border-[#4b8df5] focus:ring-2 focus:ring-blue-100"
+            className="h-11 w-full rounded-lg border border-[#dbe4ef] bg-[#fafcff] pl-11 pr-4 text-sm text-[#183963] outline-none placeholder:text-[#9aabc0] transition focus-visible:border-[#4b8df5] focus-visible:ring-2 focus-visible:ring-blue-200"
           />
         </div>
 

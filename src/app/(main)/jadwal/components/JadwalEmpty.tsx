@@ -44,7 +44,7 @@ export default function JadwalEmpty({
                 <div className="flex flex-col items-center text-center">
 <CalendarDays
   size={30}
-  strokeWidth={1.8}
+  strokeWidth={2}
   className="mb-3 text-[#CBD5E1]"
 />
 
@@ -61,7 +61,7 @@ export default function JadwalEmpty({
                   <button
                     type="button"
                     onClick={onBack}
-                    className="mt-5 inline-flex items-center gap-2 rounded-lg bg-[#EFF6FF] px-5 py-2.5 text-sm font-semibold text-[#3B82F6] transition hover:bg-[#DBEAFE]"
+                    className="mt-5 inline-flex items-center gap-2 rounded-lg bg-[#EFF6FF] px-5 py-2.5 text-sm font-semibold text-[#3B82F6] transition hover:bg-[#DBEAFE] outline-none focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2"
                   >
                     <CalendarDays size={16} />
                     Kembali ke Jadwal Hari Ini

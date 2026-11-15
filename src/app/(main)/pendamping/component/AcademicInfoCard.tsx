@@ -1,4 +1,4 @@
-﻿import { IdCard } from "lucide-react";
+import { User } from "lucide-react";
 import type { PendampingDetail } from "@/types/pendamping";
 import InfoField from "./InfoField";
 import ContactCard from "./ContactCard";
@@ -8,7 +8,7 @@ export default function AcademicInfoCard({ data }: { data: PendampingDetail }) {
     <section className="h-full rounded-2xl border border-[#DCE6F2] bg-white p-5 shadow-sm sm:p-6">
       <div className="flex items-start gap-3">
         <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#E6F0FF] text-[#3B82F6]">
-          <IdCard size={20} aria-hidden="true" />
+          <User size={20} aria-hidden="true" />
         </span>
 
         <div>

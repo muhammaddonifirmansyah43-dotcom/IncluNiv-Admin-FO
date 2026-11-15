@@ -1,4 +1,4 @@
-import Logo from "@/components/layout/Logo";
+﻿import Logo from "@/components/layout/Logo";
 
 
 export default function LoginPage() {
@@ -29,7 +29,7 @@ export default function LoginPage() {
               name="email"
               type="email"
               required
-              className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm outline-none focus:border-[#3B82F6]"
+              className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm outline-none transition hover:border-[#93B4E5] focus-visible:border-[#3B82F6] focus-visible:ring-2 focus-visible:ring-blue-200"
               placeholder="Masukkan email"
             />
           </div>
@@ -47,14 +47,14 @@ export default function LoginPage() {
               name="password"
               type="password"
               required
-              className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm outline-none focus:border-[#3B82F6]"
+              className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm outline-none transition hover:border-[#93B4E5] focus-visible:border-[#3B82F6] focus-visible:ring-2 focus-visible:ring-blue-200"
               placeholder="Masukkan password"
             />
           </div>
 
           <button
             type="button"
-            className="w-full rounded-lg bg-[#3B82F6] px-4 py-3 text-sm font-semibold text-white hover:bg-blue-600"
+            className="w-full rounded-lg bg-[#3B82F6] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[#2F73E8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2"
           >
             Masuk
           </button>

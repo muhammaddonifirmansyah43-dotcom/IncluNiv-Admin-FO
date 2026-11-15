@@ -36,7 +36,7 @@ export default function ContactCard({ email, whatsapp }: Props) {
             href={`https://wa.me/${waNumber}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex h-9 self-center items-center gap-2 rounded-lg bg-[#DDF5E7] px-3 text-xs font-medium text-[#16834A] transition hover:bg-[#CBEED9]"
+            className="inline-flex h-9 self-center items-center gap-2 rounded-lg bg-[#DDF5E7] px-3 text-xs font-medium text-[#16834A] transition hover:bg-[#CBEED9] outline-none focus-visible:ring-2 focus-visible:ring-emerald-300 focus-visible:ring-offset-2"
           >
             <MessageCircle size={15} aria-hidden="true" />
             Hubungi via WhatsApp

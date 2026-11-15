@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { ChevronDown, Search } from "lucide-react";
 import DateFilter, { type DateFilterValue } from "./DateFilter";
@@ -28,10 +28,10 @@ export default function PengajuanToolbar({
     <div className="flex flex-col gap-3 rounded-xl border border-[#E2EBF8] bg-white p-4 shadow-[0_4px_14px_rgba(31,71,130,0.07)] sm:flex-row sm:items-center">
       <div className="flex h-10 w-full min-w-0 flex-1 items-center gap-2 rounded-lg border border-[#E2EBF8] bg-[#F1F5FB] px-3 transition focus-within:border-[#3B82F6] focus-within:ring-2 focus-within:ring-blue-100">
         <Search
-          size={16}
-          className="shrink-0 text-slate-400"
-          aria-hidden="true"
-        />
+  size={18}
+  className="shrink-0 text-slate-400"
+  aria-hidden="true"
+/>
 
         <label htmlFor="pengajuan-search" className="sr-only">
           Cari pengajuan
@@ -65,7 +65,7 @@ export default function PengajuanToolbar({
           onChange={(event) =>
             onStatusFilterChange(event.target.value as StatusFilterValue)
           }
-          className="h-10 w-full appearance-none rounded-lg border border-[#E2EBF8] bg-white px-3 pr-9 text-sm font-medium text-[#17345F] outline-none transition focus:border-[#3B82F6] focus:ring-2 focus:ring-blue-100"
+          className="h-10 w-full appearance-none rounded-lg border border-[#E2EBF8] bg-white px-3 pr-9 text-sm font-medium text-[#17345F] outline-none transition hover:border-[#93B4E5] focus-visible:border-[#3B82F6] focus-visible:ring-2 focus-visible:ring-blue-200"
         >
           {statusOptions.map((option) => (
             <option key={option.value} value={option.value}>

@@ -50,7 +50,7 @@ export default function DeleteConfirmDialog({
           type="button"
           autoFocus
           onClick={onCancel}
-          className="rounded-lg border border-[#DCE6F2] bg-white px-4 py-2.5 text-sm font-semibold text-[#0F2D5B] transition hover:bg-[#F4F7FC]"
+          className="rounded-lg border border-[#DCE6F2] bg-white px-4 py-2.5 text-sm font-semibold text-[#0F2D5B] transition hover:bg-[#F4F7FC] outline-none focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2"
         >
           Batal
         </button>
@@ -58,7 +58,7 @@ export default function DeleteConfirmDialog({
         <button
           type="button"
           onClick={onConfirm}
-          className="rounded-lg bg-[#F97316] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#EA580C]"
+          className="rounded-lg bg-[#F97316] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#EA580C] outline-none focus-visible:ring-2 focus-visible:ring-orange-300 focus-visible:ring-offset-2"
         >
           Ya, Hapus
         </button>

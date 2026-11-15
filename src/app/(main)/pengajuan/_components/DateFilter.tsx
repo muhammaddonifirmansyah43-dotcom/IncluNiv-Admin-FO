@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { ChevronDown } from "lucide-react";
 
@@ -29,7 +29,7 @@ export default function DateFilter({ value, onChange }: Props) {
         onChange={(event) =>
           onChange(event.target.value as DateFilterValue)
         }
-        className="h-10 w-full appearance-none rounded-lg border border-[#E2EBF8] bg-white px-3 pr-9 text-sm font-medium text-[#17345F] outline-none transition focus:border-[#3B82F6] focus:ring-2 focus:ring-blue-100"
+        className="h-10 w-full appearance-none rounded-lg border border-[#E2EBF8] bg-white px-3 pr-9 text-sm font-medium text-[#17345F] outline-none transition hover:border-[#93B4E5] focus-visible:border-[#3B82F6] focus-visible:ring-2 focus-visible:ring-blue-200"
       >
         {options.map((option) => (
           <option key={option.value} value={option.value}>
@@ -40,7 +40,7 @@ export default function DateFilter({ value, onChange }: Props) {
 
       <ChevronDown
         size={16}
-        className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-slate-500"
+        className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-slate-500" aria-hidden="true"
       />
     </div>
   );

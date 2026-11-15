@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useMemo, useState } from "react";
 import {
@@ -118,7 +118,7 @@ export default function JadwalCalendar({
           {formatTanggal(tanggal)}
         </span>
         <ChevronDown
-          size={15}
+          size={16}
           className={`transition-transform ${open ? "rotate-180" : ""}`}
         />
       </button>
@@ -229,7 +229,7 @@ export default function JadwalCalendar({
             <button
               type="button"
               onClick={apply}
-              className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-[#3B82F6] py-2.5 text-sm font-semibold text-white transition hover:bg-[#2563EB]"
+              className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-[#3B82F6] py-2.5 text-sm font-semibold text-white transition hover:bg-[#2563EB] outline-none focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2"
             >
               <Check size={16} />
               Terapkan

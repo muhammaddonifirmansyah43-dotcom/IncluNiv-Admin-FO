@@ -47,7 +47,7 @@ export default function JadwalKuliah() {
             value={semester}
             onChange={(event) => setSemester(event.target.value)}
             aria-label="Pilih semester"
-            className="w-full appearance-none rounded-xl border border-[#DCE6F2] bg-white px-4 py-3 pr-10 text-sm font-medium text-[#263B55] outline-none transition hover:border-[#93B4E5] focus:border-[#3B82F6] focus:ring-2 focus:ring-blue-100"
+            className="w-full appearance-none rounded-xl border border-[#DCE6F2] bg-white px-4 py-3 pr-10 text-sm font-medium text-[#263B55] outline-none transition hover:border-[#93B4E5] focus-visible:border-[#3B82F6] focus-visible:ring-2 focus-visible:ring-blue-200"
           >
             {semesterOptions.map((option) => (
               <option key={option.value} value={option.value}>

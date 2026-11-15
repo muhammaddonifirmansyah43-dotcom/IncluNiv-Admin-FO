@@ -143,7 +143,7 @@ export default function RiwayatPendampingan() {
             value={semester}
             onChange={(event) => setSemester(event.target.value)}
             aria-label="Filter riwayat berdasarkan semester"
-            className="w-full appearance-none rounded-lg border border-[#DCE6F2] bg-white px-3 py-2.5 pr-9 text-sm font-medium text-[#263B55] outline-none transition hover:border-[#93B4E5] focus:border-[#3B82F6] focus:ring-2 focus:ring-blue-100"
+            className="w-full appearance-none rounded-lg border border-[#DCE6F2] bg-white px-3 py-2.5 pr-9 text-sm font-medium text-[#263B55] outline-none transition hover:border-[#93B4E5] focus-visible:border-[#3B82F6] focus-visible:ring-2 focus-visible:ring-blue-200"
           >
             {semesterOptions.map((option) => (
               <option key={option.value} value={option.value}>
@@ -153,7 +153,7 @@ export default function RiwayatPendampingan() {
           </select>
 
           <ChevronDown
-            size={15}
+            size={16}
             className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-slate-500"
           />
         </div>
@@ -185,7 +185,7 @@ export default function RiwayatPendampingan() {
 
                   <td className="whitespace-nowrap px-4 py-3.5 text-slate-600">
                     <span className="inline-flex items-center gap-1.5">
-                      <Clock size={13} className="text-[#3B82F6]" />
+                      <Clock size={14} className="text-[#3B82F6]" />
                       {item.waktu}
                     </span>
                   </td>
@@ -197,7 +197,7 @@ export default function RiwayatPendampingan() {
                   <td className="px-4 py-3.5 text-slate-600">
                     <span className="flex items-start gap-1.5">
                       <MapPin
-                        size={13}
+                        size={14}
                         className="mt-0.5 shrink-0 text-[#3B82F6]"
                       />
                       {item.lokasi}
@@ -207,12 +207,12 @@ export default function RiwayatPendampingan() {
                   <td className="px-4 py-3.5">
                     {item.status === "Selesai" ? (
                       <span className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-emerald-50 px-2.5 py-1.5 text-xs font-semibold text-emerald-700">
-                        <CheckCircle2 size={12} />
+                        <CheckCircle2 size={14} />
                         Selesai
                       </span>
                     ) : (
                       <span className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-orange-50 px-2.5 py-1.5 text-xs font-semibold text-orange-700">
-                        <CircleDashed size={12} />
+                        <CircleDashed size={14} />
                         Belum
                       </span>
                     )}

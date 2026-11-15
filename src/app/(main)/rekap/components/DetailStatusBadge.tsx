@@ -12,7 +12,7 @@ export default function DetailStatusBadge({ status }: { status: string }) {
         styles[status] ?? "bg-[#FFF2DF] text-[#D97706]"
       }`}
     >
-      <Check size={11} />
+      <Check size={12} strokeWidth={2} />
       {status}
     </span>
   );

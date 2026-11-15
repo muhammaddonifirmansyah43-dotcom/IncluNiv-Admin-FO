@@ -1,4 +1,4 @@
-import { CalendarDays, User } from "lucide-react";
+﻿import { CalendarDays, User } from "lucide-react";
 
 export type TabKey = "diri" | "jadwal";
 
@@ -30,7 +30,7 @@ export default function DetailTabs({ value, onChange }: Props) {
             aria-selected={active}
             aria-controls={`panel-${key}`}
             onClick={() => onChange(key)}
-            className={`flex h-10 items-center justify-center gap-2 rounded-xl text-sm font-semibold transition ${
+            className={`flex h-10 items-center justify-center gap-2 rounded-xl text-sm font-semibold transition outline-none focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2 ${
               active
                 ? "bg-[#3B82F6] text-white shadow-sm"
                 : "text-slate-600 hover:bg-blue-50"

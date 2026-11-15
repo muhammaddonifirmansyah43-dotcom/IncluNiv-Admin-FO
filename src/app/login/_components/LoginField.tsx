@@ -35,10 +35,10 @@ export default function LoginField({
         }`}
       >
         <Icon
-          size={21}
-          strokeWidth={2.5}
-          className={`shrink-0 ${invalid ? "text-red-500" : "text-[#17345F]"}`}
-        />
+  size={21}
+  strokeWidth={2}
+  className={`shrink-0 ${invalid ? "text-red-500" : "text-[#17345F]"}`}
+/>
         {children}
         {trailing}
       </div>
