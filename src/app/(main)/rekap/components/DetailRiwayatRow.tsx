@@ -10,22 +10,17 @@ type Props = {
 };
 
 const td =
-  "px-4 py-4 align-middle text-sm text-[#263B55]";
+  "px-5 py-4 align-middle text-sm text-[#526681]";
 
 export default function DetailRiwayatRow({ no, item }: Props) {
   return (
-    <tr className="transition-colors duration-150 hover:bg-[#F5F8FD]">
-      <td className={`${td} whitespace-nowrap font-medium text-[#8191A8]`}>
-        {String(no).padStart(2, "0")}
+    <tr className="border-b border-[#e8edf4] transition hover:bg-[#F8FAFD]">
+      <td className={`${td} whitespace-nowrap text-[#657892]`}>
+        {no}
       </td>
 
-      <td className={td}>
-        <p className="whitespace-nowrap font-semibold text-[#17345F]">
-          {item.tanggal}
-        </p>
-        <p className="mt-1 whitespace-nowrap text-xs text-[#8191A8]">
-          {item.waktu}
-        </p>
+      <td className={`${td} whitespace-nowrap font-semibold text-[#17365f]`}>
+        {item.tanggal}
       </td>
 
       <td className={`${td} font-medium leading-relaxed`}>
@@ -37,8 +32,8 @@ export default function DetailRiwayatRow({ no, item }: Props) {
       </td>
 
       <td className={td}>
-        <p className="font-medium">{item.lokasi}</p>
-        <p className="mt-1 text-xs text-[#8191A8]">
+        <p className="font-medium text-[#17365f]">{item.lokasi}</p>
+        <p className="mt-1 text-xs text-[#657892]">
           {item.ruang}
         </p>
       </td>

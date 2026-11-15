@@ -34,7 +34,7 @@ export default function ScheduleCalendar() {
         >
           <ChevronLeft size={18} />
         </button>
-        <h2 className="text-sm font-bold capitalize">{monthName}</h2>
+        <h2 className="text-base font-bold capitalize">{monthName}</h2>
         <button
           type="button"
           aria-label="Bulan berikutnya"

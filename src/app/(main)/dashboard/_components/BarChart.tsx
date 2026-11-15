@@ -17,7 +17,7 @@ function growthLabel(values: number[], index: number) {
 export default function BarChart({ labels, values, highlightIndex }: Props) {
   return (
     <div className="mt-5 flex min-h-[205px] flex-1">
-      <div className="flex w-14 shrink-0 flex-col justify-between pb-7 pr-2 text-right text-[10px] text-slate-400">
+      <div className="flex w-14 shrink-0 flex-col justify-between pb-7 pr-2 text-right text-xs text-slate-400">
         {yLabels.map((label) => (
           <span key={label}>{label}</span>
         ))}
@@ -42,7 +42,7 @@ export default function BarChart({ labels, values, highlightIndex }: Props) {
                 key={labels[index]}
                 className="flex h-full min-w-0 flex-col items-center justify-end"
               >
-                <span className="mb-2 text-[10px] text-slate-500">{value}</span>
+                <span className="mb-2 text-xs text-slate-500">{value}</span>
                 <div className="flex h-[145px] w-full items-end justify-center">
                   <div
                     title={`${labels[index]}: ${value} jam`}
@@ -52,14 +52,14 @@ export default function BarChart({ labels, values, highlightIndex }: Props) {
                     style={{ height: `${Math.max(5, (value / MAX_VALUE) * 100)}%` }}
                   >
                     {active && (
-                      <span className="absolute -top-7 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-orange-500 px-2 py-1 text-[10px] font-bold text-white">
+                      <span className="absolute -top-7 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-orange-500 px-2 py-1 text-xs font-bold text-white">
                         {growthLabel(values, index)}
                       </span>
                     )}
                   </div>
                 </div>
                 <span
-                  className={`mt-2 text-[10px] ${
+                  className={`mt-2 text-xs ${
                     active ? "font-bold text-[#3B82F6]" : "text-slate-500"
                   }`}
                 >

@@ -24,7 +24,7 @@ export default function StatisticsChart() {
     <DashboardPanel className="min-h-[340px] p-5">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <p className="text-xs font-bold uppercase tracking-wide text-slate-500">
+          <p className="text-sm font-bold uppercase tracking-wide text-slate-500">
             Statistik Pendampingan
           </p>
           <div className="mt-2 flex flex-wrap items-center gap-3">

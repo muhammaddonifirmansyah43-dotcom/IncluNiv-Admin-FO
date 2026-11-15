@@ -10,11 +10,11 @@ export default function RequestItem({ name, detail, status, tone }: PermissionRe
   return (
     <div className="flex items-center justify-between gap-2 rounded-lg border border-[#E2EBF8] bg-[#F8FAFF] p-2.5">
       <div className="min-w-0">
-        <p className="truncate text-xs font-bold">{name}</p>
-        <p className="mt-1 truncate text-[10px] text-slate-400">{detail}</p>
+        <p className="truncate text-sm font-bold">{name}</p>
+        <p className="mt-1 truncate text-xs text-slate-400">{detail}</p>
       </div>
       <span
-        className={`shrink-0 rounded border px-2 py-1 text-[10px] font-semibold ${statusStyles[tone]}`}
+        className={`shrink-0 rounded border px-2 py-1 text-xs font-semibold ${statusStyles[tone]}`}
       >
         {status}
       </span>

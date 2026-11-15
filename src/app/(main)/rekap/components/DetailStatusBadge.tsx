@@ -8,7 +8,7 @@ const styles: Record<string, string> = {
 export default function DetailStatusBadge({ status }: { status: string }) {
   return (
     <span
-      className={`inline-flex items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-1 text-[10px] font-semibold ${
+      className={`inline-flex items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-1 text-xs font-semibold ${
         styles[status] ?? "bg-[#FFF2DF] text-[#D97706]"
       }`}
     >

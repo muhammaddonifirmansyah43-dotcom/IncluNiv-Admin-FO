@@ -57,7 +57,7 @@ export default function DetailInfoCard({ item }: { item: Pengajuan }) {
           <dd>
             <span
               className={
-                "inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border px-2.5 py-0.5 text-[11px] font-semibold " +
+                "inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold " +
                 status.pill
               }
             >
@@ -74,7 +74,7 @@ export default function DetailInfoCard({ item }: { item: Pengajuan }) {
       <div className={"mt-3 rounded-lg border p-3 " + alert.box}>
         <p
           className={
-            "flex items-center gap-2 text-[11px] font-bold " +
+            "flex items-center gap-2 text-xs font-bold " +
             alert.titleColor
           }
         >

@@ -9,7 +9,7 @@ export default function StudentSummaryCard() {
           <span className="h-2.5 w-2.5 rounded-full bg-[#3B82F6]" />
           <PanelHeading>Data Mahasiswa Difabel</PanelHeading>
         </div>
-        <span className="rounded-full bg-emerald-50 px-2 py-1 text-[10px] font-semibold text-emerald-700">
+        <span className="rounded-full bg-emerald-50 px-2 py-1 text-xs font-semibold text-emerald-700">
           +8.5%
         </span>
       </div>

@@ -9,57 +9,58 @@ type Props = {
 };
 
 const th =
-  "bg-[#F8FAFD] px-4 py-3 text-[11px] font-bold uppercase tracking-wide text-slate-500";
+  "px-5 py-4 text-sm font-semibold text-[#17365f]";
 
 export default function PengajuanTable({ items }: Props) {
   return (
     <div className="w-full overflow-x-auto">
-      <table className="w-full min-w-[640px] text-left text-sm">
+      <table className="w-full min-w-[640px] border-collapse text-left text-sm">
         <thead>
-          <tr>
-            <th className={th + " w-14 text-center"}>No</th>
+          <tr className="border-b border-[#dfe6ef] bg-[#f8faff]">
+            <th className={`${th} w-14 text-center`}>No</th>
             <th className={th}>Nama</th>
             <th className={th}>NIM</th>
             <th className={th}>Tanggal Pengajuan</th>
-            <th className={th + " text-center"}>Status</th>
-            <th className={th + " text-center"}>Aksi</th>
+            <th className={`${th} text-center`}>Status</th>
+            <th className={`${th} text-center`}>Aksi</th>
           </tr>
         </thead>
 
-        <tbody className="divide-y divide-[#EEF3FB]">
+        <tbody>
           {items.map((item, index) => (
             <tr
               key={item.id}
-              className="transition hover:bg-[#F8FAFD]"
+              className="border-b border-[#e8edf4] transition hover:bg-[#F8FAFD]"
             >
-              <td className="px-4 py-4 text-center text-slate-500">
+              <td className="px-5 py-4 text-center text-sm text-[#657892]">
                 {index + 1}
               </td>
 
-              <td className="px-4 py-4 font-bold text-[#17345F]">
+              <td className="px-5 py-4 text-sm font-semibold text-[#17365f]">
                 {item.nama}
               </td>
 
-              <td className="px-4 py-4 font-mono text-xs text-slate-600">
+              <td className="px-5 py-4 font-mono text-sm text-[#526681]">
                 {item.nim}
               </td>
 
-              <td className="px-4 py-4 text-slate-600">
+              <td className="px-5 py-4 text-sm text-[#526681]">
                 {item.tanggalSingkat}
               </td>
 
-              <td className="px-4 py-4 text-center">
+              <td className="px-5 py-4 text-center">
                 <StatusBadge status={item.status} />
               </td>
 
-              <td className="px-4 py-4">
+              <td className="px-5 py-4">
                 <div className="flex justify-center">
                   <Link
                     href={"/pengajuan/" + item.id}
                     aria-label={"Lihat detail pengajuan " + item.nama}
-                    className="flex h-8 w-8 items-center justify-center rounded-md text-[#3B82F6] transition hover:bg-blue-50"
+                    title="Lihat detail"
+                    className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#e8f1ff] text-[#4385f5] transition hover:bg-[#dbe9ff]"
                   >
-                    <Eye size={17} aria-hidden="true" />
+                    <Eye size={16} strokeWidth={2} aria-hidden="true" />
                   </Link>
                 </div>
               </td>
@@ -70,7 +71,7 @@ export default function PengajuanTable({ items }: Props) {
             <tr>
               <td
                 colSpan={6}
-                className="px-4 py-12 text-center text-sm text-slate-400"
+                className="px-5 py-16 text-center text-sm text-[#8495ac]"
               >
                 Tidak ada pengajuan yang cocok.
               </td>

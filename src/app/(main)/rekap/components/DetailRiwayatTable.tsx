@@ -10,7 +10,7 @@ type Props = {
 
 const kolom = [
   "No.",
-  "Tanggal / Waktu",
+  "Tanggal",
   "Mahasiswa Didampingi",
   "Mata Kuliah",
   "Lokasi",
@@ -20,9 +20,9 @@ const kolom = [
 
 export default function DetailRiwayatTable({ volunteer }: Props) {
   return (
-    <section className="w-full overflow-hidden rounded-xl border border-[#DCE6F2] bg-white shadow-sm">
+    <section className="w-full overflow-hidden rounded-2xl border border-[#e0e7f0] bg-white shadow-sm">
       <div className="w-full overflow-x-auto">
-        <table className="w-full min-w-[720px] table-fixed text-left">
+        <table className="w-full min-w-[900px] table-fixed border-collapse text-left">
           <colgroup>
             <col className="w-[6%]" />
             <col className="w-[14%]" />
@@ -33,13 +33,13 @@ export default function DetailRiwayatTable({ volunteer }: Props) {
             <col className="w-[14%]" />
           </colgroup>
 
-          <thead className="bg-[#E6F0FF]">
-            <tr className="text-[9px] font-bold uppercase tracking-wide text-[#526985]">
+          <thead>
+            <tr className="border-b border-[#dfe6ef] bg-[#f8faff]">
               {kolom.map((item) => (
                 <th
                   key={item}
                   scope="col"
-                  className="whitespace-nowrap px-2 py-3"
+                  className="px-5 py-4 text-sm font-semibold text-[#17365f]"
                 >
                   {item}
                 </th>
@@ -47,7 +47,7 @@ export default function DetailRiwayatTable({ volunteer }: Props) {
             </tr>
           </thead>
 
-          <tbody className="divide-y divide-[#E8EEF6]">
+          <tbody>
             {volunteer.riwayat.length > 0 ? (
               volunteer.riwayat.map((item, index) => (
                 <DetailRiwayatRow
@@ -63,8 +63,8 @@ export default function DetailRiwayatTable({ volunteer }: Props) {
         </table>
       </div>
 
-      <div className="border-t border-[#E8EEF6] px-3 py-2">
-        <p className="text-[9px] text-[#8191A8]">
+      <div className="border-t border-[#e0e7ef] bg-[#f8fafc] px-5 py-4">
+        <p className="text-sm text-[#71829b]">
           {volunteer.riwayat.length > 0
             ? "Seluruh riwayat pendampingan ditampilkan"
             : "Belum ada riwayat pendampingan yang ditampilkan"}

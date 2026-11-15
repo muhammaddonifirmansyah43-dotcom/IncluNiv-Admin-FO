@@ -1,3 +1,4 @@
+
 import type { Pendamping } from "@/types/pendamping";
 import PendampingRow from "./PendampingRow";
 
@@ -24,7 +25,7 @@ export default function PendampingTable({ data, onRequestDelete }: Props) {
               <th
                 key={header.label}
                 scope="col"
-                className={`px-5 py-3.5 text-xs font-semibold text-[#17365f] ${header.className}`}
+                className={`px-5 py-4 text-sm font-semibold text-[#17365f] ${header.className}`}
               >
                 {header.label}
               </th>
@@ -44,7 +45,10 @@ export default function PendampingTable({ data, onRequestDelete }: Props) {
             ))
           ) : (
             <tr>
-              <td colSpan={5} className="h-[240px] text-center text-sm text-[#8293ad]">
+              <td
+                colSpan={5}
+                className="px-5 py-16 text-center text-sm text-[#8495ac]"
+              >
                 Data pendamping tidak ditemukan.
               </td>
             </tr>

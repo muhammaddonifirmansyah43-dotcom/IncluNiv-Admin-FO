@@ -16,11 +16,11 @@ function Diproses() {
   return (
     <div className="rounded-lg border border-amber-200 bg-amber-50 p-3">
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <span className="inline-flex items-center gap-1.5 rounded-md bg-amber-500 px-2.5 py-1 text-[11px] font-bold text-white">
+        <span className="inline-flex items-center gap-1.5 rounded-md bg-amber-500 px-2.5 py-1 text-xs font-bold text-white">
           <Zap size={12} aria-hidden="true" />
           Sedang Diproses AI
         </span>
-        <span className="text-[11px] font-bold text-amber-700">
+        <span className="text-xs font-bold text-amber-700">
           Mencari Kecocokan...
         </span>
       </div>
@@ -41,7 +41,7 @@ function Diproses() {
             </span>
             Analisis Jadwal Mahasiswa Dampingan
           </span>
-          <span className="rounded bg-emerald-50 px-1.5 py-0.5 text-[10px] font-bold text-emerald-700">
+          <span className="rounded bg-emerald-50 px-1.5 py-0.5 text-xs font-bold text-emerald-700">
             Selesai
           </span>
         </li>
@@ -51,7 +51,7 @@ function Diproses() {
               <RefreshCw size={14} className="text-amber-500" aria-hidden="true" />
               Penyaringan Relawan Berdasarkan Kompetensi
             </span>
-            <span className="whitespace-nowrap rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-bold text-amber-700">
+            <span className="whitespace-nowrap rounded bg-amber-100 px-1.5 py-0.5 text-xs font-bold text-amber-700">
               Sedang Berjalan (70%)
             </span>
           </div>
@@ -74,11 +74,11 @@ function Disetujui() {
   return (
     <div className="rounded-lg border border-emerald-200 bg-emerald-50 p-3">
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <span className="inline-flex items-center gap-1.5 rounded-md bg-emerald-500 px-2.5 py-1 text-[11px] font-bold text-white">
+        <span className="inline-flex items-center gap-1.5 rounded-md bg-emerald-500 px-2.5 py-1 text-xs font-bold text-white">
           <Check size={12} aria-hidden="true" />
           Disetujui AI
         </span>
-        <span className="text-[11px] font-semibold text-emerald-700">
+        <span className="text-xs font-semibold text-emerald-700">
           Tingkat Kecocokan: 98.4%
         </span>
       </div>
@@ -115,7 +115,7 @@ function TidakDipenuhi({ item }: { item: Pengajuan }) {
         AI tidak dapat menemukan pendamping yang tersedia
       </p>
 
-      <p className="mt-3 text-[11px] font-bold text-red-600">
+      <p className="mt-3 text-xs font-bold text-red-600">
         PENYEBAB / ALASAN:
       </p>
       <ul className="mt-2 list-disc space-y-1.5 pl-4 text-xs leading-relaxed text-slate-600">

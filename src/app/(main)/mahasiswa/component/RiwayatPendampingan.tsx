@@ -143,7 +143,7 @@ export default function RiwayatPendampingan() {
             value={semester}
             onChange={(event) => setSemester(event.target.value)}
             aria-label="Filter riwayat berdasarkan semester"
-            className="w-full appearance-none rounded-lg border border-[#DCE6F2] bg-white px-3 py-2.5 pr-9 text-xs font-medium text-[#263B55] outline-none transition hover:border-[#93B4E5] focus:border-[#3B82F6] focus:ring-2 focus:ring-blue-100"
+            className="w-full appearance-none rounded-lg border border-[#DCE6F2] bg-white px-3 py-2.5 pr-9 text-sm font-medium text-[#263B55] outline-none transition hover:border-[#93B4E5] focus:border-[#3B82F6] focus:ring-2 focus:ring-blue-100"
           >
             {semesterOptions.map((option) => (
               <option key={option.value} value={option.value}>
@@ -161,7 +161,7 @@ export default function RiwayatPendampingan() {
 
       {/* Tabel Riwayat */}
       <div className="overflow-x-auto rounded-xl border border-[#E2EAF5]">
-        <table className="w-full min-w-[760px] text-left text-xs">
+        <table className="w-full min-w-[760px] text-left text-sm">
           <thead className="bg-[#F5F8FC] text-[#17345F]">
             <tr>
               <th className="px-4 py-3.5 font-semibold">TANGGAL</th>
@@ -206,12 +206,12 @@ export default function RiwayatPendampingan() {
 
                   <td className="px-4 py-3.5">
                     {item.status === "Selesai" ? (
-                      <span className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-emerald-50 px-2.5 py-1.5 text-[10px] font-semibold text-emerald-700">
+                      <span className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-emerald-50 px-2.5 py-1.5 text-xs font-semibold text-emerald-700">
                         <CheckCircle2 size={12} />
                         Selesai
                       </span>
                     ) : (
-                      <span className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-orange-50 px-2.5 py-1.5 text-[10px] font-semibold text-orange-700">
+                      <span className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-orange-50 px-2.5 py-1.5 text-xs font-semibold text-orange-700">
                         <CircleDashed size={12} />
                         Belum
                       </span>

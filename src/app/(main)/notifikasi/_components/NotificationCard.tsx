@@ -68,7 +68,7 @@ export default function NotificationCard({ item, onToggleRead }: Props) {
 
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
-            <h3 className="text-[15px] font-bold leading-snug text-[#17345F]">
+            <h3 className="text-sm font-bold leading-snug text-[#17345F]">
               {item.title}
             </h3>
             {unread ? (

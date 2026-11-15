@@ -18,7 +18,7 @@ export default function JadwalHari({
           </h4>
         </div>
 
-        <span className="rounded-full bg-[#F1F5FB] px-2.5 py-1 text-[10px] font-medium text-slate-500">
+        <span className="rounded-full bg-[#F1F5FB] px-2.5 py-1 text-xs font-medium text-slate-500">
           {jadwal.matkul.length} Mata Kuliah
         </span>
       </div>

@@ -20,7 +20,7 @@ export function DashboardPanel({
 
 export function PanelHeading({ children }: { children: ReactNode }) {
   return (
-    <h2 className="text-sm font-bold uppercase tracking-wide text-slate-600">
+    <h2 className="text-base font-bold uppercase tracking-wide text-slate-600">
       {children}
     </h2>
   );
@@ -38,7 +38,7 @@ export function PanelFooter({ actionLabel, href, note }: FooterProps) {
       <div className="flex items-center justify-between gap-2 border-t border-slate-100 pt-3">
         <Link
           href={href}
-          className="inline-flex items-center gap-1 text-xs font-bold transition hover:text-[#3B82F6] hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-200"
+          className="inline-flex items-center gap-1 text-sm font-bold transition hover:text-[#3B82F6] hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-200"
         >
           {actionLabel}
           <ArrowRight size={14} aria-hidden="true" />
