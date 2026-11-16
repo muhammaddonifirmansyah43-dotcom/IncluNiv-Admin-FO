@@ -1,4 +1,4 @@
-
+﻿
 "use client";
 
 import { Eye } from "lucide-react";
@@ -14,6 +14,7 @@ const th = "px-5 py-4 text-sm font-semibold text-[#17365f]";
 
 export default function RekapTable({ data }: RekapTableProps) {
   const router = useRouter();
+  const maxJumlah = Math.max(0, ...data.map((item) => item.jumlah));
 
   const handleDetail = (id: number) => {
     router.push(`/rekap/detail/${id}`);
@@ -55,16 +56,20 @@ export default function RekapTable({ data }: RekapTableProps) {
                     {item.nim}
                   </td>
 
-                  <td className="px-5 py-4">
-                    <span className="inline-block max-w-[180px] rounded-md bg-[#F0F4FC] px-2 py-1 text-sm font-medium text-[#49648A]">
-                      {item.fakultas}
-                    </span>
+                  <td className="px-5 py-4 text-sm text-[#526681]">
+                    {item.fakultas}
                   </td>
 
                   <td className="px-5 py-4">
-                    <span className="whitespace-nowrap rounded-full bg-[#E7EFFF] px-3 py-1.5 text-sm font-bold text-[#2858A6]">
-                      {item.jumlah} Sesi
-                    </span>
+                    {item.jumlah === maxJumlah ? (
+                      <span className="whitespace-nowrap rounded-full bg-[#FFF0E5] px-3 py-1.5 text-sm font-bold text-[#F97316]">
+                        {item.jumlah} Sesi
+                      </span>
+                    ) : (
+                      <span className="whitespace-nowrap text-sm text-[#526681]">
+                        {item.jumlah} Sesi
+                      </span>
+                    )}
                   </td>
 
                   <td className="px-5 py-4 text-center">
@@ -116,3 +121,6 @@ export default function RekapTable({ data }: RekapTableProps) {
     </div>
   );
 }
+
+
+
