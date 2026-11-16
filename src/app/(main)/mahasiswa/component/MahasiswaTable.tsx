@@ -1,5 +1,4 @@
-import { ArrowUpDown } from "lucide-react";
-
+﻿
 import MahasiswaRow from "./MahasiswaRow";
 import type { Mahasiswa, SortDirection } from "./types";
 
@@ -46,10 +45,6 @@ export default function MahasiswaTable({
                 className="inline-flex items-center gap-1.5 rounded-sm outline-none transition hover:text-[#2563C9] focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2"
               >
                 Jenis Disabilitas
-                <ArrowUpDown
-                  size={14}
-                  className={sort ? "text-[#2563C9]" : "text-[#8ca0b8]"}
-                />
               </button>
             </th>
             <th scope="col" className={`${thBase} w-[10%] text-center`}>
@@ -84,3 +79,4 @@ export default function MahasiswaTable({
     </div>
   );
 }
+
