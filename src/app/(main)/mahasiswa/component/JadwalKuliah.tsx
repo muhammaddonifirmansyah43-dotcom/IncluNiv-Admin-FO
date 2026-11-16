@@ -1,7 +1,7 @@
-
+﻿
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CalendarDays, ChevronDown } from "lucide-react";
 
 import JadwalHari from "./JadwalHari";
@@ -13,15 +13,36 @@ import {
 
 export default function JadwalKuliah() {
   const [semester, setSemester] = useState(DEFAULT_SEMESTER);
+  const [semesterOpen, setSemesterOpen] = useState(false);
+  const semesterDropdownRef = useRef<HTMLDivElement>(null);
 
   const jadwal = jadwalPerSemester[semester] ?? [];
-  const label =
-    semesterOptions.find((option) => option.value === semester)?.label ?? "";
+  const selectedSemester = semesterOptions.find(
+    (option) => option.value === semester
+  );
+  const label = selectedSemester?.label ?? "";
 
   const totalMatkul = jadwal.reduce(
     (total, hari) => total + hari.matkul.length,
     0
   );
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        semesterDropdownRef.current &&
+        !semesterDropdownRef.current.contains(event.target as Node)
+      ) {
+        setSemesterOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <section className="rounded-2xl border border-[#DCE6F2] bg-white p-5 shadow-sm sm:p-6">
@@ -42,24 +63,65 @@ export default function JadwalKuliah() {
           </div>
         </div>
 
-        <div className="relative w-full sm:w-72">
-          <select
-            value={semester}
-            onChange={(event) => setSemester(event.target.value)}
+        {/* Dropdown Semester */}
+        <div
+          ref={semesterDropdownRef}
+          className="relative w-full sm:w-72"
+        >
+          <button
+            type="button"
             aria-label="Pilih semester"
-            className="w-full appearance-none rounded-xl border border-[#DCE6F2] bg-white px-4 py-3 pr-10 text-sm font-medium text-[#263B55] outline-none transition hover:border-[#93B4E5] focus-visible:border-[#3B82F6] focus-visible:ring-2 focus-visible:ring-blue-200"
+            aria-haspopup="listbox"
+            aria-expanded={semesterOpen}
+            onClick={() => setSemesterOpen((previous) => !previous)}
+            className={`flex w-full items-center justify-between rounded-xl border bg-white px-4 py-3 text-sm font-medium text-[#17345F] outline-none transition ${
+              semesterOpen
+                ? "border-[#3B82F6] ring-2 ring-blue-100"
+                : "border-[#DCE6F2] hover:border-[#93B4E5]"
+            }`}
           >
-            {semesterOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
+            <span>{label || "Pilih semester"}</span>
 
-          <ChevronDown
-            size={17}
-            className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-slate-500"
-          />
+            <ChevronDown
+              size={17}
+              className={`shrink-0 text-[#64748B] transition-transform ${
+                semesterOpen ? "rotate-180" : ""
+              }`}
+              aria-hidden="true"
+            />
+          </button>
+
+          {semesterOpen && (
+            <div
+              role="listbox"
+              aria-label="Pilihan semester"
+              className="absolute left-0 top-full z-50 mt-2 w-full overflow-hidden rounded-xl border border-[#DCE6F2] bg-white p-1.5 shadow-[0_8px_24px_rgba(31,71,130,0.12)]"
+            >
+              {semesterOptions.map((option) => {
+                const isSelected = semester === option.value;
+
+                return (
+                  <button
+                    key={option.value}
+                    type="button"
+                    role="option"
+                    aria-selected={isSelected}
+                    onClick={() => {
+                      setSemester(option.value);
+                      setSemesterOpen(false);
+                    }}
+                    className={`flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left text-sm transition ${
+                      isSelected
+                        ? "bg-[#E6F0FF] font-semibold text-[#17345F]"
+                        : "text-[#334155] hover:bg-[#F1F5FB]"
+                    }`}
+                  >
+                    <span>{option.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+          )}
         </div>
       </div>
 
@@ -98,3 +160,5 @@ export default function JadwalKuliah() {
     </section>
   );
 }
+
+

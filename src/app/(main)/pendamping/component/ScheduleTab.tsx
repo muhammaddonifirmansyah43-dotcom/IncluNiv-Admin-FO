@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CalendarDays, ChevronDown } from "lucide-react";
 import type { ScheduleDay as ScheduleDayType } from "@/types/pendamping";
 import ScheduleDay from "./ScheduleDay";
@@ -16,6 +16,22 @@ export default function ScheduleTab({
   jadwal: ScheduleDayType[];
 }) {
   const [semester, setSemester] = useState("ganjil-2026");
+  const [semesterOpen, setSemesterOpen] = useState(false);
+  const semesterDropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        semesterDropdownRef.current &&
+        !semesterDropdownRef.current.contains(event.target as Node)
+      ) {
+        setSemesterOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const jadwalAktif = semester === "ganjil-2026" ? jadwal : [];
   const label =
@@ -44,25 +60,52 @@ export default function ScheduleTab({
           </div>
         </div>
 
-        <div className="relative w-full sm:w-72">
-          <select
-            value={semester}
-            onChange={(event) => setSemester(event.target.value)}
+        <div
+          className="relative w-full sm:w-72"
+          ref={semesterDropdownRef}
+        >
+          <button
+            type="button"
             aria-label="Pilih semester"
-            className="w-full appearance-none rounded-xl border border-[#DCE6F2] bg-white px-4 py-3 pr-10 text-sm font-medium text-[#263B55] outline-none transition hover:border-[#93B4E5] focus-visible:border-[#3B82F6] focus-visible:ring-2 focus-visible:ring-blue-200"
+            aria-expanded={semesterOpen}
+            onClick={() => setSemesterOpen((prev) => !prev)}
+            className="flex w-full items-center justify-between rounded-xl border border-[#DCE6F2] bg-white px-4 py-3 text-sm font-medium text-[#17345F] shadow-sm transition hover:border-[#93B4E5] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3B82F6]/20"
           >
-            {semesterOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
+            <span className="whitespace-nowrap">{label}</span>
+            <ChevronDown
+              size={18}
+              aria-hidden="true"
+              className={`shrink-0 text-[#64748B] transition-transform ${semesterOpen ? "rotate-180" : ""}`}
+            />
+          </button>
 
-          <ChevronDown
-            size={17}
-            aria-hidden="true"
-            className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-slate-500"
-          />
+          {semesterOpen && (
+            <div className="absolute right-0 z-30 mt-2 w-full overflow-hidden rounded-xl border border-[#DCE6F2] bg-white p-1.5 shadow-lg">
+              {semesterOptions.map((option) => {
+                const isSelected = semester === option.value;
+
+                return (
+                  <button
+                    key={option.value}
+                    type="button"
+                    role="option"
+                    aria-selected={isSelected}
+                    onClick={() => {
+                      setSemester(option.value);
+                      setSemesterOpen(false);
+                    }}
+                    className={`w-full rounded-lg px-3 py-2.5 text-left text-sm whitespace-nowrap transition ${
+                      isSelected
+                        ? "bg-[#E6F0FF] font-semibold text-[#17345F]"
+                        : "text-[#334155] hover:bg-[#F1F5FB]"
+                    }`}
+                  >
+                    {option.label}
+                  </button>
+                );
+              })}
+            </div>
+          )}
         </div>
       </div>
 

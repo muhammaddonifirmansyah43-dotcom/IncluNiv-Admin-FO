@@ -3,7 +3,6 @@
 import { useEffect, useState, type ReactNode } from "react";
 import {
   CalendarDays,
-  Check,
   ChevronDown,
   GraduationCap,
   Search,
@@ -91,7 +90,7 @@ function FilterMenu({
 
           <div
             role="listbox"
-            className="absolute left-0 top-full z-30 mt-2 w-max min-w-[180px] rounded-xl border border-[#dce5ef] bg-white p-1.5 shadow-lg"
+            className="absolute left-0 top-full z-30 mt-2 w-max min-w-[180px] rounded-xl border border-[#DCE6F2] bg-white p-1.5 shadow-lg"
           >
             {options.map((option) => {
               const selected = option.value === value;
@@ -108,13 +107,12 @@ function FilterMenu({
                   }}
                   className={`flex w-full items-center justify-between gap-4 rounded-lg px-3 py-2.5 text-left text-sm transition ${
                     selected
-                      ? "bg-[#FDEFE2] font-semibold text-[#17365f]"
-                      : "text-[#344866] hover:bg-[#f0f5ff]"
+                      ? "bg-[#E6F0FF] font-semibold text-[#17345F]"
+                      : "text-[#334155] hover:bg-[#F1F5FB]"
                   }`}
                 >
                   {option.label}
-                  {selected && <Check size={16} className="text-[#F97316]" />}
-                </button>
+</button>
               );
             })}
           </div>
@@ -182,3 +180,5 @@ export default function JadwalFilter({
     </div>
   );
 }
+
+
