@@ -1,4 +1,4 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 
 :root {
   --color-navy: #0F2D5B;
@@ -29,4 +29,40 @@ input,
 textarea,
 select {
   font: inherit;
+}
+/* Scrollbar Dropdown IncluNiv */
+.dropdown-scrollbar {
+  scrollbar-width: thin !important;
+  scrollbar-color: #3B82F6 transparent !important;
+}
+
+.dropdown-scrollbar::-webkit-scrollbar {
+  width: 7px !important;
+  height: 7px !important;
+  background: transparent !important;
+}
+
+.dropdown-scrollbar::-webkit-scrollbar-track,
+.dropdown-scrollbar::-webkit-scrollbar-track-piece,
+.dropdown-scrollbar::-webkit-scrollbar-corner {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.dropdown-scrollbar::-webkit-scrollbar-thumb {
+  background: #3B82F6 !important;
+  border: none !important;
+  border-radius: 999px !important;
+  box-shadow: none !important;
+}
+
+.dropdown-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #0F2D5B !important;
+}
+
+.dropdown-scrollbar::-webkit-scrollbar-button {
+  display: none !important;
+  background: transparent !important;
 }
