@@ -1,4 +1,4 @@
-
+﻿
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
@@ -14,6 +14,7 @@ export default function PendampingContent() {
   const [search, setSearch] = useState("");
   const [faculty, setFaculty] = useState("Semua Fakultas");
   const [pageSize, setPageSize] = useState(20);
+  const [currentPage, setCurrentPage] = useState(1);
   const [target, setTarget] = useState<Pendamping | null>(null);
 
   useEffect(() => {
@@ -50,7 +51,28 @@ export default function PendampingContent() {
     });
   }, [items, search, faculty]);
 
-  const visible = filtered.slice(0, pageSize);
+  const rowsPerPage = 10;
+  const selectedTotal =
+    pageSize === 0 ? filtered.length : Math.min(filtered.length, pageSize);
+  const pageCount = Math.max(1, Math.ceil(selectedTotal / rowsPerPage));
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search, faculty, pageSize]);
+
+  useEffect(() => {
+    if (currentPage > pageCount) {
+      setCurrentPage(pageCount);
+    }
+  }, [currentPage, pageCount]);
+
+  const startIndex = (currentPage - 1) * rowsPerPage;
+  const startItem = selectedTotal === 0 ? 0 : startIndex + 1;
+  const endItem = Math.min(startIndex + rowsPerPage, selectedTotal);
+
+  const visible = filtered
+    .slice(0, selectedTotal)
+    .slice(startIndex, startIndex + rowsPerPage);
 
   function handleConfirmDelete() {
     if (!target) return;
@@ -73,7 +95,15 @@ export default function PendampingContent() {
 
       <div className="overflow-hidden rounded-2xl border border-[#DCE6F2] bg-white shadow-sm">
         <PendampingTable data={visible} onRequestDelete={setTarget} />
-        <TableFooter shown={visible.length} total={filtered.length} />
+        <TableFooter
+          shown={visible.length}
+          total={selectedTotal}
+          startItem={startItem}
+          endItem={endItem}
+          currentPage={currentPage}
+          pageCount={pageCount}
+          onPageChange={setCurrentPage}
+        />
       </div>
 
       <ConfirmDialog
@@ -91,3 +121,5 @@ export default function PendampingContent() {
     </div>
   );
 }
+
+

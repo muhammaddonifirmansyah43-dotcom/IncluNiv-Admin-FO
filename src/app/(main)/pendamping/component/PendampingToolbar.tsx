@@ -1,4 +1,4 @@
-
+﻿
 "use client";
 
 import { useState } from "react";
@@ -60,7 +60,7 @@ function FacultyFilter({
             onClick={() => setOpen(false)}
           />
 
-          <div className="absolute right-0 top-full z-30 mt-2 max-h-64 w-[240px] overflow-y-auto rounded-xl border border-[#dce5ef] bg-white p-1.5 shadow-lg">
+          <div className="absolute right-0 top-full z-30 mt-2 max-h-64 w-[240px] overflow-y-auto dropdown-scrollbar rounded-xl border border-[#dce5ef] bg-white p-1.5 shadow-lg">
             {options.map((item) => (
               <button
                 key={item}
@@ -128,3 +128,4 @@ export default function PendampingToolbar({
     </div>
   );
 }
+

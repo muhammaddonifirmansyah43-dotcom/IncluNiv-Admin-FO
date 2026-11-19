@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useRef, useState } from "react";
 import { ChevronDown } from "lucide-react";
@@ -40,7 +40,7 @@ export default function PageSizeSelect({ value, onChange }: Props) {
         onClick={() => setOpen((prev) => !prev)}
         className="flex h-[38px] w-full items-center justify-between gap-3 rounded-xl border border-[#dce5f2] bg-white px-4 text-sm text-[#344866] transition hover:border-[#93B4E5] outline-none focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2 sm:min-w-[170px]"
       >
-        <span>{value} data volunteer</span>
+        <span>{value === 0 ? "Semua Data" : `${value} Data`}</span>
         <ChevronDown
           size={16}
           aria-hidden="true"
@@ -51,7 +51,7 @@ export default function PageSizeSelect({ value, onChange }: Props) {
       {open && (
         <ul
           role="listbox"
-          className="absolute right-0 top-11 z-20 w-full min-w-[170px] rounded-xl border border-[#e1e8f2] bg-white p-1 shadow-lg"
+          className="absolute right-0 top-11 z-20 w-full min-w-[170px] max-h-52 overflow-y-auto overscroll-contain dropdown-scrollbar rounded-xl border border-[#e1e8f2] bg-white p-1 shadow-lg"
         >
           {pageSizeOptions.map((size) => (
             <li key={size} role="option" aria-selected={size === value}>
@@ -67,7 +67,7 @@ export default function PageSizeSelect({ value, onChange }: Props) {
                     : "text-[#344866]"
                 }`}
               >
-                {size} data volunteer
+                {size === 0 ? "Semua Data" : `${size} Data`}
               </button>
             </li>
           ))}
@@ -76,3 +76,6 @@ export default function PageSizeSelect({ value, onChange }: Props) {
     </div>
   );
 }
+
+
+
