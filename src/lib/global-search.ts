@@ -1,5 +1,5 @@
-﻿import { pendampingList } from "@/lib/pendamping-data";
-import { dataJadwal } from "@/app/(main)/jadwal/components/types";
+﻿
+import { pendampingList } from "@/lib/pendamping-data";
 
 export type GlobalSearchItem = {
   id: string;
@@ -37,24 +37,6 @@ export const globalSearchData: GlobalSearchItem[] = [
     description: `${item.nim} - ${item.fakultas}`,
     keywords: [item.nama, item.nim, item.fakultas],
     href: `/pendamping/${item.id}`,
-  })),
-
-  ...dataJadwal.map((item) => ({
-    id: String(item.id),
-    category: "Jadwal" as const,
-    title: item.mataKuliah,
-    description: `${item.mahasiswa} - ${item.pendamping} - ${item.tanggal}`,
-    keywords: [
-      item.mahasiswa,
-      item.nimMahasiswa,
-      item.pendamping,
-      item.nimPendamping,
-      item.mataKuliah,
-      item.lokasi,
-      item.kelas,
-      item.status,
-    ],
-    href: `/jadwal?q=${encodeURIComponent(item.mataKuliah)}`,
   })),
 ];
 

@@ -1,4 +1,4 @@
-
+﻿
 "use client";
 
 import { useState } from "react";
@@ -18,6 +18,7 @@ import {
 
 import Logo from "./Logo";
 import LogoutModal from "@/components/ui/LogoutModal";
+import { clearAuthSession } from "@/lib/auth";
 
 const menuItems = [
   { label: "Beranda", href: "/dashboard", icon: House },
@@ -40,8 +41,9 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
   const [showLogout, setShowLogout] = useState(false);
 
   function handleLogout() {
+    clearAuthSession();
     setShowLogout(false);
-    router.push("/login");
+    router.replace("/login");
   }
 
   return (
@@ -147,3 +149,4 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
     </>
   );
 }
+

@@ -1,7 +1,12 @@
+
 "use client";
 
-import { useMemo, useState } from "react";
-import { pengajuanList } from "@/lib/pengajuan-data";
+import { useEffect, useMemo, useState } from "react";
+import {
+  getPendingPermissions,
+  mapPermissionsToPengajuan,
+} from "@/lib/permissions";
+import type { Pengajuan } from "@/types/pengajuan";
 
 import PengajuanToolbar from "./PengajuanToolbar";
 import PengajuanTable from "./PengajuanTable";
@@ -40,9 +45,49 @@ function isSameDay(first: Date, second: Date) {
 export default function PengajuanList() {
   const [search, setSearch] = useState("");
   const [dateFilter, setDateFilter] =
-    useState<DateFilterValue>("bulan_ini");
+    useState<DateFilterValue>("hari_ini");
   const [statusFilter, setStatusFilter] =
     useState<StatusFilterValue>("semua");
+
+  const [items, setItems] = useState<Pengajuan[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let active = true;
+
+    async function loadPermissions() {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const response = await getPendingPermissions();
+        const mappedItems = mapPermissionsToPengajuan(response.data);
+
+        if (active) {
+          setItems(mappedItems);
+        }
+      } catch (err) {
+        if (active) {
+          setError(
+            err instanceof Error
+              ? err.message
+              : "Gagal mengambil data pengajuan izin."
+          );
+        }
+      } finally {
+        if (active) {
+          setLoading(false);
+        }
+      }
+    }
+
+    loadPermissions();
+
+    return () => {
+      active = false;
+    };
+  }, []);
 
   const filtered = useMemo(() => {
     const query = search.trim().toLowerCase();
@@ -53,7 +98,7 @@ export default function PengajuanList() {
     const sevenDaysAgo = new Date(today);
     sevenDaysAgo.setDate(today.getDate() - 6);
 
-    const result = pengajuanList.filter((item) => {
+    const result = items.filter((item) => {
       const matchSearch =
         !query ||
         `${item.nama} ${item.nim}`.toLowerCase().includes(query);
@@ -105,7 +150,7 @@ export default function PengajuanList() {
 
       return dateB - dateA;
     });
-  }, [search, dateFilter, statusFilter]);
+  }, [items, search, dateFilter, statusFilter]);
 
   return (
     <div className="space-y-4">
@@ -119,15 +164,27 @@ export default function PengajuanList() {
       />
 
       <div className="overflow-hidden rounded-xl border border-[#E2EBF8] bg-white shadow-[0_4px_14px_rgba(31,71,130,0.07)]">
-        <PengajuanTable items={filtered} />
+        {loading ? (
+          <p className="px-4 py-10 text-center text-sm text-slate-500">
+            Memuat data pengajuan...
+          </p>
+        ) : error ? (
+          <p className="px-4 py-10 text-center text-sm text-red-600">
+            {error}
+          </p>
+        ) : (
+          <>
+            <PengajuanTable items={filtered} />
 
-        <p className="border-t border-[#EEF3FB] px-4 py-3 text-xs text-slate-500">
-          Menampilkan{" "}
-          <span className="font-bold text-[#3B82F6]">
-            {filtered.length}
-          </span>{" "}
-          pengajuan
-        </p>
+            <p className="border-t border-[#EEF3FB] px-4 py-3 text-xs text-slate-500">
+              Menampilkan{" "}
+              <span className="font-bold text-[#3B82F6]">
+                {filtered.length}
+              </span>{" "}
+              pengajuan
+            </p>
+          </>
+        )}
       </div>
     </div>
   );

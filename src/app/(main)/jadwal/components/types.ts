@@ -1,4 +1,5 @@
-/* ---------- Tipe ---------- */
+
+/* ---------- Tipe Frontend ---------- */
 
 export type StatusJadwal = "Selesai" | "Berlangsung" | "Akan datang";
 export type FilterStatus = "Semua" | StatusJadwal;
@@ -11,15 +12,51 @@ export interface Jadwal {
   nimMahasiswa: string;
   pendamping: string;
   nimPendamping: string;
-  aiMatch?: boolean; // pendamping hasil rekomendasi AI
-  pendampingAsli?: string; // pendamping awal yang digantikan, mis. "Gita Naura (Izin Sakit)"
-  mataKuliah: string;
+  aiMatch?: boolean;
+  pendampingAsli?: string;
+  mataKuliah?: string;
   lokasi: string;
-  kelas: string;
+  kelas?: string;
   status: StatusJadwal;
 }
 
-/* ---------- Konfigurasi filter ---------- */
+/* ---------- Tipe Respons API Backend ---------- */
+
+// Status asli yang dikirim backend Prisma.
+export type AssignmentStatusApi =
+  | "PENDING"
+  | "ACCEPTED"
+  | "ONGOING"
+  | "COMPLETED"
+  | "CANCELLED";
+
+export interface AssignmentMonitoring {
+  id: number;
+  startAt: string;
+  endAt: string;
+  location: string | null;
+  status: AssignmentStatusApi;
+  student: {
+    studentCode: string | null;
+    user: {
+      fullName: string;
+    };
+  };
+  mentor: {
+    studentCode: string | null;
+    user: {
+      fullName: string;
+    };
+  };
+}
+
+export interface AssignmentMonitoringResponse {
+  success: boolean;
+  message: string;
+  data: AssignmentMonitoring[];
+}
+
+/* ---------- Konfigurasi Filter ---------- */
 
 export const semesterOptions = [
   { value: "ganjil", label: "Semester Ganjil 2026/2027" },
@@ -38,10 +75,10 @@ export const SEMESTER_RANGE: Record<string, { start: string; end: string }> = {
   genap: { start: "2027-02-01", end: "2027-07-31" },
 };
 
-// Sama dengan desain Figma. Ganti ke getTodayString() kalau data sudah dari API.
+// Sementara masih mengikuti tanggal desain Figma.
 export const DEFAULT_TANGGAL = "2026-09-30";
 
-/* ---------- Helper tanggal ---------- */
+/* ---------- Helper Tanggal ---------- */
 
 export const toDateString = (date: Date) =>
   [
@@ -64,88 +101,3 @@ export const dalamSemester = (tanggal: string, semester: string) => {
   const range = SEMESTER_RANGE[semester];
   return !range || (tanggal >= range.start && tanggal <= range.end);
 };
-
-/* ---------- Data dummy ---------- */
-
-export const dataJadwal: Jadwal[] = [
-  {
-    id: 1,
-    tanggal: "2026-09-30",
-    waktu: "07:00 - 08:30",
-    mahasiswa: "Ahmad Macheda",
-    nimMahasiswa: "235150201111",
-    pendamping: "Faris Ramadhani",
-    nimPendamping: "253140707768966",
-    mataKuliah: "Algoritma & Struktur Data",
-    lokasi: "Ruang F201 • Gedung F",
-    kelas: "TI - B (3 SKS)",
-    status: "Selesai",
-  },
-  {
-    id: 2,
-    tanggal: "2026-09-30",
-    waktu: "08:00 - 10:00",
-    mahasiswa: "Raka Fadhillah",
-    nimMahasiswa: "225150400192",
-    pendamping: "Lukito Adi Nugroho",
-    nimPendamping: "253140707111143",
-    aiMatch: true,
-    pendampingAsli: "Gita Naura (Izin Sakit)",
-    mataKuliah: "Pemrograman Mobile",
-    lokasi: "Ruang A307 • Lab Aplikasi",
-    kelas: "Mobile - A (3 SKS)",
-    status: "Berlangsung",
-  },
-  {
-    id: 3,
-    tanggal: "2026-09-30",
-    waktu: "08:00 - 10:30",
-    mahasiswa: "Ikhwanudin",
-    nimMahasiswa: "215150307111",
-    pendamping: "Dian Novitasari",
-    nimPendamping: "253140707765676",
-    mataKuliah: "Kecerdasan Buatan",
-    lokasi: "Gedung Dieng • Ruang A403",
-    kelas: "KB - D (3 SKS)",
-    status: "Berlangsung",
-  },
-  {
-    id: 4,
-    tanggal: "2026-09-30",
-    waktu: "10:20 - 12:00",
-    mahasiswa: "Zalvarina Nabilla",
-    nimMahasiswa: "245150600109",
-    pendamping: "Rizky Ananda",
-    nimPendamping: "253140707445587",
-    mataKuliah: "Interaksi Manusia & Komputer",
-    lokasi: "Ruang B409 • Gedung B",
-    kelas: "IMK - C (3 SKS)",
-    status: "Akan datang",
-  },
-  {
-    id: 5,
-    tanggal: "2026-09-30",
-    waktu: "08:45 - 11:15",
-    mahasiswa: "Bagas Pratama",
-    nimMahasiswa: "235150700012",
-    pendamping: "Mahendra Saputra",
-    nimPendamping: "253140707222234",
-    mataKuliah: "Jaringan Komputer Lanjut",
-    lokasi: "Lab Jaringan Gedung G • Lt. 2",
-    kelas: "Jarkom - A (3 SKS)",
-    status: "Berlangsung",
-  },
-  {
-    id: 6,
-    tanggal: "2026-09-30",
-    waktu: "13:00 - 15:30",
-    mahasiswa: "Dewi Harum",
-    nimMahasiswa: "225150207001",
-    pendamping: "Anisa Septiani",
-    nimPendamping: "253140707112165",
-    mataKuliah: "Sistem Basis Data Terdistribusi",
-    lokasi: "Ruang C204 • Gedung Pascasarjana",
-    kelas: "SBD - B (3 SKS)",
-    status: "Akan datang",
-  },
-];

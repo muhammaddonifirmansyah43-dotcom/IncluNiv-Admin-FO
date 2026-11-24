@@ -1,16 +1,21 @@
 
-import type { Volunteer } from "./types";
+import type { RecapActivity } from "./types";
 import DetailStatusBadge from "./DetailStatusBadge";
-
-type Riwayat = Volunteer["riwayat"][number];
 
 type Props = {
   no: number;
-  item: Riwayat;
+  item: RecapActivity;
 };
 
-const td =
-  "px-5 py-4 align-middle text-sm text-[#526681]";
+const td = "px-5 py-4 align-middle text-sm text-[#526681]";
+
+function formatDate(value: string) {
+  return new Date(value).toLocaleDateString("id-ID", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  });
+}
 
 export default function DetailRiwayatRow({ no, item }: Props) {
   return (
@@ -20,26 +25,21 @@ export default function DetailRiwayatRow({ no, item }: Props) {
       </td>
 
       <td className={`${td} whitespace-nowrap font-semibold text-[#17365f]`}>
-        {item.tanggal}
+        {formatDate(item.startAt)}
       </td>
 
       <td className={`${td} font-medium leading-relaxed`}>
-        {item.mahasiswa}
-      </td>
-
-      <td className={`${td} leading-relaxed`}>
-        {item.kegiatan}
+        {item.studentName}
       </td>
 
       <td className={td}>
-        <p className="font-medium text-[#17365f]">{item.lokasi}</p>
-        <p className="mt-1 text-xs text-[#657892]">
-          {item.ruang}
+        <p className="font-medium text-[#17365f]">
+          {item.location ?? "-"}
         </p>
       </td>
 
       <td className={`${td} whitespace-nowrap font-medium`}>
-        {item.durasi}
+        {item.durationHours} jam
       </td>
 
       <td className={td}>

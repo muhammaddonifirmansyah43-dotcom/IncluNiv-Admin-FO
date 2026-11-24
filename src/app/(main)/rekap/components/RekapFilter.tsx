@@ -1,158 +1,285 @@
-﻿"use client";
+﻿
+"use client";
 
 import { useEffect, useRef, useState } from "react";
 import { Search, ChevronDown } from "lucide-react";
+import type { RecapSemester, RecapWeek } from "@/lib/recap";
 
 interface RekapFilterProps {
   search: string;
   setSearch: (value: string) => void;
-  periode: string;
-  setPeriode: (value: string) => void;
-  semester: string;
-  setSemester: (value: string) => void;
+  semester: RecapSemester;
+  setSemester: (value: RecapSemester) => void;
+  month: number;
+  setMonth: (value: number) => void;
+  week: RecapWeek;
+  setWeek: (value: RecapWeek) => void;
+  months: { value: number; label: string }[];
+  weeks: RecapWeek[];
 }
 
-type DropdownOption = {
-  value: string;
-  label: string;
-};
-
-function FilterDropdown({
-  value,
-  options,
-  onChange,
-}: {
-  value: string;
-  options: DropdownOption[];
-  onChange: (value: string) => void;
-}) {
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    function handleClick(event: MouseEvent) {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
-        setOpen(false);
-      }
-    }
-
-    function handleKey(event: KeyboardEvent) {
-      if (event.key === "Escape") setOpen(false);
-    }
-
-    document.addEventListener("mousedown", handleClick);
-    document.addEventListener("keydown", handleKey);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClick);
-      document.removeEventListener("keydown", handleKey);
-    };
-  }, []);
-
-  const selected = options.find((option) => option.value === value);
-
-  return (
-    <div ref={ref} className="relative min-w-0">
-      <button
-        type="button"
-        aria-haspopup="listbox"
-        aria-expanded={open}
-        onClick={() => setOpen((previous) => !previous)}
-        className="flex w-full items-center justify-between gap-3 rounded-xl border border-[#DFE8F5] bg-white px-3 py-3 text-left text-sm font-medium text-[#29466D] outline-none transition hover:border-[#93B4E5] focus-visible:border-[#3B82F6] focus-visible:ring-2 focus-visible:ring-blue-200"
-      >
-        <span className="min-w-0 flex-1 truncate">
-          {selected?.label ?? ""}
-        </span>
-
-        <ChevronDown
-          size={16}
-          className={`shrink-0 text-[#7185A2] transition-transform ${
-            open ? "rotate-180" : ""
-          }`}
-        />
-      </button>
-
-      {open && (
-        <ul
-          role="listbox"
-          className="absolute left-0 top-full z-30 mt-2 max-h-56 w-full overflow-y-auto overscroll-contain dropdown-scrollbar rounded-xl border border-[#DCE5F2] bg-white p-1.5 shadow-lg"
-        >
-          {options.map((option) => (
-            <li
-              key={option.value}
-              role="option"
-              aria-selected={option.value === value}
-            >
-              <button
-                type="button"
-                onClick={() => {
-                  onChange(option.value);
-                  setOpen(false);
-                }}
-                className={`w-full rounded-lg px-3 py-2.5 text-left text-sm outline-none transition hover:bg-[#F0F5FF] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-300 ${
-                  option.value === value
-                    ? "bg-[#EAF2FF] font-semibold text-[#17365F]"
-                    : "text-[#344866]"
-                }`}
-              >
-                {option.label}
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  );
-}
+type DropdownType = "semester" | "month" | "week" | null;
 
 export default function RekapFilter({
   search,
   setSearch,
-  periode,
-  setPeriode,
   semester,
   setSemester,
+  month,
+  setMonth,
+  week,
+  setWeek,
+  months,
+  weeks,
 }: RekapFilterProps) {
-  const periodeOptions: DropdownOption[] = [
-    { value: "1 bulan terakhir", label: "1 bulan terakhir" },
-    { value: "3 bulan terakhir", label: "3 bulan terakhir" },
-    { value: "6 bulan terakhir", label: "6 bulan terakhir" },
-    { value: "Semua periode", label: "Semua periode" },
-  ];
+  const [openDropdown, setOpenDropdown] =
+    useState<DropdownType>(null);
 
-  const semesterOptions: DropdownOption[] = [
-    { value: "ganjil", label: "Semester Ganjil 2026/2027" },
-    { value: "genap", label: "Semester Genap 2026/2027" },
-  ];
+  const filterRef = useRef<HTMLDivElement>(null);
+
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  const currentMonth = currentDate.getMonth() + 1;
+
+  const academicYearStart =
+    currentMonth >= 8 ? currentYear : currentYear - 1;
+
+  const academicYear =
+    `${academicYearStart}/${academicYearStart + 1}`;
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        filterRef.current &&
+        !filterRef.current.contains(event.target as Node)
+      ) {
+        setOpenDropdown(null);
+      }
+    }
+
+    function handleEscape(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setOpenDropdown(null);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
+
+  const buttonClass =
+    "flex h-[38px] w-full min-w-0 items-center justify-between gap-2 rounded-xl border border-[#dce5f2] bg-white px-3 text-sm text-[#344866] outline-none transition hover:border-[#93B4E5] focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2";
+
+  const menuClass =
+    "absolute left-0 top-[calc(100%+8px)] z-50 max-h-52 w-full overflow-y-auto overscroll-contain dropdown-scrollbar rounded-xl border border-[#e1e8f2] bg-white p-1 shadow-lg";
+
+  const optionClass = (selected: boolean) =>
+    `w-full rounded-lg px-3 py-2.5 text-left text-sm outline-none transition hover:bg-[#f1f5ff] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-300 ${
+      selected
+        ? "bg-[#f1f5ff] font-semibold text-[#17365f]"
+        : "text-[#344866]"
+    }`;
+
+  function getWeekLabel(value: RecapWeek) {
+    return value === 0 ? "Semua Minggu" : `Minggu: ${value}`;
+  }
 
   return (
-    <div className="grid grid-cols-1 gap-3 rounded-2xl border border-[#E5ECF6] bg-white p-4 shadow-sm md:grid-cols-2 xl:grid-cols-3">
-      {/* Search */}
-      <div className="flex items-center gap-2 rounded-xl border border-[#DFE8F5] bg-white px-3">
-        <Search size={18} className="shrink-0 text-[#91A2BA]" />
+    <div
+      ref={filterRef}
+      className="relative rounded-2xl border border-[#E5ECF6] bg-white p-4 shadow-sm"
+    >
+      <div className="grid grid-cols-[minmax(0,1.5fr)_repeat(3,minmax(0,1fr))] items-center gap-3">
 
-        <input
-          type="search"
-          placeholder="Cari nama volunteer atau NIM..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="w-full bg-transparent py-3 text-sm text-[#29466D] outline-none placeholder:text-[#9AAAC0]"
-        />
+        {/* Pencarian */}
+        <div className="min-w-0">
+          <div className="flex h-[38px] min-w-0 items-center gap-2 rounded-xl border border-[#dce5f2] bg-white px-3 transition focus-within:border-[#3B82F6] focus-within:ring-2 focus-within:ring-blue-300/30">
+            <Search
+              size={18}
+              className="shrink-0 text-[#91A2BA]"
+            />
+
+            <input
+              id="recap-search"
+              type="search"
+              aria-label="Cari volunteer atau NIM"
+              placeholder="Cari volunteer atau NIM..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="h-full w-full min-w-0 bg-transparent text-sm text-[#344866] outline-none placeholder:text-[#9AAAC0]"
+            />
+          </div>
+        </div>
+
+        {/* Semester */}
+        <div
+          className={`relative min-w-0 ${
+            openDropdown === "semester" ? "z-30" : "z-0"
+          }`}
+        >
+          <button
+            type="button"
+            aria-label="Pilih semester"
+            aria-haspopup="listbox"
+            aria-expanded={openDropdown === "semester"}
+            onClick={() =>
+              setOpenDropdown(
+                openDropdown === "semester" ? null : "semester"
+              )
+            }
+            className={buttonClass}
+          >
+            <span className="truncate">
+              Semester {semester === "ODD" ? "Ganjil" : "Genap"} {academicYear}
+            </span>
+
+            <ChevronDown
+              size={16}
+              className={`shrink-0 transition-transform ${
+                openDropdown === "semester" ? "rotate-180" : ""
+              }`}
+            />
+          </button>
+
+          {openDropdown === "semester" && (
+            <ul role="listbox" className={menuClass}>
+              {[
+                { value: "ODD" as RecapSemester, label: "Ganjil" },
+                { value: "EVEN" as RecapSemester, label: "Genap" },
+              ].map((item) => (
+                <li
+                  key={item.value}
+                  role="option"
+                  aria-selected={semester === item.value}
+                >
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSemester(item.value);
+                      setOpenDropdown(null);
+                    }}
+                    className={optionClass(semester === item.value)}
+                  >
+                    Semester {item.label} {academicYear}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        {/* Bulan */}
+        <div
+          className={`relative min-w-0 ${
+            openDropdown === "month" ? "z-30" : "z-0"
+          }`}
+        >
+          <button
+            type="button"
+            aria-label="Pilih bulan"
+            aria-haspopup="listbox"
+            aria-expanded={openDropdown === "month"}
+            onClick={() =>
+              setOpenDropdown(
+                openDropdown === "month" ? null : "month"
+              )
+            }
+            className={buttonClass}
+          >
+            <span className="truncate">
+              Bulan: {months.find((item) => item.value === month)?.label}
+            </span>
+
+            <ChevronDown
+              size={16}
+              className={`shrink-0 transition-transform ${
+                openDropdown === "month" ? "rotate-180" : ""
+              }`}
+            />
+          </button>
+
+          {openDropdown === "month" && (
+            <ul role="listbox" className={menuClass}>
+              {months.map((item) => (
+                <li
+                  key={item.value}
+                  role="option"
+                  aria-selected={month === item.value}
+                >
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMonth(item.value);
+                      setOpenDropdown(null);
+                    }}
+                    className={optionClass(month === item.value)}
+                  >
+                    {item.label}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        {/* Minggu */}
+        <div
+          className={`relative min-w-0 ${
+            openDropdown === "week" ? "z-30" : "z-0"
+          }`}
+        >
+          <button
+            type="button"
+            aria-label="Pilih minggu"
+            aria-haspopup="listbox"
+            aria-expanded={openDropdown === "week"}
+            onClick={() =>
+              setOpenDropdown(
+                openDropdown === "week" ? null : "week"
+              )
+            }
+            className={buttonClass}
+          >
+            <span className="truncate">{getWeekLabel(week)}</span>
+
+            <ChevronDown
+              size={16}
+              className={`shrink-0 transition-transform ${
+                openDropdown === "week" ? "rotate-180" : ""
+              }`}
+            />
+          </button>
+
+          {openDropdown === "week" && (
+            <ul role="listbox" className={menuClass}>
+              {weeks.map((item) => (
+                <li
+                  key={item}
+                  role="option"
+                  aria-selected={week === item}
+                >
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setWeek(item);
+                      setOpenDropdown(null);
+                    }}
+                    className={optionClass(week === item)}
+                  >
+                    {getWeekLabel(item)}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
       </div>
-
-      {/* Filter Periode */}
-      <FilterDropdown
-        value={periode}
-        options={periodeOptions}
-        onChange={setPeriode}
-      />
-
-      {/* Filter Semester */}
-      <FilterDropdown
-        value={semester}
-        options={semesterOptions}
-        onChange={setSemester}
-      />
     </div>
   );
 }

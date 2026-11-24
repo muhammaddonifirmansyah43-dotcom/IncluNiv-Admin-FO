@@ -1,31 +1,47 @@
 
-export interface RiwayatPendampingan {
-  id: number;
-  tanggal: string;
-  waktu: string;
-  mahasiswa: string;
-  kegiatan: string;
-  lokasi: string;
-  ruang: string;
-  durasi: string;
-  status: "Selesai" | "Berlangsung" | "Akan datang";
+export interface RecapVolunteer {
+  mentorId: number;
+  userId: number;
+  nim: string | null;
+  fullName: string;
+  email: string;
+  photoUrl: string | null;
+  department: string | null;
+  totalActivities: number;
+  totalHours: number;
 }
 
-export interface Volunteer {
-  id: number;
-  nama: string;
-  nim: string;
-  fakultas: string;
-  prodi: string;
-  foto: string;
-  totalSesi: number;
-  riwayat: RiwayatPendampingan[];
+export interface RecapActivity {
+  assignmentId: number;
+  studentId: number;
+  studentName: string;
+  startAt: string;
+  endAt: string;
+  location: string | null;
+  status: string;
+  confirmedAt: string | null;
+  notes: string | null;
+  durationHours: number;
 }
 
-export interface RekapItem {
-  id: number;
-  nama: string;
-  nim: string;
-  fakultas: string;
-  jumlah: number;
+export interface RecapVolunteerDetail extends RecapVolunteer {
+  skills: string | null;
+  activities: RecapActivity[];
+}
+
+export interface RecapListResponse {
+  success: boolean;
+  message: string;
+  data: {
+    totalVolunteers: number;
+    totalMonthActivities: number;
+    totalWeekActivities: number;
+    volunteers: RecapVolunteer[];
+  };
+}
+
+export interface RecapDetailResponse {
+  success: boolean;
+  message: string;
+  data: RecapVolunteerDetail;
 }

@@ -1,36 +1,36 @@
 
-import type { Volunteer } from "./types";
+import type { RecapVolunteerDetail } from "./types";
 
 import DetailRiwayatRow from "./DetailRiwayatRow";
 import DetailRiwayatEmpty from "./DetailRiwayatEmpty";
 
 type Props = {
-  volunteer: Volunteer;
+  volunteer: RecapVolunteerDetail;
 };
 
 const kolom = [
   "No.",
   "Tanggal",
   "Mahasiswa Didampingi",
-  "Mata Kuliah",
   "Lokasi",
   "Durasi",
   "Status",
 ];
 
 export default function DetailRiwayatTable({ volunteer }: Props) {
+  const activities = volunteer.activities;
+
   return (
     <section className="w-full overflow-hidden rounded-2xl border border-[#e0e7f0] bg-white shadow-sm">
       <div className="w-full overflow-x-auto">
-        <table className="w-full min-w-[900px] table-fixed border-collapse text-left">
+        <table className="w-full min-w-[800px] table-fixed border-collapse text-left">
           <colgroup>
             <col className="w-[6%]" />
-            <col className="w-[14%]" />
             <col className="w-[17%]" />
-            <col className="w-[21%]" />
-            <col className="w-[17%]" />
-            <col className="w-[11%]" />
-            <col className="w-[14%]" />
+            <col className="w-[23%]" />
+            <col className="w-[20%]" />
+            <col className="w-[16%]" />
+            <col className="w-[18%]" />
           </colgroup>
 
           <thead>
@@ -48,10 +48,10 @@ export default function DetailRiwayatTable({ volunteer }: Props) {
           </thead>
 
           <tbody>
-            {volunteer.riwayat.length > 0 ? (
-              volunteer.riwayat.map((item, index) => (
+            {activities.length > 0 ? (
+              activities.map((item, index) => (
                 <DetailRiwayatRow
-                  key={item.id}
+                  key={item.assignmentId}
                   no={index + 1}
                   item={item}
                 />
@@ -65,9 +65,9 @@ export default function DetailRiwayatTable({ volunteer }: Props) {
 
       <div className="border-t border-[#e0e7ef] bg-[#f8fafc] px-5 py-4">
         <p className="text-sm text-[#71829b]">
-          {volunteer.riwayat.length > 0
-            ? "Seluruh riwayat pendampingan ditampilkan"
-            : "Belum ada riwayat pendampingan yang ditampilkan"}
+          {activities.length > 0
+            ? `Menampilkan ${activities.length} riwayat pendampingan`
+            : "Belum ada riwayat pendampingan"}
         </p>
       </div>
     </section>

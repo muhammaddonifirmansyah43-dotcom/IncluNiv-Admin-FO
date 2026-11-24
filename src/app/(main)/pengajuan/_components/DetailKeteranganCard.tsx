@@ -15,7 +15,7 @@ export default function DetailKeteranganCard({ item }: { item: Pengajuan }) {
       }
     >
       <p className="text-xs font-bold uppercase tracking-wide text-slate-500">
-        Alasan izin mahasiswa
+        Alasan Pengajuan Izin
       </p>
       <blockquote className="mt-2 rounded-lg border-l-4 border-l-[#3B82F6] bg-[#F1F5FB] p-3 text-xs italic leading-relaxed text-[#17345F]">
         “{item.alasan}”
