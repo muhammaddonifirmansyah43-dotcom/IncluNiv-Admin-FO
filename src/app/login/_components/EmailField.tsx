@@ -1,4 +1,4 @@
-import { UserRound } from "lucide-react";
+﻿import { Mail } from "lucide-react";
 import LoginField from "./LoginField";
 
 type Props = {
@@ -7,15 +7,15 @@ type Props = {
   onChange: (value: string) => void;
 };
 
-export default function UsernameField({ value, invalid, onChange }: Props) {
+export default function EmailField({ value, invalid, onChange }: Props) {
   return (
-    <LoginField id="username" label="Username" icon={UserRound} invalid={invalid}>
+    <LoginField id="email" label="Email" icon={Mail} invalid={invalid}>
       <input
-        id="username"
-        name="username"
-        type="text"
-        autoComplete="username"
-        placeholder="Masukkan username"
+        id="email"
+        name="email"
+        type="email"
+        autoComplete="email"
+        placeholder="Masukkan email"
         value={value}
         onChange={(event) => onChange(event.target.value)}
         aria-invalid={invalid}

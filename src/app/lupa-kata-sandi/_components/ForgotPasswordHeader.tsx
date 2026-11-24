@@ -10,7 +10,7 @@ export default function ForgotPasswordHeader() {
           Lupa kata sandi?
         </h1>
         <p className="mx-auto mt-2 max-w-[300px] text-[14px] leading-relaxed text-[#31435D]">
-          Masukkan username atau email yang terdaftar pada akun Anda.
+          Masukkan email yang terdaftar pada akun Anda.
         </p>
       </div>
     </>

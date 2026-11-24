@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -10,19 +11,16 @@ import ForgotPasswordSuccess from "./ForgotPasswordSuccess";
 export default function ForgotPasswordContent() {
   const [submitted, setSubmitted] = useState(false);
 
-  if (submitted) {
-    return (
-      <AuthCard className="max-w-[400px]">
-        <ForgotPasswordSuccess />
-      </AuthCard>
-    );
-  }
-
   return (
-    <AuthCard>
+    <AuthCard className="max-w-[400px]">
       <BackToLoginLink />
       <ForgotPasswordHeader />
-      <ForgotPasswordForm onSuccess={() => setSubmitted(true)} />
+
+      {submitted ? (
+        <ForgotPasswordSuccess />
+      ) : (
+        <ForgotPasswordForm onSuccess={() => setSubmitted(true)} />
+      )}
     </AuthCard>
   );
 }
