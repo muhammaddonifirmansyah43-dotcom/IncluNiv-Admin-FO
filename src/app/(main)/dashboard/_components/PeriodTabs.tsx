@@ -15,11 +15,11 @@ export default function PeriodTabs({ value, onChange }: Props) {
           type="button"
           aria-pressed={value === item}
           onClick={() => onChange(item)}
-          className={`rounded-md px-3 py-2 text-xs transition ${
-            value === item
-              ? "bg-white font-bold text-[#17345F] shadow-sm"
-              : "text-slate-500 hover:text-[#17345F]"
-          }`}
+          className={`rounded-md px-3 py-2 text-sm outline-none transition focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2 ${
+  value === item
+    ? "bg-white font-bold text-[#17345F] shadow-sm"
+    : "text-slate-500 hover:text-[#17345F]"
+}`}
         >
           {item}
         </button>

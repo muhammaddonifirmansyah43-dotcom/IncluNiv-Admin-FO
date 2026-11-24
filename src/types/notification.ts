@@ -31,4 +31,4 @@ export type NotificationItem = {
   };
 };
 
-export type NotificationFilter = "all" | "unread";
+export type NotificationFilter = "all" | "unread" | "read";

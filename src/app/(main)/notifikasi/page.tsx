@@ -3,7 +3,7 @@ import NotificationContent from "./_components/NotificationContent";
 
 export default function NotifikasiPage() {
   return (
-    <div className="mx-auto w-full max-w-6xl space-y-5 p-4 text-[#17345F] sm:p-6">
+    <div className="w-full space-y-5 p-4 text-[#17345F] sm:p-5">
       <NotificationHeader />
       <NotificationContent />
     </div>

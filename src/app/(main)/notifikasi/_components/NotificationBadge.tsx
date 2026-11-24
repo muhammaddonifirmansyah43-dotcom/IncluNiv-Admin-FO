@@ -15,7 +15,7 @@ type Props = {
 export default function NotificationBadge({ label, tone }: Props) {
   return (
     <span
-      className={`whitespace-nowrap rounded border px-2 py-0.5 text-[11px] font-semibold ${styles[tone]}`}
+      className={`whitespace-nowrap rounded border px-2 py-0.5 text-xs font-semibold ${styles[tone]}`}
     >
       {label}
     </span>

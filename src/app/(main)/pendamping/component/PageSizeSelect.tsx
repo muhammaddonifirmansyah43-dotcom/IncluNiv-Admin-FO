@@ -38,7 +38,7 @@ export default function PageSizeSelect({ value, onChange }: Props) {
         aria-haspopup="listbox"
         aria-expanded={open}
         onClick={() => setOpen((prev) => !prev)}
-        className="flex h-[38px] w-full items-center justify-between gap-3 rounded-xl border border-[#dce5f2] bg-white px-4 text-sm text-[#344866] sm:min-w-[170px]"
+        className="flex h-[38px] w-full items-center justify-between gap-3 rounded-xl border border-[#dce5f2] bg-white px-4 text-sm text-[#344866] transition hover:border-[#93B4E5] outline-none focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2 sm:min-w-[170px]"
       >
         <span>{value} data volunteer</span>
         <ChevronDown
@@ -61,7 +61,7 @@ export default function PageSizeSelect({ value, onChange }: Props) {
                   onChange(size);
                   setOpen(false);
                 }}
-                className={`w-full rounded-lg px-3 py-2 text-left text-sm hover:bg-[#f1f5ff] ${
+                className={`w-full rounded-lg px-3 py-2 text-left text-sm outline-none transition hover:bg-[#f1f5ff] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-300 ${
                   size === value
                     ? "bg-[#f1f5ff] font-semibold text-[#17365f]"
                     : "text-[#344866]"

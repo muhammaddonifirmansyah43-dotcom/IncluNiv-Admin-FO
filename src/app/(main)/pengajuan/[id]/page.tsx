@@ -1,6 +1,7 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
+
 import { pengajuanList } from "@/lib/pengajuan-data";
 import DetailProfilCard from "../_components/DetailProfilCard";
 import DetailInfoCard from "../_components/DetailInfoCard";
@@ -21,10 +22,10 @@ export default async function PengajuanDetailPage({
     <div className="mx-auto w-full max-w-6xl space-y-4 p-4 text-[#17345F] sm:p-6">
       <Link
         href="/pengajuan"
-        className="inline-flex items-center gap-2 text-sm font-medium text-[#3B82F6] hover:underline"
+        className="inline-flex items-center gap-2 text-sm font-medium text-[#3B82F6] transition hover:text-[#17345F] hover:underline rounded-md outline-none focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2"
       >
         <ArrowLeft size={16} aria-hidden="true" />
-        Kembali ke Data Mahasiswa
+        Kembali ke Halaman Pengajuan
       </Link>
 
       <div className="grid gap-4 lg:grid-cols-2">

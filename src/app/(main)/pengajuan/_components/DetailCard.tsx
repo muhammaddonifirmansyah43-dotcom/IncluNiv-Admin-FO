@@ -18,7 +18,7 @@ export default function DetailCard({ icon: Icon, title, subtitle, badge, childre
             <Icon size={20} aria-hidden="true" />
           </span>
           <div>
-            <h2 className="text-sm font-bold text-[#17345F]">{title}</h2>
+            <h2 className="text-base font-bold text-[#17345F]">{title}</h2>
             <p className="text-xs text-slate-500">{subtitle}</p>
           </div>
         </div>

@@ -1,12 +1,13 @@
+
 "use client";
 
-import { useState } from "react"; // BARU
+import { useState } from "react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation"; // BARU: useRouter
+import { usePathname, useRouter } from "next/navigation";
 import {
   House,
-  Users,
-  UserRoundCheck,
+  GraduationCap,
+  HandHeart,
   ClipboardList,
   CalendarDays,
   FileBarChart,
@@ -16,15 +17,15 @@ import {
 } from "lucide-react";
 
 import Logo from "./Logo";
-import LogoutModal from "@/components/ui/LogoutModal"; // BARU
+import LogoutModal from "@/components/ui/LogoutModal";
 
 const menuItems = [
   { label: "Beranda", href: "/dashboard", icon: House },
-  { label: "Data Mahasiswa", href: "/mahasiswa", icon: Users },
-  { label: "Data Volunteer", href: "/pendamping", icon: UserRoundCheck },
+  { label: "Data Mahasiswa", href: "/mahasiswa", icon: GraduationCap },
+  { label: "Data pendamping", href: "/pendamping", icon: HandHeart },
   { label: "Pengajuan", href: "/pengajuan", icon: ClipboardList },
   { label: "Penjadwalan", href: "/jadwal", icon: CalendarDays },
-  { label: "Rekap Volunteer", href: "/rekap", icon: FileBarChart },
+  { label: "Rekap Pendamping", href: "/rekap", icon: FileBarChart },
   { label: "Notifikasi", href: "/notifikasi", icon: Bell },
 ];
 
@@ -35,24 +36,21 @@ type SidebarProps = {
 
 export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
   const pathname = usePathname();
-  const router = useRouter(); // BARU
-  const [showLogout, setShowLogout] = useState(false); // BARU
+  const router = useRouter();
+  const [showLogout, setShowLogout] = useState(false);
 
-  // BARU
   function handleLogout() {
     setShowLogout(false);
-    // hapus data sesi di sini kalau nanti sudah ada (token, cookie, dll.)
     router.push("/login");
   }
 
   return (
     <>
       <aside
-        className={`flex h-full shrink-0 flex-col overflow-y-auto bg-[#0F2D5B] py-5 text-white transition-[width] duration-300 ${
+        className={`flex h-full shrink-0 flex-col overflow-y-auto bg-[#0F2D5B] pt-0 pb-5 text-white transition-[width] duration-300 ${
           collapsed ? "w-[72px] px-2" : "w-72 px-3"
         }`}
       >
-        {/* Logo, nama aplikasi, dan tombol collapse */}
         <div className="mb-8 flex h-[64px] shrink-0 items-center gap-2">
           <div
             className={`flex shrink-0 items-center ${
@@ -71,10 +69,10 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
           {!collapsed && (
             <>
               <div className="min-w-0 flex-1">
-                <h1 className="whitespace-nowrap text-[25px] font-extrabold leading-tight tracking-wide">
+                <h1 className="whitespace-nowrap text-[22px] font-extrabold leading-tight tracking-wide">
                   INCLUNIV
                 </h1>
-                <p className="whitespace-nowrap text-[15px] font-semibold uppercase tracking-wide text-blue-200">
+                <p className="whitespace-nowrap text-[12px] font-semibold uppercase tracking-wide text-blue-200">
                   LAYANAN DISABILITAS
                 </p>
               </div>
@@ -92,7 +90,6 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
           )}
         </div>
 
-        {/* Menu navigasi */}
         <nav className="flex flex-1 flex-col gap-1">
           {menuItems.map((item) => {
             const Icon = item.icon;
@@ -117,29 +114,31 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
                     : "text-blue-100 hover:bg-white/10"
                 }`}
               >
-                <Icon size={18} strokeWidth={1.8} />
+                <Icon
+                  size={20}
+                  strokeWidth={2}
+                  className="h-5 w-5 shrink-0"
+                />
                 {!collapsed && <span>{item.label}</span>}
               </Link>
             );
           })}
         </nav>
 
-        {/* Tombol keluar */}
         <button
           type="button"
-          onClick={() => setShowLogout(true)} // BARU
+          onClick={() => setShowLogout(true)}
           title={collapsed ? "Keluar" : undefined}
-          aria-label="Keluar" // BARU
+          aria-label="Keluar"
           className={`mt-6 flex shrink-0 items-center rounded-lg py-3 text-sm text-orange-300 transition-colors hover:bg-white/10 ${
             collapsed ? "justify-center px-0" : "gap-3 px-3"
           }`}
         >
-          <LogOut size={18} />
+          <LogOut size={20} strokeWidth={2} className="h-5 w-5 shrink-0" />
           {!collapsed && <span>Keluar</span>}
         </button>
       </aside>
 
-      {/* BARU: modal konfirmasi keluar */}
       <LogoutModal
         open={showLogout}
         onClose={() => setShowLogout(false)}

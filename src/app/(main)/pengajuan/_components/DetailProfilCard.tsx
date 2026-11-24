@@ -5,7 +5,7 @@ import DetailCard from "./DetailCard";
 function Field({ label, value }: { label: string; value: string }) {
   return (
     <div className="rounded-lg border border-[#E2EBF8] bg-[#F8FAFD] p-3">
-      <p className="text-[10px] font-bold uppercase tracking-wide text-slate-500">{label}</p>
+      <p className="text-xs font-bold uppercase tracking-wide text-slate-500">{label}</p>
       <p className="mt-1 text-sm font-bold text-[#17345F]">{value}</p>
     </div>
   );
@@ -24,7 +24,7 @@ export default function DetailProfilCard({ item }: { item: Pengajuan }) {
       title="Profil Pengaju"
       subtitle="Identitas mahasiswa pengaju perizinan"
       badge={
-        <span className="rounded-full border border-blue-200 bg-blue-50 px-2.5 py-0.5 text-[11px] font-semibold text-[#3B82F6]">
+        <span className="rounded-full border border-blue-200 bg-blue-50 px-2.5 py-0.5 text-xs font-semibold text-[#3B82F6]">
           Volunteer
         </span>
       }
@@ -36,7 +36,7 @@ export default function DetailProfilCard({ item }: { item: Pengajuan }) {
         <div className="min-w-0">
           <p className="truncate text-base font-bold text-[#17345F]">{item.nama}</p>
           <p className="text-xs font-semibold text-[#3B82F6]">{item.jabatan}</p>
-          <p className="mt-0.5 text-[11px] text-slate-400">{item.terdaftar}</p>
+          <p className="mt-0.5 text-xs text-slate-400">{item.terdaftar}</p>
         </div>
       </div>
 

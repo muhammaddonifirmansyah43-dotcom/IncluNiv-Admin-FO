@@ -1,3 +1,4 @@
+
 import { Eye, Trash2 } from "lucide-react";
 
 import type { Mahasiswa } from "./types";
@@ -43,9 +44,9 @@ export default function MahasiswaRow({
             onClick={() => onView(item.id)}
             title="Lihat detail"
             aria-label={`Lihat detail ${item.nama}`}
-            className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#e8f1ff] text-[#4385f5] transition hover:bg-[#dbe9ff]"
+            className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#e8f1ff] text-[#4385f5] transition hover:bg-[#dbe9ff] outline-none focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2"
           >
-            <Eye size={17} />
+            <Eye size={16} strokeWidth={2} aria-hidden="true" />
           </button>
 
           <button
@@ -53,9 +54,9 @@ export default function MahasiswaRow({
             onClick={() => onDelete(item)}
             title="Hapus"
             aria-label={`Hapus ${item.nama}`}
-            className="flex h-9 w-9 items-center justify-center rounded-lg text-[#8495ac] transition hover:bg-[#fff0f0] hover:text-[#e05252]"
+            className="flex h-9 w-9 items-center justify-center rounded-lg text-[#8495ac] transition hover:bg-[#fff0f0] hover:text-[#e05252] outline-none focus-visible:ring-2 focus-visible:ring-red-300 focus-visible:ring-offset-2"
           >
-            <Trash2 size={16} />
+            <Trash2 size={16} strokeWidth={2} aria-hidden="true" />
           </button>
         </div>
       </td>
