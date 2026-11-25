@@ -9,8 +9,7 @@ interface JadwalTableProps {
   tanggal: string;
 }
 
-const th =
-  "px-5 py-4 text-sm font-semibold text-[#17365f]";
+const th = "px-5 py-4 text-sm font-semibold text-[#17365f]";
 
 const statusStyle: Record<StatusJadwal, string> = {
   Selesai: "border-emerald-200 bg-emerald-50 text-emerald-600",
@@ -35,24 +34,26 @@ export default function JadwalTable({ data, tanggal }: JadwalTableProps) {
   return (
     <div className="overflow-hidden rounded-2xl border border-[#DCE6F2] bg-white shadow-sm">
       <div className="overflow-x-auto">
-        <table className="w-full min-w-[900px] border-collapse">
-          <caption className="sr-only">Daftar jadwal pendampingan</caption>
+        <table className="w-full min-w-[850px] border-collapse">
+          <caption className="sr-only">
+            Daftar jadwal pendampingan
+          </caption>
 
           <thead>
             <tr className="border-b border-[#dfe6ef] bg-[#f8faff]">
               <th scope="col" className={`${th} w-[14%] text-left`}>
                 Waktu
               </th>
-              <th scope="col" className={`${th} w-[22%] text-left`}>
+              <th scope="col" className={`${th} w-[23%] text-left`}>
                 Mahasiswa Difabel
               </th>
-              <th scope="col" className={`${th} w-[24%] text-left`}>
+              <th scope="col" className={`${th} w-[25%] text-left`}>
                 Pendamping
               </th>
-              <th scope="col" className={`${th} w-[28%] text-left`}>
+              <th scope="col" className={`${th} w-[23%] text-left`}>
                 Lokasi / Ruang
               </th>
-              <th scope="col" className={`${th} w-[12%] text-center`}>
+              <th scope="col" className={`${th} w-[15%] text-center`}>
                 Status
               </th>
             </tr>
@@ -66,9 +67,7 @@ export default function JadwalTable({ data, tanggal }: JadwalTableProps) {
                 <tr
                   key={item.id}
                   className={`border-b border-[#e8edf4] transition ${
-                    live
-                      ? "bg-[#F5F9FF]"
-                      : "hover:bg-[#F8FAFD]"
+                    live ? "bg-[#F5F9FF]" : "hover:bg-[#F8FAFD]"
                   }`}
                 >
                   <td
@@ -111,22 +110,16 @@ export default function JadwalTable({ data, tanggal }: JadwalTableProps) {
                   </td>
 
                   <td className="px-5 py-4">
-                    <p className="text-sm font-semibold text-[#17365f]">
-                      {item.mataKuliah}
-                    </p>
                     <p
-                      className={`mt-0.5 flex items-start gap-1.5 text-xs text-[#526681] ${
+                      className={`flex items-start gap-1.5 text-sm text-[#526681] ${
                         live ? "font-semibold" : ""
                       }`}
                     >
                       <MapPin
-                        size={14}
+                        size={15}
                         className="mt-0.5 shrink-0 text-[#3B82F6]"
                       />
-                      {item.lokasi}
-                    </p>
-                    <p className="mt-0.5 text-xs text-[#657892]">
-                      Kelas {item.kelas}
+                      <span>{item.lokasi || "Belum ditentukan"}</span>
                     </p>
                   </td>
 

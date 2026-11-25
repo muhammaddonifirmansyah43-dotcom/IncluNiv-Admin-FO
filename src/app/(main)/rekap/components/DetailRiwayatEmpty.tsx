@@ -4,7 +4,7 @@ import { CalendarDays } from "lucide-react";
 export default function DetailRiwayatEmpty() {
   return (
     <tr>
-      <td colSpan={7} className="px-5 py-16 text-center">
+      <td colSpan={6} className="px-5 py-16 text-center">
         <CalendarDays
           size={30}
           className="mx-auto mb-3 text-[#A5B4C8]"

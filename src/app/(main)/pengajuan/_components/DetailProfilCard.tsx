@@ -22,7 +22,7 @@ export default function DetailProfilCard({ item }: { item: Pengajuan }) {
     <DetailCard
       icon={UserRound}
       title="Profil Pengaju"
-      subtitle="Identitas mahasiswa pengaju perizinan"
+      subtitle="Identitas volunteer yang mengajukan izin"
       badge={
         <span className="rounded-full border border-blue-200 bg-blue-50 px-2.5 py-0.5 text-xs font-semibold text-[#3B82F6]">
           Volunteer

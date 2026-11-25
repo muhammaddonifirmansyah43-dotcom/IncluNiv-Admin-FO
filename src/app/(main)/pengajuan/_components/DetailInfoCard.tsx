@@ -9,20 +9,20 @@ const alertContent: Record<
   { title: string; text: string; box: string; titleColor: string }
 > = {
   dalam_proses: {
-    title: "JADWAL YANG TERDAMPAK",
-    text: "Pengajuan izin sedang dianalisis oleh sistem pencocokan AI untuk mengidentifikasi relawan pengganti yang sesuai jadwal dan kualifikasi akademik pendampingan.",
+    title: "STATUS PENGAJUAN",
+    text: "Pengajuan izin telah diterima dan tercatat dalam sistem. Pengajuan masih menunggu proses tindak lanjut. Fitur pemrosesan AI belum tersedia.",
     box: "border-amber-200 bg-amber-50 text-amber-800",
     titleColor: "text-amber-700",
   },
   telah_disetujui: {
-    title: "JADWAL YANG TERDAMPAK",
-    text: "Pengajuan izin telah disetujui dan dapat dilanjutkan ke proses penyesuaian jadwal pendampingan.",
+    title: "STATUS PENGAJUAN",
+    text: "Pengajuan izin telah memiliki status disetujui pada sistem. Informasi tindak lanjut penyesuaian jadwal dapat diperbarui sesuai proses pendampingan.",
     box: "border-blue-200 bg-blue-50 text-slate-600",
     titleColor: "text-[#17345F]",
   },
   tidak_dipenuhi: {
-    title: "PENGAJUAN TIDAK DAPAT DIPENUHI",
-    text: "Pengajuan izin tidak dapat dipenuhi karena tidak ditemukan relawan pengganti yang tersedia dan sesuai kualifikasi pada jadwal tersebut.",
+    title: "STATUS PENGAJUAN",
+    text: "Pengajuan izin telah memiliki status tidak dipenuhi pada sistem. Alasan keputusan belum tersedia pada data yang diterima.",
     box: "border-red-200 bg-red-50 text-red-700",
     titleColor: "text-red-600",
   },

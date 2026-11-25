@@ -1,4 +1,5 @@
-﻿"use client";
+﻿
+"use client";
 
 import { useEffect, useMemo, useState } from "react";
 import {
@@ -20,17 +21,19 @@ const monthStart = (value: string) => {
 
 interface JadwalCalendarProps {
   tanggal: string;
+  tanggalDipilih: boolean;
   onApply: (value: string) => void;
   markedDates: string[];
 }
 
 export default function JadwalCalendar({
   tanggal,
+  tanggalDipilih,
   onApply,
   markedDates,
 }: JadwalCalendarProps) {
   const [open, setOpen] = useState(false);
-  const [draft, setDraft] = useState(tanggal); // pilihan sementara sebelum "Terapkan"
+  const [draft, setDraft] = useState(tanggal);
   const [viewMonth, setViewMonth] = useState(() => monthStart(tanggal));
 
   useEffect(() => {
@@ -49,6 +52,7 @@ export default function JadwalCalendar({
       setDraft(tanggal);
       setViewMonth(monthStart(tanggal));
     }
+
     setOpen(!open);
   };
 
@@ -56,7 +60,6 @@ export default function JadwalCalendar({
     const year = viewMonth.getFullYear();
     const month = viewMonth.getMonth();
 
-    // Minggu dimulai hari Senin
     const offset = (new Date(year, month, 1).getDay() + 6) % 7;
     const totalDays = new Date(year, month + 1, 0).getDate();
     const length = Math.ceil((offset + totalDays) / 7) * 7;
@@ -81,7 +84,6 @@ export default function JadwalCalendar({
     year: "numeric",
   }).format(viewMonth);
 
-  // Ganjil: Agustus - Januari, Genap: Februari - Juli
   const isGanjil = viewMonth.getMonth() >= 7 || viewMonth.getMonth() === 0;
 
   const changeMonth = (amount: number) =>
@@ -95,13 +97,13 @@ export default function JadwalCalendar({
   };
 
   return (
-    <div className="relative">
+    <div className="relative shrink-0">
       <button
         type="button"
         aria-haspopup="dialog"
         aria-expanded={open}
         onClick={toggle}
-        className={`flex h-[38px] items-center gap-2 rounded-lg border px-3 text-sm transition ${
+        className={`flex h-[38px] max-w-full items-center gap-2 rounded-lg border px-3 text-sm transition ${
           open
             ? "border-[#3B82F6] bg-[#3B82F6] text-white"
             : "border-[#dbe4ef] bg-white text-[#344866] hover:border-[#93B4E5]"
@@ -109,17 +111,30 @@ export default function JadwalCalendar({
       >
         <CalendarDays
           size={16}
-          className={open ? "text-white" : "text-[#3B82F6]"}
+          className={`shrink-0 ${
+            open ? "text-white" : "text-[#3B82F6]"
+          }`}
         />
-        <span className={open ? "text-blue-100" : "text-[#71829b]"}>
-          Pilih Tanggal:
+
+        <span
+          className={`whitespace-nowrap ${
+            open ? "text-white" : "text-[#71829b]"
+          }`}
+        >
+          Pilih Tanggal :
         </span>
-        <span className="whitespace-nowrap font-semibold">
-          {formatTanggal(tanggal)}
-        </span>
+
+        {tanggalDipilih && (
+          <span className="whitespace-nowrap font-semibold">
+            {formatTanggal(tanggal)}
+          </span>
+        )}
+
         <ChevronDown
           size={16}
-          className={`transition-transform ${open ? "rotate-180" : ""}`}
+          className={`shrink-0 transition-transform ${
+            open ? "rotate-180" : ""
+          }`}
         />
       </button>
 
@@ -137,13 +152,14 @@ export default function JadwalCalendar({
             aria-label="Pilih tanggal"
             className="absolute right-0 top-full z-30 mt-2 w-[310px] max-w-[calc(100vw-2rem)] rounded-2xl border border-[#dce5ef] bg-white p-4 shadow-xl"
           >
-            {/* Header */}
             <div className="mb-3 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <CalendarDays size={16} className="text-[#3B82F6]" />
+
                 <h3 className="text-base font-bold capitalize text-[#17365f]">
                   {monthLabel}
                 </h3>
+
                 <span className="rounded border border-[#3B82F6] px-1.5 py-0.5 text-xs font-semibold text-[#2563C9]">
                   {isGanjil ? "Ganjil" : "Genap"}
                 </span>
@@ -158,6 +174,7 @@ export default function JadwalCalendar({
                 >
                   <ChevronLeft size={18} />
                 </button>
+
                 <button
                   type="button"
                   onClick={() => changeMonth(1)}
@@ -169,7 +186,6 @@ export default function JadwalCalendar({
               </div>
             </div>
 
-            {/* Nama hari */}
             <div className="mb-1 grid grid-cols-7 text-center">
               {HARI.map((hari) => (
                 <span
@@ -183,13 +199,13 @@ export default function JadwalCalendar({
               ))}
             </div>
 
-            {/* Tanggal */}
             <div className="grid grid-cols-7 gap-y-1">
               {days.map((item) => {
                 const selected = item.key === draft;
                 const isToday = item.key === today;
 
                 let style = "";
+
                 if (selected) {
                   style = "bg-[#3B82F6] font-bold text-white";
                 } else if (isToday) {
@@ -213,6 +229,7 @@ export default function JadwalCalendar({
                     className={`relative mx-auto flex h-9 w-9 items-center justify-center rounded-full text-sm transition ${style}`}
                   >
                     {item.day}
+
                     {marked.has(item.key) && (
                       <span
                         className={`absolute bottom-1 h-1 w-1 rounded-full ${
@@ -225,7 +242,6 @@ export default function JadwalCalendar({
               })}
             </div>
 
-            {/* Terapkan */}
             <button
               type="button"
               onClick={apply}

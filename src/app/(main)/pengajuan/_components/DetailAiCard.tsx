@@ -1,136 +1,75 @@
 
-import Link from "next/link";
-import {
-  ArrowRight,
-  CalendarCheck,
-  Check,
-  RefreshCw,
-  X,
-  Zap,
-  Sparkles,
-} from "lucide-react";
+import { Sparkles, Clock3 } from "lucide-react";
 import type { Pengajuan } from "@/types/pengajuan";
 import DetailCard from "./DetailCard";
 
-function Diproses() {
+function Menunggu() {
   return (
     <div className="rounded-lg border border-amber-200 bg-amber-50 p-3">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <span className="inline-flex items-center gap-1.5 rounded-md bg-amber-500 px-2.5 py-1 text-xs font-bold text-white">
-          <Zap size={12} aria-hidden="true" />
-          Sedang Diproses AI
+          <Clock3 size={12} aria-hidden="true" />
+          Menunggu Pemrosesan AI
         </span>
         <span className="text-xs font-bold text-amber-700">
-          Mencari Kecocokan...
+          Belum Tersedia
         </span>
       </div>
 
       <p className="mt-3 text-xs leading-relaxed text-slate-600">
-        Sistem AI sedang mencocokkan kualifikasi pendampingan{" "}
-        <strong className="text-[#17345F]">Sensorik Netra</strong> dan jadwal
-        kuliah dengan database{" "}
-        <strong className="text-[#17345F]">20 relawan aktif</strong> yang
-        berstatus luang.
+        Pengajuan izin telah diterima dan tercatat dalam sistem.
+        Fitur pemrosesan serta pencocokan relawan menggunakan AI
+        belum tersedia pada tahap pengembangan saat ini.
       </p>
 
       <ul className="mt-3 space-y-3 rounded-lg border border-amber-100 bg-white p-3 text-xs">
         <li className="flex items-center justify-between gap-2">
-          <span className="flex items-center gap-2 text-slate-600">
-            <span className="flex h-4 w-4 items-center justify-center rounded-full bg-emerald-500 text-white">
-              <Check size={10} aria-hidden="true" />
-            </span>
-            Analisis Jadwal Mahasiswa Dampingan
+          <span className="text-slate-600">
+            Penerimaan Pengajuan Izin
           </span>
           <span className="rounded bg-emerald-50 px-1.5 py-0.5 text-xs font-bold text-emerald-700">
-            Selesai
+            Tercatat
           </span>
         </li>
-        <li>
-          <div className="flex items-center justify-between gap-2">
-            <span className="flex items-center gap-2 text-slate-600">
-              <RefreshCw size={14} className="text-amber-500" aria-hidden="true" />
-              Penyaringan Relawan Berdasarkan Kompetensi
-            </span>
-            <span className="whitespace-nowrap rounded bg-amber-100 px-1.5 py-0.5 text-xs font-bold text-amber-700">
-              Sedang Berjalan (70%)
-            </span>
-          </div>
-          <div
-            className="mt-2 h-1.5 rounded-full bg-amber-100"
-            role="progressbar"
-            aria-valuenow={70}
-            aria-valuemin={0}
-            aria-valuemax={100}
-          >
-            <div className="h-full w-[70%] rounded-full bg-amber-500" />
-          </div>
+        <li className="flex items-center justify-between gap-2">
+          <span className="text-slate-600">
+            Pemrosesan dan Pencocokan AI
+          </span>
+          <span className="whitespace-nowrap rounded bg-amber-100 px-1.5 py-0.5 text-xs font-bold text-amber-700">
+            Belum Tersedia
+          </span>
         </li>
       </ul>
     </div>
   );
 }
 
-function Disetujui() {
+function HasilKeputusan({ status }: { status: Pengajuan["status"] }) {
+  const disetujui = status === "telah_disetujui";
+
   return (
-    <div className="rounded-lg border border-emerald-200 bg-emerald-50 p-3">
-      <div className="flex flex-wrap items-center justify-between gap-2">
-        <span className="inline-flex items-center gap-1.5 rounded-md bg-emerald-500 px-2.5 py-1 text-xs font-bold text-white">
-          <Check size={12} aria-hidden="true" />
-          Disetujui AI
-        </span>
-        <span className="text-xs font-semibold text-emerald-700">
-          Tingkat Kecocokan: 98.4%
-        </span>
-      </div>
-
-      <p className="mt-3 text-xs leading-relaxed text-slate-600">
-        AI berhasil memproses pengajuan izin dan telah menemukan volunteer
-        pengganti yang sesuai kualifikasi.
-      </p>
-
-      <Link
-        href="/jadwal"
-        className="mt-3 flex items-center justify-between gap-2 rounded-lg border border-emerald-200 bg-white px-3 py-2.5 text-xs font-semibold text-[#17345F] transition hover:bg-emerald-50 outline-none focus-visible:ring-2 focus-visible:ring-emerald-300 focus-visible:ring-offset-2"
+    <div
+      className={
+        disetujui
+          ? "rounded-lg border border-emerald-200 bg-emerald-50 p-3"
+          : "rounded-lg border border-red-200 bg-red-50 p-3"
+      }
+    >
+      <p
+        className={
+          disetujui
+            ? "text-sm font-bold text-emerald-700"
+            : "text-sm font-bold text-red-600"
+        }
       >
-        <span className="flex items-center gap-2">
-          <CalendarCheck size={15} className="text-[#3B82F6]" aria-hidden="true" />
-          Lihat pendamping pengganti pada jadwal
-        </span>
-        <ArrowRight size={15} className="text-[#3B82F6]" aria-hidden="true" />
-      </Link>
-    </div>
-  );
-}
-
-function TidakDipenuhi({ item }: { item: Pengajuan }) {
-  return (
-    <div className="rounded-lg border border-red-200 bg-red-50 p-3">
-      <p className="flex items-center gap-2 text-sm font-bold text-red-600">
-        <span className="flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-white">
-          <X size={12} aria-hidden="true" />
-        </span>
-        Tidak dipenuhi
-      </p>
-      <p className="mt-1.5 border-b border-red-200 pb-3 text-xs text-slate-600">
-        AI tidak dapat menemukan pendamping yang tersedia
+        {disetujui ? "Pengajuan Disetujui" : "Pengajuan Tidak Dipenuhi"}
       </p>
 
-      <p className="mt-3 text-xs font-bold text-red-600">
-        PENYEBAB / ALASAN:
+      <p className="mt-2 text-xs leading-relaxed text-slate-600">
+        {disetujui
+          ? "Pengajuan telah memiliki status disetujui pada sistem. Informasi mengenai proses AI belum tersedia."
+          : "Pengajuan telah memiliki status tidak dipenuhi pada sistem. Alasan keputusan otomatis belum tersedia."}
       </p>
-      <ul className="mt-2 list-disc space-y-1.5 pl-4 text-xs leading-relaxed text-slate-600">
-        <li>
-          Tidak ada pendamping yang tersedia pada waktu yang dibutuhkan (
-          <strong className="text-[#17345F]">
-            {item.jadwal.hari.split(",")[0]}, {item.jadwal.jam}
-          </strong>
-          )
-        </li>
-        <li>
-          Tidak ditemukan pendamping dengan keahlian yang sesuai (
-          <strong className="text-[#17345F]">{item.jabatan}</strong>)
-        </li>
-      </ul>
     </div>
   );
 }
@@ -138,14 +77,15 @@ function TidakDipenuhi({ item }: { item: Pengajuan }) {
 export default function DetailAiCard({ item }: { item: Pengajuan }) {
   const subtitle =
     item.status === "dalam_proses"
-      ? "Pencocokan relawan pengganti otomatis"
-      : "";
+      ? "Informasi status pemrosesan pengajuan"
+      : "Informasi hasil keputusan pengajuan";
 
   return (
     <DetailCard icon={Sparkles} title="Hasil Pemrosesan AI" subtitle={subtitle}>
-      {item.status === "dalam_proses" && <Diproses />}
-      {item.status === "telah_disetujui" && <Disetujui />}
-      {item.status === "tidak_dipenuhi" && <TidakDipenuhi item={item} />}
+      {item.status === "dalam_proses" && <Menunggu />}
+      {item.status !== "dalam_proses" && (
+        <HasilKeputusan status={item.status} />
+      )}
     </DetailCard>
   );
 }

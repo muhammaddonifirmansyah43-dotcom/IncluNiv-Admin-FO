@@ -1,34 +1,72 @@
-﻿"use client";
+﻿
+"use client";
 
 import { useState, type FormEvent } from "react";
 import { UserRound } from "lucide-react";
 import AuthField from "@/components/auth/AuthField";
-import { isValidIdentifier } from "@/lib/auth";
+import { isValidEmail } from "@/lib/auth";
 
 type Props = {
   onSuccess: () => void;
 };
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 export default function ForgotPasswordForm({ onSuccess }: Props) {
   const [identifier, setIdentifier] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
-    if (!identifier.trim()) {
-      setError("Masukkan username atau email terlebih dahulu.");
-      return;
-    }
-
-    if (!isValidIdentifier(identifier)) {
-      setError("Masukkan username atau alamat email yang valid.");
-      return;
-    }
-
-    // Simulasi pengiriman. Belum mengirim email sungguhan.
     setError("");
-    onSuccess();
+
+    const email = identifier.trim();
+
+    if (!email) {
+      setError("Masukkan email terlebih dahulu.");
+      return;
+    }
+
+    if (!isValidEmail(email)) {
+      setError("Masukkan alamat email yang valid.");
+      return;
+    }
+
+    if (!API_URL) {
+      setError("Konfigurasi alamat backend belum tersedia.");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const response = await fetch(`${API_URL}/api/auth/forgot-password`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(
+          result.message || "Gagal memproses permintaan reset kata sandi."
+        );
+      }
+
+      onSuccess();
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Terjadi kesalahan. Silakan coba lagi."
+      );
+    } finally {
+      setLoading(false);
+    }
   }
 
   const invalid = Boolean(error);
@@ -37,16 +75,16 @@ export default function ForgotPasswordForm({ onSuccess }: Props) {
     <form onSubmit={handleSubmit} noValidate className="space-y-4">
       <AuthField
         id="identifier"
-        label="Username atau email"
+        label="Email"
         icon={UserRound}
         invalid={invalid}
       >
         <input
           id="identifier"
           name="identifier"
-          type="text"
-          autoComplete="username"
-          placeholder="Masukkan username atau email"
+          type="email"
+          autoComplete="email"
+          placeholder="Masukkan email"
           value={identifier}
           onChange={(event) => {
             setIdentifier(event.target.value);
@@ -70,9 +108,10 @@ export default function ForgotPasswordForm({ onSuccess }: Props) {
 
       <button
         type="submit"
-        className="flex h-[48px] w-full items-center justify-center rounded-[24px] bg-[#3B82F6] text-[18px] font-bold text-white transition hover:bg-[#2F73E8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-200 focus-visible:ring-offset-2"
+        disabled={loading}
+        className="flex h-[48px] w-full items-center justify-center rounded-[24px] bg-[#3B82F6] text-[18px] font-bold text-white transition hover:bg-[#2F73E8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-200 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
       >
-        Lanjutkan
+        {loading ? "Memproses..." : "Lanjutkan"}
       </button>
     </form>
   );
