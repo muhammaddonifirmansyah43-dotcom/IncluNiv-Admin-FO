@@ -5,6 +5,7 @@ import {
   Eye,
   FileText,
   Mail,
+  MailOpen,
   Route,
   type LucideIcon,
 } from "lucide-react";
@@ -99,18 +100,26 @@ export default function NotificationCard({ item, onToggleRead }: Props) {
           <ActionIcon size={14} aria-hidden="true" />
         </Link>
 
-        {unread && (
-          <button
-            type="button"
-            onClick={() => onToggleRead(item.id)}
-            aria-label="Tandai sudah dibaca"
-            title="Tandai sudah dibaca"
-            className="flex h-9 w-9 items-center justify-center rounded-lg text-slate-400 transition hover:bg-blue-50 hover:text-[#3B82F6] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2"
-          >
+        <button
+          type="button"
+          onClick={() => onToggleRead(item.id)}
+          aria-label={
+            unread ? "Tandai sudah dibaca" : "Tandai belum dibaca"
+          }
+          title={
+            unread ? "Tandai sudah dibaca" : "Tandai belum dibaca"
+          }
+          className="flex h-9 w-9 items-center justify-center rounded-lg text-slate-400 transition hover:bg-blue-50 hover:text-[#3B82F6] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2"
+        >
+          {unread ? (
             <Mail size={18} aria-hidden="true" />
-          </button>
-        )}
+          ) : (
+            <MailOpen size={18} aria-hidden="true" />
+          )}
+        </button>
       </div>
     </li>
   );
 }
+
+       
