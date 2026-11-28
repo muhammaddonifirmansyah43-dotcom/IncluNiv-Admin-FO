@@ -51,12 +51,12 @@ export default function PengajuanToolbar({
   }, []);
 
   return (
-    <div className="flex flex-col gap-3 rounded-xl border border-[#E2EBF8] bg-white p-4 shadow-[0_4px_14px_rgba(31,71,130,0.07)] sm:flex-row sm:items-center">
+    <div className="flex flex-col gap-3 rounded-2xl border border-[#E5ECF6] bg-white p-4 shadow-sm sm:flex-row sm:items-center">
       {/* Pencarian */}
-      <div className="flex h-10 w-full min-w-0 flex-1 items-center gap-2 rounded-lg border border-[#E2EBF8] bg-[#F1F5FB] px-3 transition focus-within:border-[#3B82F6] focus-within:ring-2 focus-within:ring-blue-100">
+      <div className="flex h-[38px] w-full min-w-0 flex-1 items-center gap-2 rounded-xl border border-[#dbe4ef] bg-[#fafcff] px-3 transition focus-within:border-[#4b8df5] focus-within:ring-2 focus-within:ring-blue-200">
         <Search
           size={18}
-          className="shrink-0 text-slate-400"
+          className="shrink-0 text-[#91a3bb]"
           aria-hidden="true"
         />
 
@@ -70,7 +70,7 @@ export default function PengajuanToolbar({
           value={search}
           onChange={(event) => onSearchChange(event.target.value)}
           placeholder="Cari nama pendamping, NIM ..."
-          className="h-full min-w-0 flex-1 bg-transparent text-sm text-[#17345F] outline-none placeholder:text-slate-400"
+          className="h-full min-w-0 flex-1 bg-transparent text-sm text-[#183963] outline-none placeholder:text-[#9aabc0]"
         />
       </div>
 
@@ -97,10 +97,10 @@ export default function PengajuanToolbar({
           aria-haspopup="listbox"
           aria-expanded={statusOpen}
           onClick={() => setStatusOpen((previous) => !previous)}
-          className={`flex h-10 w-full items-center justify-between rounded-lg border bg-white px-3 text-sm font-medium text-[#17345F] outline-none transition ${
+          className={`flex h-[38px] w-full items-center justify-between rounded-xl border bg-white px-3 text-sm text-[#344866] outline-none transition ${
             statusOpen
-              ? "border-[#3B82F6] ring-2 ring-blue-100"
-              : "border-[#E2EBF8] hover:border-[#93B4E5]"
+              ? "border-[#4b8df5] ring-2 ring-blue-200"
+              : "border-[#dce5f2] hover:border-[#93B4E5]"
           }`}
         >
           <span>
@@ -111,7 +111,7 @@ export default function PengajuanToolbar({
 
           <ChevronDown
             size={16}
-            className={`shrink-0 text-[#64748B] transition-transform ${
+            className={`shrink-0 text-[#91a3bb] transition-transform ${
               statusOpen ? "rotate-180" : ""
             }`}
             aria-hidden="true"
@@ -122,7 +122,7 @@ export default function PengajuanToolbar({
           <div
             role="listbox"
             aria-label="Pilihan status pengajuan"
-            className="absolute left-0 top-full z-50 mt-2 w-full overflow-hidden rounded-xl border border-[#DCE6F2] bg-white p-1.5 shadow-[0_8px_24px_rgba(31,71,130,0.12)]"
+            className="absolute left-0 top-full z-50 mt-2 w-full overflow-hidden rounded-xl border border-[#e1e8f2] bg-white p-1 shadow-lg"
           >
             {statusOptions.map((option) => {
               const isSelected = statusFilter === option.value;
@@ -141,8 +141,8 @@ export default function PengajuanToolbar({
                   }}
                   className={`flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left text-sm transition ${
                     isSelected
-                      ? "bg-[#E6F0FF] font-semibold text-[#17345F]"
-                      : "text-[#334155] hover:bg-[#F1F5FB]"
+                      ? "bg-[#f1f5ff] font-semibold text-[#17365f]"
+                      : "text-[#344866] hover:bg-[#f1f5ff]"
                   }`}
                 >
                   <span>
@@ -159,5 +159,4 @@ export default function PengajuanToolbar({
     </div>
   );
 }
-
 

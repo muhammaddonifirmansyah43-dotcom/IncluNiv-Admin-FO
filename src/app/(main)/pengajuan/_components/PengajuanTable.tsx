@@ -6,12 +6,16 @@ import StatusBadge from "./StatusBadge";
 
 type Props = {
   items: Pengajuan[];
+  startIndex: number;
 };
 
 const th =
   "px-5 py-4 text-sm font-semibold text-[#17365f]";
 
-export default function PengajuanTable({ items }: Props) {
+export default function PengajuanTable({
+  items,
+  startIndex,
+}: Props) {
   return (
     <div className="w-full overflow-x-auto">
       <table className="w-full min-w-[640px] border-collapse text-left text-sm">
@@ -33,7 +37,7 @@ export default function PengajuanTable({ items }: Props) {
               className="border-b border-[#e8edf4] transition hover:bg-[#F8FAFD]"
             >
               <td className="px-5 py-4 text-center text-sm text-[#657892]">
-                {index + 1}
+                {startIndex + index + 1}
               </td>
 
               <td className="px-5 py-4 text-sm font-semibold text-[#17365f]">

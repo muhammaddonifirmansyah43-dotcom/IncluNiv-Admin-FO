@@ -1,4 +1,4 @@
-﻿import type { NotificationFilter } from "@/types/notification";
+import type { NotificationFilter } from "@/types/notification";
 
 type Props = {
   value: NotificationFilter;
@@ -33,10 +33,10 @@ export default function FilterTabs({
             type="button"
             aria-pressed={active}
             onClick={() => onChange(tab.key)}
-            className={`inline-flex h-8 items-center gap-2 rounded-md border px-3 text-xs font-semibold transition ${
+            className={`inline-flex h-[38px] items-center gap-2 rounded-xl border px-3 text-sm font-semibold transition ${
               active
                 ? "border-[#3B82F6] bg-[#3B82F6] text-white"
-                : "border-[#D9E6F8] bg-white text-slate-600 hover:bg-blue-50"
+                : "border-[#dce5f2] bg-white text-[#344866] hover:border-[#93B4E5] hover:bg-[#f1f5ff]"
             }`}
           >
             {tab.label}

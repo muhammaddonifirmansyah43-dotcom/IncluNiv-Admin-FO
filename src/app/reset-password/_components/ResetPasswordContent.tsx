@@ -4,7 +4,13 @@
 import { useState, type FormEvent } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { LockKeyhole, Eye, EyeOff, CheckCircle2 } from "lucide-react";
+import {
+  LockKeyhole,
+  Eye,
+  EyeOff,
+  CheckCircle2,
+  ArrowLeft,
+} from "lucide-react";
 import AuthCard from "@/components/auth/AuthCard";
 import AuthField from "@/components/auth/AuthField";
 
@@ -87,25 +93,25 @@ export default function ResetPasswordContent() {
   }
 
   return (
-    <AuthCard className="max-w-[440px]">
+    <AuthCard className="max-w-[510px]">
       {success ? (
-        <div className="text-center">
-          <div className="mx-auto mb-4 flex h-[76px] w-[76px] items-center justify-center rounded-full bg-green-100 text-green-600">
-            <CheckCircle2 size={44} />
+        <div className="text-center" role="status">
+          <div className="mx-auto mb-5 flex h-[76px] w-[76px] items-center justify-center rounded-full bg-blue-100 text-[#3B82F6]">
+            <CheckCircle2 size={42} strokeWidth={2.2} />
           </div>
 
-          <h1 className="text-[24px] font-extrabold text-[#171717]">
+          <h1 className="text-[28px] font-extrabold leading-tight tracking-tight text-[#171717]">
             Kata Sandi Berhasil Diperbarui
           </h1>
 
-          <p className="mt-3 text-[14px] leading-relaxed text-[#31435D]">
+          <p className="mx-auto mt-3 max-w-[360px] text-[14px] leading-relaxed text-[#31435D]">
             Kata sandi akun IncluNiv kamu sudah berhasil diubah.
             Silakan masuk menggunakan kata sandi yang baru.
           </p>
 
           <Link
             href="/login"
-            className="mt-6 flex min-h-[48px] w-full items-center justify-center rounded-[24px] bg-[#3B82F6] px-4 text-[17px] font-bold text-white transition hover:bg-[#2F73E8]"
+            className="mt-7 flex h-[48px] w-full items-center justify-center rounded-[24px] bg-[#3B82F6] px-4 text-[17px] font-bold text-white transition hover:bg-[#2F73E8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-200 focus-visible:ring-offset-2"
           >
             Kembali ke halaman login
           </Link>
@@ -114,21 +120,23 @@ export default function ResetPasswordContent() {
         <>
           <Link
             href="/login"
-            className="mb-6 inline-flex text-[14px] font-semibold text-[#3B82F6] hover:underline"
+            className="mb-8 inline-flex items-center gap-1 rounded-sm text-[14px] font-medium text-[#3B82F6] transition hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2"
           >
-            ← Kembali ke login
+            <ArrowLeft size={16} strokeWidth={2} />
+            Kembali ke halaman login
           </Link>
 
-          <div className="mb-6 text-center">
-            <h1 className="text-[25px] font-extrabold text-[#17345F]">
+          <div className="mb-7 text-center">
+            <h1 className="text-[32px] font-extrabold leading-tight tracking-tight text-[#171717]">
               Buat Kata Sandi Baru
             </h1>
-            <p className="mt-2 text-[14px] leading-relaxed text-[#31435D]">
+
+            <p className="mx-auto mt-2 max-w-[360px] text-[14px] leading-relaxed text-[#31435D]">
               Masukkan kata sandi baru untuk akun IncluNiv kamu.
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} noValidate className="space-y-4">
+          <form onSubmit={handleSubmit} noValidate className="space-y-5">
             <AuthField
               id="newPassword"
               label="Kata Sandi Baru"
@@ -143,7 +151,7 @@ export default function ResetPasswordContent() {
                       ? "Sembunyikan kata sandi"
                       : "Tampilkan kata sandi"
                   }
-                  className="shrink-0 text-slate-500 hover:text-[#17345F]"
+                  className="shrink-0 text-slate-500 transition hover:text-[#17345F]"
                 >
                   {showNewPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 </button>
@@ -179,7 +187,7 @@ export default function ResetPasswordContent() {
                       ? "Sembunyikan konfirmasi kata sandi"
                       : "Tampilkan konfirmasi kata sandi"
                   }
-                  className="shrink-0 text-slate-500 hover:text-[#17345F]"
+                  className="shrink-0 text-slate-500 transition hover:text-[#17345F]"
                 >
                   {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 </button>
@@ -214,7 +222,7 @@ export default function ResetPasswordContent() {
             <button
               type="submit"
               disabled={loading}
-              className="flex h-[48px] w-full items-center justify-center rounded-[24px] bg-[#3B82F6] text-[17px] font-bold text-white transition hover:bg-[#2F73E8] disabled:cursor-not-allowed disabled:opacity-60"
+              className="flex h-[48px] w-full items-center justify-center rounded-[24px] bg-[#3B82F6] text-[17px] font-bold text-white transition hover:bg-[#2F73E8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-200 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {loading ? "Menyimpan..." : "Simpan Kata Sandi Baru"}
             </button>

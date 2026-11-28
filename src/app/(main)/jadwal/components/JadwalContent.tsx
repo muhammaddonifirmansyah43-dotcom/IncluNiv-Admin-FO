@@ -275,6 +275,7 @@ export default function JadwalContent() {
         onTanggalApply={handleTanggalApply}
         onToday={handleToday}
         markedDates={markedDates}
+        isToday={!globalSearch && tanggal === getTodayString()}
       />
 
       {filtered.length > 0 ? (
