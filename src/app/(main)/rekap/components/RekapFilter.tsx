@@ -1,4 +1,4 @@
-﻿
+
 "use client";
 
 import { useEffect, useRef, useState } from "react";
@@ -98,10 +98,10 @@ export default function RekapFilter({
 
         {/* Pencarian */}
         <div className="min-w-0">
-          <div className="flex h-[38px] min-w-0 items-center gap-2 rounded-xl border border-[#dce5f2] bg-white px-3 transition focus-within:border-[#3B82F6] focus-within:ring-2 focus-within:ring-blue-300/30">
+          <div className="flex h-[38px] min-w-0 items-center gap-2 rounded-xl border border-[#dbe4ef] bg-[#fafcff] px-3 transition focus-within:border-[#4b8df5] focus-within:ring-2 focus-within:ring-blue-200">
             <Search
               size={18}
-              className="shrink-0 text-[#91A2BA]"
+              className="shrink-0 text-[#91a3bb]"
             />
 
             <input
@@ -111,7 +111,7 @@ export default function RekapFilter({
               placeholder="Cari volunteer atau NIM..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="h-full w-full min-w-0 bg-transparent text-sm text-[#344866] outline-none placeholder:text-[#9AAAC0]"
+              className="h-full w-full min-w-0 bg-transparent text-sm text-[#183963] outline-none placeholder:text-[#9aabc0]"
             />
           </div>
         </div>

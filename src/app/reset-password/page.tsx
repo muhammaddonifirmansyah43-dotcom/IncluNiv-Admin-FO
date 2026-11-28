@@ -5,7 +5,7 @@ import ResetPasswordContent from "./_components/ResetPasswordContent";
 
 export default function ResetPasswordPage() {
   return (
-    <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#DCEAFF] px-4 py-6">
+    <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#DCEAFF] px-5 py-8">
       <AuthBackground />
 
       <Suspense

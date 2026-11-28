@@ -60,6 +60,10 @@ export default function RekapVolunteerPage() {
   const [error, setError] = useState("");
   const [reload, setReload] = useState(0);
 
+  // Pagination: maksimal 10 data per halaman.
+  const [currentPage, setCurrentPage] = useState(1);
+  const rowsPerPage = 10;
+
   const monthOptions = semesterMonths[semester];
 
   // 0 berarti Semua Minggu.
@@ -76,6 +80,7 @@ export default function RekapVolunteerPage() {
     setWeek(0);
   }
 
+  // Ambil data berdasarkan filter periode.
   useEffect(() => {
     let isMounted = true;
 
@@ -118,6 +123,12 @@ export default function RekapVolunteerPage() {
     };
   }, [reload, semester, month, week]);
 
+  // Kembalikan ke halaman pertama ketika pencarian atau filter berubah.
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search, semester, month, week]);
+
+  // Filter data berdasarkan nama volunteer atau NIM.
   const filteredData = useMemo(() => {
     const keyword = search.toLowerCase().trim();
 
@@ -128,6 +139,35 @@ export default function RekapVolunteerPage() {
       );
     });
   }, [volunteers, search]);
+
+  // Hitung jumlah halaman berdasarkan hasil filter.
+  const pageCount = Math.max(
+    1,
+    Math.ceil(filteredData.length / rowsPerPage)
+  );
+
+  // Pastikan halaman aktif tidak melebihi jumlah halaman.
+  useEffect(() => {
+    if (currentPage > pageCount) {
+      setCurrentPage(pageCount);
+    }
+  }, [currentPage, pageCount]);
+
+  // Tentukan data yang ditampilkan pada halaman aktif.
+  const startIndex = (currentPage - 1) * rowsPerPage;
+
+  const visibleData = filteredData.slice(
+    startIndex,
+    startIndex + rowsPerPage
+  );
+
+  const startItem =
+    filteredData.length === 0 ? 0 : startIndex + 1;
+
+  const endItem = Math.min(
+    startIndex + rowsPerPage,
+    filteredData.length
+  );
 
   const emptyMessage = useMemo(() => {
     // Data periode tersedia, tetapi tidak cocok dengan pencarian.
@@ -197,9 +237,15 @@ export default function RekapVolunteerPage() {
         </div>
       ) : (
         <RekapTable
-          data={filteredData}
+          data={visibleData}
           totalVolunteers={totalVolunteers}
           emptyMessage={emptyMessage}
+          currentPage={currentPage}
+          pageCount={pageCount}
+          startItem={startItem}
+          endItem={endItem}
+          totalFiltered={filteredData.length}
+          onPageChange={setCurrentPage}
         />
       )}
     </div>

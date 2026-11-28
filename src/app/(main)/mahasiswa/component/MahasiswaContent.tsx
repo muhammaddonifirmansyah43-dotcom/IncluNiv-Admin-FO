@@ -44,7 +44,7 @@ const initialData: Mahasiswa[] = [
 ];
 
 const disabilityOptions = ["Semua", "Tuna Daksa", "Tuna Netra", "Tuna Rungu"];
-const limitOptions = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
+const limitOptions = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
 
 export default function MahasiswaContent() {
   const router = useRouter();
@@ -53,7 +53,7 @@ export default function MahasiswaContent() {
   const [search, setSearch] = useState("");
   const [disability, setDisability] = useState("Semua");
   const [faculty, setFaculty] = useState("Semua Fakultas");
-  const [limit, setLimit] = useState(20);
+  const [limit, setLimit] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [sort, setSort] = useState<SortDirection>(null);
   const [deleteTarget, setDeleteTarget] = useState<Mahasiswa | null>(null);
@@ -114,9 +114,14 @@ export default function MahasiswaContent() {
     return result;
   }, [data, search, disability, faculty, sort]);
 
-  const rowsPerPage = 10;
+  // Kondisi awal: seluruh data ditampilkan dengan pagination 10 data per halaman.
+  // Jika admin memilih jumlah data, seluruh jumlah pilihan ditampilkan sekaligus.
   const selectedTotal =
     limit === 0 ? filtered.length : Math.min(filtered.length, limit);
+
+  const rowsPerPage =
+    limit === 0 ? 10 : Math.max(selectedTotal, 1);
+
   const pageCount = Math.max(1, Math.ceil(selectedTotal / rowsPerPage));
 
   useEffect(() => {
@@ -181,7 +186,3 @@ export default function MahasiswaContent() {
     </div>
   );
 }
-
-
-
-

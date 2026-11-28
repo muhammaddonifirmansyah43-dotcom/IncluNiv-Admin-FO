@@ -13,7 +13,7 @@ export default function PendampingContent() {
   const [items, setItems] = useState(pendampingList);
   const [search, setSearch] = useState("");
   const [faculty, setFaculty] = useState("Semua Fakultas");
-  const [pageSize, setPageSize] = useState(20);
+  const [pageSize, setPageSize] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [target, setTarget] = useState<Pendamping | null>(null);
 
@@ -51,10 +51,20 @@ export default function PendampingContent() {
     });
   }, [items, search, faculty]);
 
-  const rowsPerPage = 10;
+  // Kondisi awal: tampilkan seluruh data dengan pagination 10 data per halaman.
+  // Jika admin memilih jumlah data, tampilkan seluruh jumlah pilihan sekaligus.
   const selectedTotal =
-    pageSize === 0 ? filtered.length : Math.min(filtered.length, pageSize);
-  const pageCount = Math.max(1, Math.ceil(selectedTotal / rowsPerPage));
+    pageSize === 0
+      ? filtered.length
+      : Math.min(filtered.length, pageSize);
+
+  const rowsPerPage =
+    pageSize === 0 ? 10 : Math.max(selectedTotal, 1);
+
+  const pageCount = Math.max(
+    1,
+    Math.ceil(selectedTotal / rowsPerPage)
+  );
 
   useEffect(() => {
     setCurrentPage(1);
@@ -121,5 +131,3 @@ export default function PendampingContent() {
     </div>
   );
 }
-
-

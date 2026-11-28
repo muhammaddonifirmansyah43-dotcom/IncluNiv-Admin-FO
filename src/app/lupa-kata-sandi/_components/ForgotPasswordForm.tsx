@@ -2,7 +2,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { UserRound } from "lucide-react";
+import { Mail } from "lucide-react";
 import AuthField from "@/components/auth/AuthField";
 import { isValidEmail } from "@/lib/auth";
 
@@ -72,11 +72,11 @@ export default function ForgotPasswordForm({ onSuccess }: Props) {
   const invalid = Boolean(error);
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="space-y-4">
+    <form onSubmit={handleSubmit} noValidate className="space-y-5">
       <AuthField
         id="identifier"
         label="Email"
-        icon={UserRound}
+        icon={Mail}
         invalid={invalid}
       >
         <input
@@ -109,7 +109,7 @@ export default function ForgotPasswordForm({ onSuccess }: Props) {
       <button
         type="submit"
         disabled={loading}
-        className="flex h-[48px] w-full items-center justify-center rounded-[24px] bg-[#3B82F6] text-[18px] font-bold text-white transition hover:bg-[#2F73E8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-200 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
+        className="flex h-[48px] w-full items-center justify-center rounded-[24px] bg-[#3B82F6] text-[17px] font-bold text-white transition hover:bg-[#2F73E8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-200 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {loading ? "Memproses..." : "Lanjutkan"}
       </button>

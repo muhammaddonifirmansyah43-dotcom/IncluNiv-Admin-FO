@@ -1,4 +1,4 @@
-﻿
+
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
@@ -109,12 +109,6 @@ export default function JadwalCalendar({
             : "border-[#dbe4ef] bg-white text-[#344866] hover:border-[#93B4E5]"
         }`}
       >
-        <CalendarDays
-          size={16}
-          className={`shrink-0 ${
-            open ? "text-white" : "text-[#3B82F6]"
-          }`}
-        />
 
         <span
           className={`whitespace-nowrap ${

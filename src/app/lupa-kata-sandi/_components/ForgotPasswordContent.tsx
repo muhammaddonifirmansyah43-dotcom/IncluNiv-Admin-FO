@@ -12,14 +12,18 @@ export default function ForgotPasswordContent() {
   const [submitted, setSubmitted] = useState(false);
 
   return (
-    <AuthCard className="max-w-[400px]">
-      <BackToLoginLink />
-      <ForgotPasswordHeader />
-
+    <AuthCard className="max-w-[510px]">
       {submitted ? (
         <ForgotPasswordSuccess />
       ) : (
-        <ForgotPasswordForm onSuccess={() => setSubmitted(true)} />
+        <>
+          <BackToLoginLink />
+          <ForgotPasswordHeader />
+
+          <ForgotPasswordForm
+            onSuccess={() => setSubmitted(true)}
+          />
+        </>
       )}
     </AuthCard>
   );

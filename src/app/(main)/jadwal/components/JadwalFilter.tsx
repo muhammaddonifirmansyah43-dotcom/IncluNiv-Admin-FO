@@ -1,11 +1,9 @@
-﻿
+
 "use client";
 
 import { useEffect, useState, type ReactNode } from "react";
 import {
-  CalendarDays,
   ChevronDown,
-  GraduationCap,
   Search,
 } from "lucide-react";
 
@@ -25,6 +23,7 @@ interface JadwalFilterProps {
   onTanggalApply: (value: string) => void;
   onToday: () => void;
   markedDates: string[];
+  isToday: boolean;
 }
 
 interface FilterMenuProps {
@@ -63,20 +62,20 @@ function FilterMenu({
 
   const solid = active || (solidWhenOpen && open);
 
-  const buttonStyle = `flex h-[38px] items-center gap-2 rounded-lg px-3 text-sm font-medium transition ${
+  const buttonStyle = `flex h-[38px] items-center gap-2 rounded-xl border px-3 text-sm transition ${
     solid
-      ? "bg-[#3B82F6] text-white"
-      : "bg-[#EAF2FF] text-[#2563C9] hover:bg-[#DCE9FF]"
+      ? "border-[#3B82F6] bg-[#3B82F6] text-white"
+      : "border-[#dce5f2] bg-white text-[#344866] hover:border-[#93B4E5]"
   }`;
 
   return (
-    <div className="relative flex shrink-0 items-center">
+    <div className={`relative flex shrink-0 items-center ${onLabelClick ? (solid ? "h-[38px] min-w-[136px] rounded-xl border border-[#F97316] bg-[#F97316] text-white" : "h-[38px] min-w-[136px] rounded-xl border border-[#dce5f2] bg-white text-[#344866] hover:border-[#93B4E5]") : ""}`}>
       {onLabelClick ? (
         <>
           <button
             type="button"
             onClick={onLabelClick}
-            className={`${buttonStyle} rounded-r-none`}
+            className="flex h-full min-w-0 flex-1 items-center justify-center px-3 text-sm transition"
           >
             {icon}
             <span className="whitespace-nowrap">{label}</span>
@@ -88,7 +87,7 @@ function FilterMenu({
             aria-haspopup="listbox"
             aria-expanded={open}
             onClick={() => setOpen(!open)}
-            className={`${buttonStyle} rounded-l-none border-l border-white/30 px-2`}
+            className={`flex h-full items-center justify-center border-l px-2 transition ${solid ? "border-white/30 text-white" : "border-[#dce5f2] text-[#344866]"}`}
           >
             <ChevronDown
               size={16}
@@ -124,7 +123,7 @@ function FilterMenu({
 
           <div
             role="listbox"
-            className="absolute left-0 top-full z-30 mt-2 w-max min-w-[180px] rounded-xl border border-[#DCE6F2] bg-white p-1.5 shadow-lg"
+            className="absolute left-0 top-full z-30 mt-2 w-max min-w-[180px] rounded-xl border border-[#e1e8f2] bg-white p-1 shadow-lg"
           >
             {options.map((option) => {
               const selected = option.value === value;
@@ -141,8 +140,8 @@ function FilterMenu({
                   }}
                   className={`flex w-full items-center justify-between gap-4 rounded-lg px-3 py-2.5 text-left text-sm transition ${
                     selected
-                      ? "bg-[#E6F0FF] font-semibold text-[#17345F]"
-                      : "text-[#334155] hover:bg-[#F1F5FB]"
+                      ? "bg-[#f1f5ff] font-semibold text-[#17365f]"
+                      : "text-[#344866] hover:bg-[#f1f5ff]"
                   }`}
                 >
                   {option.label}
@@ -168,12 +167,13 @@ export default function JadwalFilter({
   onTanggalApply,
   onToday,
   markedDates,
+  isToday,
 }: JadwalFilterProps) {
   const semesterLabel =
     semesterOptions.find((option) => option.value === semester)?.label ?? "";
 
   return (
-    <div className="min-w-0 rounded-2xl border border-[#e0e8f3] bg-white p-3 shadow-sm">
+    <div className="min-w-0 rounded-2xl border border-[#E5ECF6] bg-white p-4 shadow-sm">
       <div className="flex flex-nowrap items-center gap-2 sm:gap-3">
         {/* Pencarian */}
         <div className="relative min-w-[150px] flex-1">
@@ -186,13 +186,13 @@ export default function JadwalFilter({
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Cari mahasiswa, volunteer, mata kuliah, atau ruang..."
-            className="h-[38px] w-full rounded-lg bg-[#F1F5FA] pl-10 pr-3 text-sm text-[#183963] outline-none placeholder:text-[#9aabc0] transition focus-visible:ring-2 focus-visible:ring-blue-200"
+            className="h-[38px] w-full rounded-xl border border-[#dbe4ef] bg-[#fafcff] pl-10 pr-3 text-sm text-[#183963] outline-none placeholder:text-[#9aabc0] transition focus-visible:border-[#4b8df5] focus-visible:ring-2 focus-visible:ring-blue-200"
           />
         </div>
 
         {/* Filter Semester */}
         <FilterMenu
-          icon={<GraduationCap size={16} />}
+          icon={null}
           label={semesterLabel}
           value={semester}
           options={semesterOptions}
@@ -201,7 +201,7 @@ export default function JadwalFilter({
 
         {/* Tombol Hari Ini + dropdown status */}
         <FilterMenu
-          icon={<CalendarDays size={16} />}
+          icon={null}
           label="Hari Ini"
           value={status}
           options={statusOptions.map((item) => ({
@@ -210,8 +210,7 @@ export default function JadwalFilter({
           }))}
           onChange={(value) => setStatus(value as FilterStatus)}
           onLabelClick={onToday}
-          active={status !== "Semua"}
-          solidWhenOpen
+          active={isToday}
         />
 
         {/* Filter tanggal */}
